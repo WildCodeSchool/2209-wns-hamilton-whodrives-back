@@ -1,20 +1,18 @@
-FROM node as builder
-WORKDIR /usr/app
-COPY package*.json ./
+FROM node:lts-alpine
+
+RUN apk update && apk add bash git
+RUN mkdir app
+WORKDIR /app
+
+COPY package.json ./
+COPY package-lock.json ./
+
+COPY tsconfig.json ./
+
 RUN npm install
-COPY . .
-RUN npm run build
 
-# stage 2
-FROM node
-WORKDIR /usr/app
-COPY package*.json ./
-RUN npm install --production
+COPY database.postgres ./
 
-COPY --from=builder /usr/app/dist ./dist
+COPY src src
 
-COPY ormconfig.docker.json ./ormconfig.json
-COPY .env .
-
-EXPOSE 4000
-CMD node dist/src/index.js
+CMD ["db:5433", "--" , "npm","start"]
