@@ -84,13 +84,13 @@ export type Mutation = {
 
 
 export type MutationCreateUserArgs = {
-  address?: InputMaybe<Scalars['String']>;
+  address: Scalars['String'];
   birthday?: InputMaybe<Scalars['Date']>;
   email: Scalars['String'];
   firstname: Scalars['String'];
   lastname: Scalars['String'];
   password: Scalars['String'];
-  phone?: InputMaybe<Scalars['String']>;
+  phone: Scalars['String'];
   username: Scalars['String'];
 };
 
@@ -101,15 +101,15 @@ export type MutationDeleteUserArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  address?: InputMaybe<Scalars['String']>;
+  address: Scalars['String'];
   birthday?: InputMaybe<Scalars['Date']>;
-  email?: InputMaybe<Scalars['String']>;
-  firstname?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
+  firstname: Scalars['String'];
   id: Scalars['ID'];
-  lastname?: InputMaybe<Scalars['String']>;
-  password?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-  username?: InputMaybe<Scalars['String']>;
+  lastname: Scalars['String'];
+  password: Scalars['String'];
+  phone: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type Query = {
@@ -127,13 +127,13 @@ export type User = {
   __typename?: 'User';
   address?: Maybe<Scalars['String']>;
   birthday?: Maybe<Scalars['Date']>;
-  email: Scalars['String'];
-  firstname: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
+  firstname?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  lastname: Scalars['String'];
-  password: Scalars['String'];
+  lastname?: Maybe<Scalars['String']>;
+  password?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
-  username: Scalars['String'];
+  username?: Maybe<Scalars['String']>;
 };
 
 
@@ -478,9 +478,9 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'firstname' | 'lastname' | 'password' | 'username'>>;
+  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'address' | 'email' | 'firstname' | 'lastname' | 'password' | 'phone' | 'username'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
-  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
+  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'address' | 'email' | 'firstname' | 'id' | 'lastname' | 'password' | 'phone' | 'username'>>;
 };
 
 export interface NegativeFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NegativeFloat'], any> {
@@ -595,13 +595,13 @@ export interface UnsignedIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   birthday?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  lastname?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

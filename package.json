@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node-dev --respawn --transpile-only --poll src/index.ts",
-    "generate": "graphql-codegen --config codegen.yml"
+    "generate": "graphql-codegen --watch --config codegen.yml"
   },
   "repository": {
     "type": "git",
@@ -24,9 +24,11 @@
     "@graphql-tools/merge": "^8.3.6",
     "apollo-server": "^3.10.3",
     "apollo-server-express": "^3.11.1",
+    "concurrently": "^7.5.0",
     "graphql": "^16.6.0",
     "graphql-list-fields": "^2.0.2",
     "graphql-scalars": "^1.19.0",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "sqlite3": "^5.1.2",
     "ts-node-dev": "^2.0.0",
