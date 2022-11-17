@@ -2,10 +2,10 @@
   "name": "2209-wns-hamilton-whodrives-back",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node-dev src/index.ts",
+    "start": "ts-node-dev --respawn --transpile-only --poll src/index.ts",
     "generate": "graphql-codegen --config codegen.yml"
   },
   "repository": {

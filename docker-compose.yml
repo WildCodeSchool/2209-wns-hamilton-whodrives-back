@@ -1,13 +1,43 @@
+version: '3.7'
+
 services:
-
-  db:
-    image: postgres
-    restart: always
+  back:
+    build: ./
+    container_name: whodrives-back
     environment:
-      POSTGRES_PASSWORD: example
-
+      - PORT=4000
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 4000:4000
+    networks:
+      - grape
+    depends_on:
+      - db
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+  db:
+    image: postgres:13
+    hostname: postgres
+    container_name: whodrives-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env
+    networks:
+      - grape
+    volumes:
+      - postgres:/var/lib/postgresql/data
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+
+volumes:
+  postgres:
+    name: whodrives-db
+
+networks:
+  grape:
