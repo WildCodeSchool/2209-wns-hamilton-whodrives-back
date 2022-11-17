@@ -11,8 +11,11 @@ COPY tsconfig.json ./
 
 RUN npm install
 
-COPY database.postgres ./
+COPY .env ./
+COPY database.env ./
+
+# COPY database.postgres ./
 
 COPY src src
 
-CMD ["db:5433", "--" , "npm","start"]
+CMD npm start
