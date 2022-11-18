@@ -23,6 +23,16 @@ class UserController {
         address, 
         birthday
       });
+      // const user = await this.db.save({
+      //   username, 
+      //   firstname, 
+      //   lastname, 
+      //   password, 
+      //   email, 
+      //   phone, 
+      //   address, 
+      //   birthday
+      // });
       return user;
   }
 }
