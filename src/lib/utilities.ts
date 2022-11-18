@@ -1,14 +1,16 @@
 import * as jwt from "jsonwebtoken";
-import { IGenerateToken } from "./utilities.spec";
+// import { IGenerateToken } from "./utilities.spec";
 import * as dotenv from "dotenv";
-
+import UserController from "../controller/User";
 dotenv.config();
 
-const SECRET_KEY = `${process.env.SECRET_KEY}`;
+const SECRET_KEY = process.env.SECRET_KEY as string;
+// const SECRET_KEY = `${process.env.SECRET_KEY}`;
 
 //fonction permettant de générer un token
-export function generateToken(infos: IGenerateToken) {
-  let token = jwt.sign(infos, SECRET_KEY, { expiresIn: "2h" });
+export function generateToken(email: string) {
+  let token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "2h" });
+  console.log("token ici" + token);
   return token;
 }
 //Fonction permettant de générer un ID unique
@@ -23,4 +25,34 @@ export function create_UUID() {
     }
   );
   return uuid;
+}
+
+export async function getUser(authorization: string) {
+  return new Promise((resolve, reject) => {
+    if (authorization) {
+      let token = authorization.split(" ")[1];
+      try {
+        jwt.verify(token, SECRET_KEY, async (err: any, payload: any) => {
+          if (payload && Object.keys(payload).length) {
+            let user = await new UserController().getUserByEmail(payload.email);
+            resolve(user);
+          }
+        });
+      } catch (e: any) {
+        reject(e);
+      }
+    } else {
+      resolve(null);
+    }
+  });
+}
+
+export function checkRights(userLogged: any, rights?: string[]) {
+  if (!userLogged) {
+    throw new Error("Vous devez être connecté");
+  }
+
+  // if (!userLogged.roles.includes()) {
+  //   throw new Error("Vous n'avez pas les droits suffisants");
+  // }
 }

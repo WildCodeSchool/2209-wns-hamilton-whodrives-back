@@ -3,8 +3,11 @@ import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import express from "express";
 import http from "http";
 import datasource from './lib/datasource';
+import { getUser } from "./lib/utilities";
+
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
+
 import { makeExecutableSchema } from "@graphql-tools/schema";
 
 import cors from "cors";
@@ -32,7 +35,15 @@ async function startApolloServer() {
   });
   const server = new ApolloServer({
     schema,
-    context: () => ({}),
+    context: async ({ req, res }) => {
+      let userLogged: any = await getUser(req.headers.authorization as string);
+      console.log(userLogged);
+      return {
+        req,
+        res,
+        userLogged,
+      };
+    },
     csrfPrevention: true,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   });

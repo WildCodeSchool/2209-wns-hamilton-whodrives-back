@@ -25,7 +25,7 @@ type Mutation {
     phone: String!
     address: String!
     birthday: Date
-  ): User
+  ): RegisterUser
   updateUser(
     id: ID!
     username: String!
@@ -39,6 +39,11 @@ type Mutation {
   ): User
   deleteUser(id: ID!): User
   register(registerUserInput: RegisterUserInput): User
+}
+type RegisterUser {
+  email: String
+  success: Boolean
+  token: String
 }
 
 input RegisterUserInput {
