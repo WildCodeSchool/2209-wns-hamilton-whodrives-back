@@ -38,7 +38,7 @@ type Mutation {
     birthday: Date
   ): User
   deleteUser(id: ID!): User
-  register(registerUserInput: RegisterUserInput): UserInf
+  register(registerUserInput: RegisterUserInput): User
 }
 
 input RegisterUserInput {

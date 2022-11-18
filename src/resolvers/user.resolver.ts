@@ -1,6 +1,7 @@
 import UserController from "../controller/User";
 import getFieldNames from "graphql-list-fields";
 import {MutationCreateUserArgs} from "@/graphgen";
+import * as bcrypt from 'bcrypt'; 
 
 export default {
   Query: {
@@ -14,24 +15,11 @@ export default {
       console.log(args);
       const { username, firstname, lastname, password, email, phone, address, birthday } = args;
       let user = await new UserController().addUser({ username, firstname, lastname, password, email, phone, address, birthday });
+      const salt = await bcrypt.genSalt(10);
+      const hashed = await bcrypt.hash(password, salt);
+      user.password = hashed;
       console.log(user);
       return user; 
-    },
-    // register: async (
-    //     _: any,
-    //     { registerUserInput }
-    //   ) => {
-    //     let newUser = { ...registerUserInput };
-    //     const { password, username } = newUser;
-    //     if (users.some((e) => e.username === username)) {
-    //       throw new ApolloError("Un utilisateur existe déjà");
-    //     }
-    //     const salt = await bcrypt.genSalt(10);
-    //     const hashed = await bcrypt.hash(password, salt);
-    //     newUser.password = hashed;
-    //     //Token à générer
-    //     //newUser à ajouter aux users
-    //     return newUser;
-    //   },
+    }
   },
 };
