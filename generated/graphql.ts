@@ -93,6 +93,10 @@ export type MutationCreateUserArgs = {
   phone: Scalars['String'];
   username: Scalars['String'];
 };
+export type MutationloginUserArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
 
 
 export type MutationDeleteUserArgs = {
