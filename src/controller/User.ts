@@ -15,7 +15,7 @@ class UserController {
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
   }
-  async getUserByEmail(email: string) {
+  async getUserByEmail({email}:{email: string}) {
     return await this.db.findOneBy({ email });
   }
 

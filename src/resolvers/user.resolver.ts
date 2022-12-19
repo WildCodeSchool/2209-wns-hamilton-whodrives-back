@@ -35,7 +35,7 @@ export default {
       return user
     },
      loginUser: async (_: any, args: MutationloginUserArgs, { res }: ExpressContext) => {
-       const {password, email} = args;
+      const {password, email} = args;
       let user = await new UserController().getUserByEmail({email});
 
        if (!user) {
