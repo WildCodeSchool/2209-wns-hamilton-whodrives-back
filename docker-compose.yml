@@ -1,6 +1,20 @@
 version: '3.7'
 
 services:
+  front:
+    build: ../2209-wns-hamilton-whodrives-front/
+    container_name: whodrives-front
+    environment:
+      - PORT=3000
+    volumes:
+      - ../2209-wns-hamilton-whodrives-front/src:/app/src
+    ports:
+      - 3000:3000
+    networks:
+      - grape
+    depends_on:
+      - back
+
   back:
     build: ./
     container_name: whodrives-back
@@ -16,6 +30,7 @@ services:
       - db
     extra_hosts:
       - "host.docker.internal:172.17.0.1"
+
   db:
     image: postgres:13
     hostname: postgres
@@ -29,6 +44,7 @@ services:
       - grape
     volumes:
       - postgres:/var/lib/postgresql/data
+
   adminer:
     image: adminer
     restart: always

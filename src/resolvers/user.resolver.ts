@@ -1,6 +1,6 @@
 import UserController from "../controller/User";
 // import getFieldNames from "graphql-list-fields";
-import {MutationCreateUserArgs, MutationloginUserArgs} from "@/graphgen";
+import {MutationCreateUserArgs, MutationLoginUserArgs} from "@/graphgen";
 import * as bcrypt from 'bcrypt'; 
 import { create_UUID, generateToken } from "../lib/utilities";
 import { ExpressContext } from "apollo-server-express";
@@ -34,7 +34,7 @@ export default {
       // return {email, success: true, token};
       return user
     },
-     loginUser: async (_: any, args: MutationloginUserArgs, { res }: ExpressContext) => {
+     loginUser: async (_: any, args: MutationLoginUserArgs, { res }: ExpressContext) => {
       const {password, email} = args;
       let user = await new UserController().getUserByEmail({email});
 
