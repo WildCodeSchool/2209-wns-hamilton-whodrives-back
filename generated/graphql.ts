@@ -85,11 +85,7 @@ export type Mutation = {
 
 
 export type MutationCreateUserArgs = {
-  address: Scalars['String'];
-  birthday?: InputMaybe<Scalars['Date']>;
   email: Scalars['String'];
-  firstname: Scalars['String'];
-  lastname: Scalars['String'];
   password: Scalars['String'];
   phone: Scalars['String'];
   username: Scalars['String'];

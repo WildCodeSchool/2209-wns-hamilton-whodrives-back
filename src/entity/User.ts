@@ -9,11 +9,11 @@ export default class User {
     @Column()
     username: string;
 
-    @Column()
-    firstname: string;
+    // @Column()
+    // firstname: string;
 
-    @Column()
-    lastname: string;
+    // @Column()
+    // lastname: string;
 
     @Column()
     password: string;
@@ -24,9 +24,9 @@ export default class User {
     @Column()
     phone: string;
 
-    @Column()
-    address: string;
+    // @Column()
+    // address: string;
 
-    @Column({nullable: true})
-    birthday: Date;
+    // @Column({nullable: true})
+    // birthday: Date;
 }
