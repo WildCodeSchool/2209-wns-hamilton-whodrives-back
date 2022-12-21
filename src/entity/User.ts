@@ -27,6 +27,6 @@ export default class User {
     @Column()
     address: string;
 
-    @Column()
+    @Column({nullable: true})
     birthday: Date;
 }
