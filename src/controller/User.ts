@@ -19,16 +19,12 @@ class UserController {
     return await this.db.findOneBy({ email });
   }
 
-  async addUser({ username, firstname, lastname, password, email, phone, address, birthday }: { username: string, firstname: string, lastname: string, password: string, email: string, phone: string, address: string, birthday: Date }) {
+  async addUser({ username, password, email, phone, }: { username: string, password: string, email: string, phone: string }) {
       const user = await this.db.save({
-        username, 
-        firstname, 
-        lastname, 
+        username,  
         password, 
         email, 
         phone, 
-        address, 
-        birthday
       });
       return user;
   }
