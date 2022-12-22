@@ -1,9 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
-import UserInfo from "./UserInfo";
-import Badge from "./Badge";
-import Rating from "./Rating";
-import Receipt from "./Receipt";
-import ConfirmMail from "./ConfirmMail";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+
+import Car from './Car';
+import ConfirmMail from './ConfirmMail';
+import Receipt from './Receipt';
+import UserInfo from './UserInfo';
+
+
 
 @Entity("user")
 export default class User {
@@ -28,6 +30,9 @@ export default class User {
     
     @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
     confirmMails: ConfirmMail[]
+
+    @OneToMany(() => Car, (car) => car.users)
+    cars: Car[];
 
     @ManyToOne(() => UserInfo, userInfo => userInfo.user)
     userInfo: UserInfo;

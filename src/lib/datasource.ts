@@ -3,6 +3,10 @@ import User from "../entity/User";
 import * as dotenv from "dotenv";
 
 import * as path from "path";
+import Car from "../entity/Car";
+import Model from "../entity/Model";
+import CarPicture from "../entity/CarPicture";
+import Option from "../entity/Option";
 import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilPicture";
 import Badge from "../entity/Badge";
@@ -23,7 +27,7 @@ export default new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: [User,UserInfo, ProfilPicture, Badge, About, ChatOption, MusicOption, Trajet,Roles,Rating,Receipt,ConfirmMail ],
+  entities: [User,UserInfo, ProfilPicture, Badge, About, ChatOption, MusicOption, Trajet, Roles, Rating, Receipt, ConfirmMail, Car, Model, Option, CarPicture ],
   synchronize: true,
   // logging: ["query", "error"]
 })
