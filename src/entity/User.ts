@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import UserInfo from "./UserInfo";
+import Badge from "./Badge";
 import Rating from "./Rating";
 import Receipt from "./Receipt";
 import ConfirmMail from "./ConfirmMail";
@@ -12,12 +14,6 @@ export default class User {
     @Column()
     username: string;
 
-    // @Column()
-    // firstname: string;
-
-    // @Column()
-    // lastname: string;
-
     @Column()
     password: string;
 
@@ -29,11 +25,11 @@ export default class User {
  
     @OneToMany(() => Receipt, (receipt) => receipt.user)
     receipts: Receipt[]
+    
     @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
     confirmMails: ConfirmMail[]
-    // @Column()
-    // address: string;
 
-    // @Column({nullable: true})
-    // birthday: Date;
+    @ManyToOne(() => UserInfo, userInfo => userInfo.user)
+    userInfo: UserInfo;
+
 }
