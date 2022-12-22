@@ -3,7 +3,7 @@ import User from "../entity/User";
 import * as dotenv from "dotenv";
 
 import * as path from "path";
-import UserInfo from "../entity/User-info";
+import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilPicture";
 import Badge from "../entity/Badge";
 import About from "../entity/About";

@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
-import UserInfo from "./User-info";
+import UserInfo from "./UserInfo";
 import About from "./About";
 
 @Entity("chat_option")

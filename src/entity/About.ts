@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
 import ChatOption from "./ChatOption";
 import MusicOption from "./MusicOption";
-import UserInfo from "./User-info";
+import UserInfo from "./UserInfo";
 
 
 @Entity("about")
