@@ -18,5 +18,5 @@ export default new DataSource({
   database: process.env.DATABASE_DB,
   entities: [User, Car, Model, Option, CarPicture],
   synchronize: true,
-  logging: true
+  // logging: ["query", "error"]
 })
