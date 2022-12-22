@@ -3,6 +3,12 @@ import User from "../entity/User";
 import * as dotenv from "dotenv";
 
 import * as path from "path";
+import UserInfo from "../entity/User-info";
+import ProfilPicture from "../entity/ProfilPicture";
+import Badge from "../entity/Badge";
+import About from "../entity/About";
+import ChatOption from "../entity/ChatOption";
+import MusicOption from "../entity/MusicOption";
 dotenv.config();
 
 export default new DataSource({
@@ -12,7 +18,7 @@ export default new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: [User],
+  entities: [User,UserInfo, ProfilPicture, Badge, About, ChatOption, MusicOption ],
   synchronize: true,
   // logging: ["query", "error"]
 })

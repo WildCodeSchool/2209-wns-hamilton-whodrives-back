@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import UserInfo from "./User-info";
+import Badge from "./Badge";
 
 @Entity("user")
 export default class User {
@@ -10,12 +12,6 @@ export default class User {
     username: string;
 
     @Column()
-    firstname: string;
-
-    @Column()
-    lastname: string;
-
-    @Column()
     password: string;
 
     @Column()
@@ -24,9 +20,8 @@ export default class User {
     @Column()
     phone: string;
 
-    @Column()
-    address: string;
+    @ManyToOne(() => UserInfo, userInfo => userInfo.user)
+    userInfo: UserInfo;
 
-    @Column({nullable: true})
-    birthday: Date;
+   
 }
