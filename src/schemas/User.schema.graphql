@@ -1,13 +1,13 @@
 type User {
   id: ID!
   username: String
-  firstname: String
-  lastname: String
+  # firstname: String
+  # lastname: String
   password: String
   email: String
   phone: String
-  address: String
-  birthday: Date
+  # address: String
+  # birthday: Date
 }
 type RegisterUser {
   email: String
@@ -24,24 +24,24 @@ type Query {
 type Mutation {
   createUser(
     username: String!
-    firstname: String!
-    lastname: String!
+    # firstname: String!
+    # lastname: String!
     password: String!
     email: String!
     phone: String!
-    address: String!
-    birthday: Date
+    # address: String!
+    # birthday: Date
   ): User
   updateUser(
     id: ID!
     username: String!
-    firstname: String!
-    lastname: String!
+    # firstname: String!
+    # lastname: String!
     password: String!
     email: String!
     phone: String!
-    address: String!
-    birthday: Date
+    # address: String!
+    # birthday: Date
   ): User
   deleteUser(id: ID!): User
   loginUser(

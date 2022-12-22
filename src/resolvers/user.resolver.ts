@@ -23,10 +23,10 @@ export default {
   Mutation: {
     createUser: async (_: any, args: MutationCreateUserArgs, { res }: ExpressContext) => {
       console.log(args);
-      const { username, firstname, lastname, password, email, phone, address, birthday } = args;
+      const { username, password, email, phone } = args;
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
-      let user = await new UserController().addUser({ username, firstname, lastname, password: hashed, email, phone, address, birthday });
+      let user = await new UserController().addUser({ username, password: hashed, email, phone});
 
       // let token = generateToken(email);
 

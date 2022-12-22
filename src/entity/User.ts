@@ -1,7 +1,11 @@
-import { OneToMany } from 'typeorm';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 import Car from './Car';
+import ConfirmMail from './ConfirmMail';
+import Receipt from './Receipt';
+import UserInfo from './UserInfo';
+
+
 
 @Entity("user")
 export default class User {
@@ -12,12 +16,6 @@ export default class User {
     @Column()
     username: string;
 
-    // @Column()
-    // firstname: string;
-
-    // @Column()
-    // lastname: string;
-
     @Column()
     password: string;
 
@@ -26,13 +24,17 @@ export default class User {
 
     @Column()
     phone: string;
-
-    // @Column()
-    // address: string;
-
-    // @Column()
-    // birthday: Date;
+ 
+    @OneToMany(() => Receipt, (receipt) => receipt.user)
+    receipts: Receipt[]
+    
+    @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
+    confirmMails: ConfirmMail[]
 
     @OneToMany(() => Car, (car) => car.users)
     cars: Car[];
+
+    @ManyToOne(() => UserInfo, userInfo => userInfo.user)
+    userInfo: UserInfo;
+
 }
