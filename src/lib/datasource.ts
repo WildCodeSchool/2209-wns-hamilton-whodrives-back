@@ -3,6 +3,10 @@ import User from "../entity/User";
 import * as dotenv from "dotenv";
 
 import * as path from "path";
+import Car from "../entity/Car";
+import Model from "../entity/Model";
+import CarPicture from "../entity/CarPicture";
+import Option from "../entity/Option";
 dotenv.config();
 
 export default new DataSource({
@@ -12,7 +16,7 @@ export default new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: [User],
+  entities: [User, Car, Model, Option, CarPicture],
   synchronize: true,
   logging: true
 })

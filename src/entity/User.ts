@@ -1,4 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+
+import Car from './Car';
 
 @Entity("user")
 export default class User {
@@ -9,11 +12,11 @@ export default class User {
     @Column()
     username: string;
 
-    @Column()
-    firstname: string;
+    // @Column()
+    // firstname: string;
 
-    @Column()
-    lastname: string;
+    // @Column()
+    // lastname: string;
 
     @Column()
     password: string;
@@ -24,9 +27,12 @@ export default class User {
     @Column()
     phone: string;
 
-    @Column()
-    address: string;
+    // @Column()
+    // address: string;
 
-    @Column()
-    birthday: Date;
+    // @Column()
+    // birthday: Date;
+
+    @OneToMany(() => Car, (car) => car.users)
+    cars: Car[];
 }
