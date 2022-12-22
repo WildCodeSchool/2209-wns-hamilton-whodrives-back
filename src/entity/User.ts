@@ -30,14 +30,9 @@ export default class User {
     // @Column()
     // address: string;
 
-<<<<<<< HEAD
     // @Column()
     // birthday: Date;
 
     @OneToMany(() => Car, (car) => car.users)
     cars: Car[];
-=======
-    @Column({nullable: true})
-    birthday: Date;
->>>>>>> c637447b35d93f3ac750af76941ff55e9de9ffb8
 }
