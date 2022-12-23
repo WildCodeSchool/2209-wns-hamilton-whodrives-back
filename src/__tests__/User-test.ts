@@ -1,10 +1,9 @@
-import { gql, HttpLink, InMemoryCache } from "@apollo/client";
-import { ApolloServer } from "apollo-server-express";
+import { ApolloClient, gql, HttpLink, InMemoryCache } from "@apollo/client";
 import fetch from "cross-fetch";
   
-  const client = new ApolloServer({
+  const client = new ApolloClient({
     link: new HttpLink({
-      uri: "http://localhost:4000/graphql",
+      uri: "http://host.docker.internal:4000/graphql",
       fetch,
     }),
     cache: new InMemoryCache(),
