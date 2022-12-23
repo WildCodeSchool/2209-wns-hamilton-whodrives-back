@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm";
-import User from "./User"
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import User from './User';
 
 @Entity("trajet")
 export default class Trajet {
@@ -26,5 +26,3 @@ export default class Trajet {
     @JoinTable()
     User: User[]
 }
-
-

@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, } from "typeorm";
-import User from "./User"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import User from './User';
 
 @Entity("confirmMail")
 export default class ConfirmMail {
@@ -15,4 +15,5 @@ export default class ConfirmMail {
 
     @ManyToOne(() => User, (user) => user.confirmMails)
     user: User[];
+    
 }

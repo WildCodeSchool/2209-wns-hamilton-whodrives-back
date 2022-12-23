@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-
 import Car from './Car';
 import ConfirmMail from './ConfirmMail';
 import Receipt from './Receipt';
