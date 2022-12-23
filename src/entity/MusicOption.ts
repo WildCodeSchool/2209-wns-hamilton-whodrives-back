@@ -1,6 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany,  } from "typeorm";
-import About from "./About";
-
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import About from './About';
 
 @Entity("music_option")
 export default class MusicOption {

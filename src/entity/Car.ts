@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne } from "typeorm";
-import Model from "./Model";
-import User from "./User";
-import Option from "./Option";
-import CarPicture from "./CarPicture";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import CarPicture from './CarPicture';
+import Model from './Model';
+import Options from './Option';
+import User from './User';
 
 @Entity("car")
 export default class Car {
@@ -19,10 +19,10 @@ export default class Car {
     @OneToMany(() => CarPicture, (carPicture) => carPicture.cars)
     carPictures: CarPicture[];
 
-    @ManyToOne(() => Option, (option) => option.cars)
-    option: Option[];
+    @OneToOne(() => Options, (options) => options.car)
+    options: Options;
 
     @ManyToOne(() => Model, (model) => model.cars)
-    model: Model[];
+    model: Model;
 
 }

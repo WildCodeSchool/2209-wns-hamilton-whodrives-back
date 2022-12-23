@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm";
-import User from "./User"
+import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import User from './User';
 
 @Entity("rating")
 export default class Rating {
@@ -17,4 +17,3 @@ export default class Rating {
     @JoinTable()
     User: User[];
 }
-

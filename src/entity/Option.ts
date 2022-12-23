@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 import Car from './Car';
 
-@Entity("option")
-export default class Option {
+@Entity("options")
+export default class Options {
 
     @PrimaryGeneratedColumn()
     id: number;
@@ -11,7 +11,7 @@ export default class Option {
     @Column()
     air_conditioner: boolean;
 
-    @OneToMany(() => Car, (car) => car.option)
-    cars: Car[];
+    @OneToOne(() => Car, (car) => car.options)
+    car: Car;
 
 }
