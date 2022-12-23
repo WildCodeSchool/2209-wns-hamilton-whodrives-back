@@ -11,7 +11,7 @@ export default class Option {
     @Column()
     air_conditioner: boolean;
 
-    @OneToMany(() => Car, (car) => car.options)
+    @OneToMany(() => Car, (car) => car.option)
     cars: Car[];
 
 }

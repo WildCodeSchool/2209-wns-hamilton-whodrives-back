@@ -36,10 +36,10 @@ export default class UserInfo {
     address: string;
 
     @ManyToOne(() => ProfilPicture, profilPicture => profilPicture.userInfo)
-    profilPicture: ProfilPicture;
+    profilPicture: ProfilPicture[];
 
     @ManyToOne(() => About, about => about.userInfo)
-    about: About;
+    about: About[];
 
     @OneToMany(() => User , user => user.userInfo)
     user: User[];

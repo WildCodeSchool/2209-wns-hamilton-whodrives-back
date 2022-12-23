@@ -13,6 +13,6 @@ export default class Receipts {
 
 
     @ManyToOne(() => User, (user) => user.receipts)
-    user: User
+    user: User[];
 }
 

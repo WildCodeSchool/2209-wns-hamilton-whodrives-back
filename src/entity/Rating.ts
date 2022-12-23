@@ -15,6 +15,6 @@ export default class Rating {
 
     @ManyToMany(() => User)
     @JoinTable()
-    User: User[]
+    User: User[];
 }
 

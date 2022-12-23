@@ -9,5 +9,5 @@ export default class ConfirmMail {
 
 
     @ManyToOne(() => User, (user) => user.confirmMails)
-    user: User
+    user: User[];
 }

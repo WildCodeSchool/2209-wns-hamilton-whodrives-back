@@ -20,10 +20,10 @@ export default class About {
         smoke: boolean;
 
         @ManyToOne(() => ChatOption, chatOption => chatOption.about)
-        chatOption: ChatOption;
+        chatOption: ChatOption[];
 
         @ManyToOne(() => MusicOption, musicOption => musicOption.about)
-        musicOption: MusicOption;
+        musicOption: MusicOption[];
 
         @OneToMany(() => UserInfo, userInfo => userInfo.about)
         userInfo: UserInfo[];

@@ -14,15 +14,15 @@ export default class Car {
     seat: number;
 
     @ManyToOne(() => User, (user) => user.cars)
-    users: User[];
+    user: User[];
 
     @OneToMany(() => CarPicture, (carPicture) => carPicture.cars)
     carPictures: CarPicture[];
 
     @ManyToOne(() => Option, (option) => option.cars)
-    options: Option[];
+    option: Option[];
 
     @ManyToOne(() => Model, (model) => model.cars)
-    models: Model[];
+    model: Model[];
 
 }

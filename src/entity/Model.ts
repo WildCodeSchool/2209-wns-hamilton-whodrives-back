@@ -11,7 +11,7 @@ export default class Model {
     @Column()
     seat: number;
 
-    @OneToMany(() => Car, (car) => car.models)
+    @OneToMany(() => Car, (car) => car.model)
     cars: Car[];
 
 }

@@ -31,10 +31,10 @@ export default class User {
     @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
     confirmMails: ConfirmMail[]
 
-    @OneToMany(() => Car, (car) => car.users)
+    @OneToMany(() => Car, (car) => car.user)
     cars: Car[];
 
     @ManyToOne(() => UserInfo, userInfo => userInfo.user)
-    userInfo: UserInfo;
+    userInfo: UserInfo[];
 
 }
