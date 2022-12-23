@@ -5,24 +5,23 @@ import ConfirmMail from './ConfirmMail';
 import Receipt from './Receipt';
 import UserInfo from './UserInfo';
 
-
-
 @Entity("user")
 export default class User {
 
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column()
+    @Column({unique: true})
     username: string;
 
-    @Column()
+    @Column({length: 140})
     password: string;
 
-    @Column()
+    //email is unique
+    @Column({unique: true})
     email: string;
 
-    @Column()
+    @Column({unique: true})
     phone: string;
  
     @OneToMany(() => Receipt, (receipt) => receipt.user)

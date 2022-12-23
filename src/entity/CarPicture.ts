@@ -9,7 +9,7 @@ export default class CarPicture {
     id: number;
     
     @Column()
-    name: string;
+    path: string;
 
     @ManyToOne(() => Car, (car) => car.carPictures)
     cars: Car[];
