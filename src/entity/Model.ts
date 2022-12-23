@@ -9,7 +9,7 @@ export default class Model {
     id: number;
     
     @Column()
-    seat: number;
+    name: string;
 
     @OneToMany(() => Car, (car) => car.models)
     cars: Car[];

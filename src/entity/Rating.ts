@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm";
 import User from "./User"
 
 @Entity("rating")
@@ -10,7 +10,7 @@ export default class Rating {
     @Column()
     note: number;
     
-    @Column()
+    @Column({length: 255})
     content: string;
 
     @ManyToMany(() => User)

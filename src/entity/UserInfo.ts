@@ -1,8 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne} from "typeorm";
 import ProfilPicture from "./ProfilPicture";
 import User from "./User";
-import Badge from "./Badge";
-import ChatOption from "./ChatOption";
 import About from "./About";
 
 @Entity("user_info")
@@ -11,28 +9,26 @@ export default class UserInfo {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({length: 64})
     city: string;
 
-    @Column()
+    @Column({length: 45})
     country: string;
 
-    @Column()
+    @Column({length: 45})
     firstname: string;
 
-    @Column()
+    @Column({length: 45})
     lastname: string;
 
     @Column()
-    age: string
+    age: number;
 
     @Column({nullable: true})
     birthday: Date;
 
-    @Column()
-    phone: string;
-
-    @Column()
+    // max lenght 10
+    @Column({length: 100})
     address: string;
 
     @ManyToOne(() => ProfilPicture, profilPicture => profilPicture.userInfo)

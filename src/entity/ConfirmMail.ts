@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany,ManyToOne, JoinTable, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, } from "typeorm";
 import User from "./User"
 
 @Entity("confirmMail")
@@ -7,6 +7,11 @@ export default class ConfirmMail {
     @PrimaryGeneratedColumn()
     id: number;
 
+    @Column()
+    dateTime: Date;
+
+    @Column()
+    idConfirmation: string;
 
     @ManyToOne(() => User, (user) => user.confirmMails)
     user: User

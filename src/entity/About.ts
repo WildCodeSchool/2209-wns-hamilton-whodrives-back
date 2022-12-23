@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne,} from "typeorm";
 import ChatOption from "./ChatOption";
 import MusicOption from "./MusicOption";
 import UserInfo from "./UserInfo";
-
 
 @Entity("about")
 export default class About {
