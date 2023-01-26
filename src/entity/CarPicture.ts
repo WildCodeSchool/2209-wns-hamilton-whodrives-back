@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-
 import Car from './Car';
 
 @Entity("carPicture")

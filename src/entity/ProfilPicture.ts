@@ -1,17 +1,17 @@
-
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import UserInfo from "./UserInfo";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import UserInfo from './UserInfo';
 
 @Entity("profil_picture")
 export default class ProfilPicture {
     
-        @PrimaryGeneratedColumn()
-        id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
     
-        @Column()
-        path: string;
+    @Column()
+    path: string;
 
-        @OneToMany(() => UserInfo, userInfo => userInfo.profilPicture)
-        userInfo: UserInfo[];
+    @OneToMany(() => UserInfo, userInfo => userInfo.profilPicture)
+    userInfo: UserInfo[];
        
-    }
+}
+    

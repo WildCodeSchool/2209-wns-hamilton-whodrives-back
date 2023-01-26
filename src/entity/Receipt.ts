@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column ,ManyToOne,} from "typeorm";
-import User from "./User"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import User from './User';
 
 @Entity("receipts")
 export default class Receipts {
@@ -11,6 +11,5 @@ export default class Receipts {
     file_name: string;
 
     @ManyToOne(() => User, (user) => user.receipts)
-    user: User
+    user: User[];
 }
-

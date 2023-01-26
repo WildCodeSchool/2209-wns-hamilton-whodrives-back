@@ -12,6 +12,6 @@ export default class Roles {
        
     @ManyToMany(() => User)
     @JoinTable()
-    User: User[]
+    User: User[];
 
 }
