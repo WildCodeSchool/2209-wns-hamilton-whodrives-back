@@ -1,0 +1,24 @@
+
+type UserInfo {
+    id: ID!
+    city: String,
+    country: String,
+    firstname: String,
+    lastname: String,
+    age: Int,
+    birthday: Date,
+    address: String 
+}
+
+type Query {
+    getUserInfo(id: ID!): UserInfo
+    getUserInfos: [UserInfo]
+}
+
+
+
+type Mutation {
+    updateUserInfo (id: ID!, city: String, country: String, firstname: String, lastname: String, age: Int, birthday: Date, address: String): UserInfo
+    creatUserInfo (id: ID!, city: String, country: String, firstname: String, lastname: String, age: Int, birthday: Date, address: String, profilPictureId: Int): UserInfo
+    
+}
