@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import CarPicture from './CarPicture';
 import Model from './Model';
 import Options from './Option';
@@ -20,6 +20,7 @@ export default class Car {
     carPictures: CarPicture[];
 
     @OneToOne(() => Options, (options) => options.car)
+    @JoinColumn()
     options: Options;
 
     @ManyToOne(() => Model, (model) => model.cars)

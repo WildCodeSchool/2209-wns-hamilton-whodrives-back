@@ -28,6 +28,13 @@ type Mutation {
     email: String!
     phone: String!
   ): User
-  deleteUser(id: ID!): User
-  loginUser(email: String!, password: String!): RegisterUser
+  deleteUser(id: ID!): Res
+  loginUser(
+    email: String!
+    password: String!
+  ): RegisterUser
 }
+
+type Res{
+msg: String
+} 
