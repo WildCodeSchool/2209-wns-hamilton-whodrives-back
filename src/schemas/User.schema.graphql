@@ -29,9 +29,5 @@ type Mutation {
     phone: String!
   ): User
   deleteUser(id: ID!): User
-  loginUser(
-    email: String!
-    password: String!
-  ): RegisterUser
+  loginUser(email: String!, password: String!): RegisterUser
 }
-

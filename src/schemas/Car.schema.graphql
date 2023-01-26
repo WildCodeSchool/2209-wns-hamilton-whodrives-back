@@ -1,0 +1,17 @@
+type Car {
+  id: ID!
+  seat: Int!
+  modelId: ID!
+  optionId: ID
+}
+
+type Query {
+  cars: [Car]
+  car(id: ID!): Car
+}
+
+type Mutation {
+  createCar(id: ID!, seat: Int!, modelId: ID!, optionId: ID): Car
+  updateCar(id: ID!, seat: Int, modelId: ID, optionId: ID): Car
+  deleteCar(id: ID!): Car
+}
