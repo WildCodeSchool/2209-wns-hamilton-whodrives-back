@@ -1,3 +1,4 @@
+import { MutationCreateCarArgs, MutationUpdateCarArgs } from '@/graphgen';
 import { Repository } from 'typeorm';
 import Car from '../entity/Car';
 import Model from '../entity/Model';
@@ -27,7 +28,7 @@ class CarController {
     return await this.db.findOneBy({user: {id: userId}})
   }
 
-  async addCar({ seat, modelId, optionId }: { seat: number, modelId: number, optionId: number }) {
+  async addCar({ seat, modelId, optionId }: MutationCreateCarArgs) {
     const car = await this.db.save({
       seat,
       modelId,
@@ -36,20 +37,26 @@ class CarController {
       return car;
   }
 
-  async updateCar({ id, seat, modelId, optionId }: { id: number, seat: number, modelId: number, optionId: number }) {
+  async updateCar({ id, seat, modelId, optionId }: MutationUpdateCarArgs) {
     let errors = {} as IErrors;
-    const model = await this.dbModel.findOneBy({ id: modelId });
+    let model = null;
+    let options = null;
+    if(modelId) {
+    model = await this.dbModel.findOneBy({ id: +modelId });
+    }
     if(!model) {
       errors.model = 'Model not found';
     }
-    const options = await this.dbOptions.findOneBy({ id: optionId });
+    if(optionId) {
+    options = await this.dbOptions.findOneBy({ id: +optionId });
+    }
     if(!options) {
       errors.options = 'Options not found';
     }
     if(model && options) {
       const car = await this.db.update(
-        { id }, {
-        seat,
+        { id: +id }, {
+        seat: seat ?? undefined,
         model,
         options,
       }
