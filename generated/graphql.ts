@@ -106,7 +106,7 @@ export type MutationLoginUserArgs = {
 export type MutationUpdateUserArgs = {
   email: Scalars['String'];
   id: Scalars['ID'];
-  password: Scalars['String'];
+  password?: InputMaybe<Scalars['String']>;
   phone: Scalars['String'];
   username: Scalars['String'];
 };
@@ -485,7 +485,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password' | 'phone' | 'username'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
-  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'email' | 'id' | 'password' | 'phone' | 'username'>>;
+  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'email' | 'id' | 'phone' | 'username'>>;
 };
 
 export interface NegativeFloatScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['NegativeFloat'], any> {
