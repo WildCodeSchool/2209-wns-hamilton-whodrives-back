@@ -3,7 +3,10 @@ import datasource from "../lib/datasource";
 import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilPicture";
 import User from "src/entity/User";
-import { MutationCreatUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
+import { MutationCreateUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
+
+
+const SECRET:string = 'secret'
 
 
 class UserInfoController {
@@ -12,7 +15,7 @@ class UserInfoController {
   dbPicture: Repository<ProfilPicture>;
 
   constructor() {
-    this.db = datasource.getRepository("User");
+    this.db = datasource.getRepository("UserInfo");
     this.dbPicture = datasource.getRepository("ProfilPicture");
   }
 
@@ -24,10 +27,11 @@ class UserInfoController {
     return await this.db.findOneBy({ id });
     }
 
-async creatUserInfo({id, city, country, firstname, lastname, age, birthday, address, profilPictureId }: MutationCreatUserInfoArgs) {
- const user = await this.db.findOne({ where: { id: +id } });
-    const userInfo = await this.db.save({
+async createUserInfo({ city, country, firstname, lastname, age, birthday, address, profilPictureId }: MutationCreateUserInfoArgs) {
+  console.log(userId);
+const user = await this.dbUsere.findOne({where: {id: + userId}});
 
+    const userInfo = await this.db.save({
         city,
         country,
         firstname,
@@ -36,10 +40,21 @@ async creatUserInfo({id, city, country, firstname, lastname, age, birthday, addr
         birthday,
         address,
         profilPictureId,
-    });
-    return userInfo;
-}
 
+    });
+
+
+  //  const user = await this.dbUsere.findOne({where: {id: + TokenKind}});
+    // on update le user cible avec l'id du user info cree
+    //await this.dbUsere.save({
+     //   ...user,
+      //  userInfoId: userInfo.id
+   // });
+    return userInfo;
+
+
+
+}
 // update le user cible grace a son token 
 async updateUserInfo({ id, city, country, firstname, lastname, age, birthday, address}: MutationUpdateUserInfoArgs ){
     const userInfo = await this.db.findOne({where: {id: + id}});

@@ -1,6 +1,6 @@
-import { MutationCreateCarArgs, MutationDeleteCarArgs, MutationUpdateCarArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import CarController from "../controller/Car";
+import { MutationCreateCarArgs, MutationDeleteCarArgs, MutationUpdateCarArgs } from "@/graphgen";
 
 export default {
     Query: {

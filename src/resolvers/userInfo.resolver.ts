@@ -1,23 +1,34 @@
+import {  MutationCreateUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
 import UserInfoController from "../controller/UserInfo";
 // import getFieldNames from "graphql-list-fields";
-import {MutationCreatUserInfoArgs, MutationUpdateUserInfoArgs} from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
+import { IUserLogged } from "./Interface";
 
 export default {
     Query: {
-        usersInfo: async (_: any, {}, {userLogged}: any, infos: any) => {
+
+        getUserInfos: async (_: any, {}, {userLogged}: any, infos: any) => {
+
+            return  await new UserInfoController().listUsersInfo();
+        },
+
+
+
+        getUserInfo: async (_: any, {id}:{id: number}, {userLogged}: any, infos: any) => {
             
             // const fields = getFieldNames(infos);
             // return await new UserController().listUsers();
-            return await new UserInfoController().listUsersInfo();
+            return await new UserInfoController().getUserInfoById(id);
             }
         },
         
     Mutation: {
-        createUserInfo: async (_: any, args: MutationCreatUserInfoArgs, { res }: ExpressContext) => {
-
-            const {id, city, country, firstname, lastname, age, birthday, address, profilPictureId } = args;
-            let userInfo = await new UserInfoController().creatUserInfo({id, city , country, firstname, lastname, age, birthday, address, profilPictureId });
+        createUserInfo: async (_: any,  args: MutationCreateUserInfoArgs,  userLogged: IUserLogged ) => {
+            
+            let userId = userLogged.userLogged.id;
+            const { city, country, firstname, lastname, age, birthday, address, profilPictureId,  } = args;
+            let userInfo = await new UserInfoController().createUserInfo({  city, country, firstname, lastname, age, birthday, address, profilPictureId });
+            console.log(userId);
             return userInfo;
         },
         updateUserInfo: async (_: any, args: MutationUpdateUserInfoArgs, { res }: ExpressContext) => {

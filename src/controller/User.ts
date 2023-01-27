@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import datasource from "../lib/datasource";
 import User from "../entity/User";
-import { MutationCreateUserArgs, MutationDeleteUserArgs, MutationUpdateUserArgs } from "@/graphgen"
+import { MutationCreateUserArgs, MutationDeleteUserArgs, MutationUpdateUserArgs } from "@/graphgen";
 
 class UserController {
   db: Repository<User>;
@@ -20,12 +20,12 @@ class UserController {
     return await this.db.findOne({ where: { email } });
   }
 
-  async addUser({ username, password, email, phone, }: MutationCreateUserArgs) {
+  async addUser({ username, password, email, phone}: MutationCreateUserArgs) {
     const user = await this.db.save({
       username,
       password,
       email,
-      phone,
+      phone
     });
     return user;
   }

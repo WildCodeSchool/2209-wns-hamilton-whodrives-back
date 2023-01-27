@@ -85,28 +85,15 @@ export type Car = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  creatUserInfo?: Maybe<UserInfo>;
   createCar?: Maybe<Car>;
   createUser?: Maybe<User>;
+  createUserInfo?: Maybe<UserInfo>;
   deleteCar?: Maybe<Car>;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
   updateCar?: Maybe<Car>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
-};
-
-
-export type MutationCreatUserInfoArgs = {
-  address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Int']>;
-  birthday?: InputMaybe<Scalars['Date']>;
-  city?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  firstname?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
-  lastname?: InputMaybe<Scalars['String']>;
-  profilPictureId?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -123,6 +110,18 @@ export type MutationCreateUserArgs = {
   password: Scalars['String'];
   phone: Scalars['String'];
   username: Scalars['String'];
+};
+
+
+export type MutationCreateUserInfoArgs = {
+  address?: InputMaybe<Scalars['String']>;
+  age?: InputMaybe<Scalars['Int']>;
+  birthday?: InputMaybe<Scalars['Date']>;
+  city?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  firstname?: InputMaybe<Scalars['String']>;
+  lastname?: InputMaybe<Scalars['String']>;
+  profilPictureId?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -588,14 +587,14 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  creatUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationCreatUserInfoArgs, 'id'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'id' | 'modelId' | 'seat'>>;
   createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password' | 'phone' | 'username'>>;
+  createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
-  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'email' | 'id' | 'password' | 'phone' | 'username'>>;
+  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'email' | 'id' | 'phone' | 'username'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
 };
 
