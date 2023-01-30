@@ -2,7 +2,7 @@ import { ChildEntity, Repository } from "typeorm";
 import datasource from "../lib/datasource";
 import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilPicture";
-import User from "src/entity/User";
+import User from "../entity/User";
 import { MutationCreateUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
 
 
@@ -28,8 +28,7 @@ class UserInfoController {
     }
 
 async createUserInfo({ city, country, firstname, lastname, age, birthday, address, profilPictureId }: MutationCreateUserInfoArgs) {
-  console.log(userId);
-const user = await this.dbUsere.findOne({where: {id: + userId}});
+
 
     const userInfo = await this.db.save({
         city,

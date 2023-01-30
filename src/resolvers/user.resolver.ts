@@ -1,6 +1,7 @@
 import UserController from "../controller/User";
 import * as bcrypt from 'bcrypt'; 
 import { create_UUID, generateToken } from "../lib/utilities";
+import { IUserLogged } from "./Interface";
 import { ExpressContext } from "apollo-server-express";
 import { MutationCreateUserArgs, MutationDeleteUserArgs, MutationLoginUserArgs, MutationUpdateUserArgs } from "@/graphgen";
 

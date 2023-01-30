@@ -1,11 +1,6 @@
-import { User } from "@/graphgen";
+import User from "../entity/User";
 
 export interface IUserLogged {
-  userLogged:User,
-  id: number,
-  username: string,
-  password: string,
-  email: string,
-  phone: string,
-  }
+  userLogged: User
+}
 

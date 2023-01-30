@@ -4,6 +4,7 @@ type User {
   password: String
   email: String
   phone: String
+  userId: ID
 }
 type RegisterUser {
   email: String
@@ -23,10 +24,11 @@ type Mutation {
   ): User
   updateUser(
     id: ID!
-    username: String!
+    username: String
     password: String
-    email: String!
-    phone: String!
+    email: String
+    phone: String
+    userId: ID
   ): User
   deleteUser(id: ID!): Res
   loginUser(
