@@ -1,0 +1,16 @@
+type Model {
+  id: ID!
+  name: String
+  cars: String
+}
+
+type Query {
+  Models: [Model]
+  Model(id: ID!): Model
+}
+
+type Mutation {
+  createModel( name: String,cars: String): Model
+  updateModel(id: ID!, name: String,cars: String): Model
+  deleteModel(id: ID!): Model
+}

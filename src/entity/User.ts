@@ -33,6 +33,6 @@ export default class User {
     cars: Car[];
 
     @ManyToOne(() => UserInfo, userInfo => userInfo.user)
-    userInfo: UserInfo[];
+    userInfo: UserInfo;
 
 }

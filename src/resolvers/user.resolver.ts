@@ -1,14 +1,14 @@
 import UserController from "../controller/User";
-import {MutationCreateUserArgs, MutationDeleteUserArgs, MutationLoginUserArgs, MutationUpdateUserArgs} from "@/graphgen";
 import * as bcrypt from 'bcrypt'; 
 import { create_UUID, generateToken } from "../lib/utilities";
+import { IUserLogged } from "./Interface";
 import { ExpressContext } from "apollo-server-express";
-import {checkRights} from "../lib/utilities";
-import User from "src/entity/User";
+import { MutationCreateUserArgs, MutationDeleteUserArgs, MutationLoginUserArgs, MutationUpdateUserArgs } from "@/graphgen";
 
 export default {
   Query: {
     users: async (_: any, {}, {userLogged}: any, infos: any) => {
+      console.log(userLogged)
       return await new UserController().listUsers();
     },
     user: async (_: any, { id }: { id: number }, context: any, infos: any) => {

@@ -2,7 +2,6 @@ import {DataSource} from "typeorm";
 import User from "../entity/User";
 import * as dotenv from "dotenv";
 
-import * as path from "path";
 import Car from "../entity/Car";
 import Model from "../entity/Model";
 import CarPicture from "../entity/CarPicture";
