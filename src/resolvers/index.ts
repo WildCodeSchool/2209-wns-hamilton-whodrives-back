@@ -5,6 +5,9 @@ import userResolver from "./user.resolver";
 import carResolver from "./car.resolver";
 import userInfoResolver from "./userInfo.resolver";
 import modelResolver from "./model.resolver";
-const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver];
+import ChatOptionResolver from "./ChatOption.resolver";
+import MusicOptionResolver from "./MusicOption.resolver";
+import AboutResolver from "./About.resolver";
+const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver, ChatOptionResolver, MusicOptionResolver, AboutResolver];
 
 export default mergeResolvers(resolvers);

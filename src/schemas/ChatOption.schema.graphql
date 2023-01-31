@@ -1,0 +1,13 @@
+type ChatOption {
+    id: ID!
+    content: String!
+}
+
+type Query {
+    chatOptions: [ChatOption]
+    chatOption(id: ID!): ChatOption
+} 
+type Mutation {
+    createChatOption(content: String!): ChatOption
+    updateChatOption(id: ID!, content: String!): ChatOption
+}

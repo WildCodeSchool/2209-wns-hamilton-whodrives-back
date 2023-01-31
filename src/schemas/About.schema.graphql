@@ -1,0 +1,18 @@
+type About {
+    id: ID!
+    animal: Boolean
+    description: String
+    smoke: Boolean
+    chatOption: ChatOption
+    musicOption: MusicOption
+}
+
+
+type Query {
+    about: About!
+}
+
+type Mutation {
+    createAbout( animal: Boolean!, description: String!, smoke: Boolean!, chatOption:ID, musicOption:ID): About
+    updateAbout( id: ID !, animal: Boolean, description: String, smoke: Boolean, chatOption:ID, musicOption:ID): About
+}
