@@ -6,6 +6,9 @@ import carResolver from "./car.resolver";
 import userInfoResolver from "./userInfo.resolver";
 import modelResolver from "./model.resolver";
 import rolesResolver from "./roles.resolver";
-const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver,rolesResolver];
+import ratingResolver from "./rating.resolver";
+import TripResolver from "./trip.resolver";
+import receiptsResolver from "./receipts.resolver";
+const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver,rolesResolver,ratingResolver,TripResolver,receiptsResolver];
 
 export default mergeResolvers(resolvers);

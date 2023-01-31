@@ -78,8 +78,7 @@ export type Scalars = {
 export type Car = {
   __typename?: 'Car';
   id: Scalars['ID'];
-  modelId: Scalars['ID'];
-  optionId?: Maybe<Scalars['ID']>;
+  model?: Maybe<Model>;
   seat: Scalars['Int'];
 };
 
@@ -94,30 +93,65 @@ export type Mutation = {
   __typename?: 'Mutation';
   createCar?: Maybe<Car>;
   createModel?: Maybe<Model>;
+  createRating?: Maybe<Rating>;
+  createReceipts?: Maybe<Receipts>;
+  createRole?: Maybe<Roles>;
+  createTrip?: Maybe<Trip>;
   createUser?: Maybe<User>;
   createUserInfo?: Maybe<UserInfo>;
   deleteCar?: Maybe<Car>;
   deleteModel?: Maybe<Model>;
+  deleteRating?: Maybe<Rating>;
+  deleteReceipts?: Maybe<Receipts>;
+  deleteRole?: Maybe<Roles>;
+  deleteTrip?: Maybe<Trip>;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
   updateCar?: Maybe<Car>;
   updateModel?: Maybe<Model>;
+  updateRating?: Maybe<Rating>;
+  updateReceipts?: Maybe<Receipts>;
+  updateRole?: Maybe<Roles>;
+  updateTrip?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
 };
 
 
 export type MutationCreateCarArgs = {
-  id: Scalars['ID'];
-  modelId: Scalars['ID'];
-  optionId?: InputMaybe<Scalars['ID']>;
+  modelId?: InputMaybe<Scalars['Int']>;
+  optionId?: InputMaybe<Scalars['Int']>;
   seat: Scalars['Int'];
 };
 
 
 export type MutationCreateModelArgs = {
-  cars?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationCreateRatingArgs = {
+  content?: InputMaybe<Scalars['String']>;
+  note?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type MutationCreateReceiptsArgs = {
+  file_name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationCreateRoleArgs = {
+  name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationCreateTripArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['Date']>;
 };
 
 
@@ -151,6 +185,26 @@ export type MutationDeleteModelArgs = {
 };
 
 
+export type MutationDeleteRatingArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteReceiptsArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteRoleArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteTripArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationDeleteUserArgs = {
   id: Scalars['ID'];
 };
@@ -164,16 +218,44 @@ export type MutationLoginUserArgs = {
 
 export type MutationUpdateCarArgs = {
   id: Scalars['ID'];
-  modelId?: InputMaybe<Scalars['ID']>;
-  optionId?: InputMaybe<Scalars['ID']>;
+  modelId?: InputMaybe<Scalars['Int']>;
+  optionId?: InputMaybe<Scalars['Int']>;
   seat?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type MutationUpdateModelArgs = {
-  cars?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationUpdateRatingArgs = {
+  content?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  note?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type MutationUpdateReceiptsArgs = {
+  file_name?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
+
+export type MutationUpdateRoleArgs = {
+  id: Scalars['ID'];
+  name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationUpdateTripArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['Date']>;
+  id: Scalars['ID'];
 };
 
 
@@ -202,8 +284,16 @@ export type Query = {
   __typename?: 'Query';
   Model?: Maybe<Model>;
   Models?: Maybe<Array<Maybe<Model>>>;
+  Rating?: Maybe<Rating>;
+  Ratings?: Maybe<Array<Maybe<Rating>>>;
+  Receipt?: Maybe<Receipts>;
+  Receipts?: Maybe<Array<Maybe<Receipts>>>;
+  Role?: Maybe<Roles>;
+  Roles?: Maybe<Array<Maybe<Roles>>>;
   car?: Maybe<Car>;
   cars?: Maybe<Array<Maybe<Car>>>;
+  getTrip?: Maybe<Trip>;
+  getTrips?: Maybe<Array<Maybe<Trip>>>;
   getUserInfo?: Maybe<UserInfo>;
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
   user?: Maybe<User>;
@@ -216,7 +306,27 @@ export type QueryModelArgs = {
 };
 
 
+export type QueryRatingArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryReceiptArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryRoleArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type QueryCarArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryGetTripArgs = {
   id: Scalars['ID'];
 };
 
@@ -230,6 +340,19 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
+export type Rating = {
+  __typename?: 'Rating';
+  content?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  note?: Maybe<Scalars['Int']>;
+};
+
+export type Receipts = {
+  __typename?: 'Receipts';
+  file_name?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+};
+
 export type RegisterUser = {
   __typename?: 'RegisterUser';
   email?: Maybe<Scalars['String']>;
@@ -240,6 +363,22 @@ export type RegisterUser = {
 export type Res = {
   __typename?: 'Res';
   msg?: Maybe<Scalars['String']>;
+};
+
+export type Roles = {
+  __typename?: 'Roles';
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+};
+
+export type Trip = {
+  __typename?: 'Trip';
+  arrival_date?: Maybe<Scalars['Date']>;
+  date_departure?: Maybe<Scalars['Date']>;
+  departure_places?: Maybe<Scalars['String']>;
+  destination?: Maybe<Scalars['String']>;
+  hour_departure?: Maybe<Scalars['Date']>;
+  id: Scalars['ID'];
 };
 
 export type User = {
@@ -388,8 +527,11 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
+  Rating: ResolverTypeWrapper<Rating>;
+  Receipts: ResolverTypeWrapper<Receipts>;
   RegisterUser: ResolverTypeWrapper<RegisterUser>;
   Res: ResolverTypeWrapper<Res>;
+  Roles: ResolverTypeWrapper<Roles>;
   RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
   SafeInt: ResolverTypeWrapper<Scalars['SafeInt']>;
   SemVer: ResolverTypeWrapper<Scalars['SemVer']>;
@@ -397,6 +539,7 @@ export type ResolversTypes = {
   Time: ResolverTypeWrapper<Scalars['Time']>;
   TimeZone: ResolverTypeWrapper<Scalars['TimeZone']>;
   Timestamp: ResolverTypeWrapper<Scalars['Timestamp']>;
+  Trip: ResolverTypeWrapper<Trip>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   USCurrency: ResolverTypeWrapper<Scalars['USCurrency']>;
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
@@ -465,8 +608,11 @@ export type ResolversParentTypes = {
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
+  Rating: Rating;
+  Receipts: Receipts;
   RegisterUser: RegisterUser;
   Res: Res;
+  Roles: Roles;
   RoutingNumber: Scalars['RoutingNumber'];
   SafeInt: Scalars['SafeInt'];
   SemVer: Scalars['SemVer'];
@@ -474,6 +620,7 @@ export type ResolversParentTypes = {
   Time: Scalars['Time'];
   TimeZone: Scalars['TimeZone'];
   Timestamp: Scalars['Timestamp'];
+  Trip: Trip;
   URL: Scalars['URL'];
   USCurrency: Scalars['USCurrency'];
   UUID: Scalars['UUID'];
@@ -499,8 +646,7 @@ export interface ByteScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 
 export type CarResolvers<ContextType = any, ParentType extends ResolversParentTypes['Car'] = ResolversParentTypes['Car']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  modelId?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  optionId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType>;
   seat?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -633,16 +779,28 @@ export type ModelResolvers<ContextType = any, ParentType extends ResolversParent
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'id' | 'modelId' | 'seat'>>;
+  createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
   createModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, Partial<MutationCreateModelArgs>>;
+  createRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, Partial<MutationCreateRatingArgs>>;
+  createReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, Partial<MutationCreateReceiptsArgs>>;
+  createRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, Partial<MutationCreateRoleArgs>>;
+  createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
   createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
   deleteModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationDeleteModelArgs, 'id'>>;
+  deleteRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<MutationDeleteRatingArgs, 'id'>>;
+  deleteReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationDeleteReceiptsArgs, 'id'>>;
+  deleteRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationDeleteRoleArgs, 'id'>>;
+  deleteTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
   updateModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationUpdateModelArgs, 'id'>>;
+  updateRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<MutationUpdateRatingArgs, 'id'>>;
+  updateReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationUpdateReceiptsArgs, 'id'>>;
+  updateRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationUpdateRoleArgs, 'id'>>;
+  updateTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripArgs, 'id'>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
 };
@@ -702,8 +860,16 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   Model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<QueryModelArgs, 'id'>>;
   Models?: Resolver<Maybe<Array<Maybe<ResolversTypes['Model']>>>, ParentType, ContextType>;
+  Rating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<QueryRatingArgs, 'id'>>;
+  Ratings?: Resolver<Maybe<Array<Maybe<ResolversTypes['Rating']>>>, ParentType, ContextType>;
+  Receipt?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<QueryReceiptArgs, 'id'>>;
+  Receipts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Receipts']>>>, ParentType, ContextType>;
+  Role?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
+  Roles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Roles']>>>, ParentType, ContextType>;
   car?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<QueryCarArgs, 'id'>>;
   cars?: Resolver<Maybe<Array<Maybe<ResolversTypes['Car']>>>, ParentType, ContextType>;
+  getTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<QueryGetTripArgs, 'id'>>;
+  getTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   getUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<QueryGetUserInfoArgs, 'id'>>;
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -718,6 +884,19 @@ export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'RGBA';
 }
 
+export type RatingResolvers<ContextType = any, ParentType extends ResolversParentTypes['Rating'] = ResolversParentTypes['Rating']> = {
+  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  note?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReceiptsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Receipts'] = ResolversParentTypes['Receipts']> = {
+  file_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type RegisterUserResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegisterUser'] = ResolversParentTypes['RegisterUser']> = {
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
@@ -727,6 +906,12 @@ export type RegisterUserResolvers<ContextType = any, ParentType extends Resolver
 
 export type ResResolvers<ContextType = any, ParentType extends ResolversParentTypes['Res'] = ResolversParentTypes['Res']> = {
   msg?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type RolesResolvers<ContextType = any, ParentType extends ResolversParentTypes['Roles'] = ResolversParentTypes['Roles']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -753,6 +938,16 @@ export interface TimeZoneScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Timestamp'], any> {
   name: 'Timestamp';
 }
+
+export type TripResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trip'] = ResolversParentTypes['Trip']> = {
+  arrival_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  date_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  departure_places?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hour_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['URL'], any> {
   name: 'URL';
@@ -857,14 +1052,18 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
+  Rating?: RatingResolvers<ContextType>;
+  Receipts?: ReceiptsResolvers<ContextType>;
   RegisterUser?: RegisterUserResolvers<ContextType>;
   Res?: ResResolvers<ContextType>;
+  Roles?: RolesResolvers<ContextType>;
   RoutingNumber?: GraphQLScalarType;
   SafeInt?: GraphQLScalarType;
   SemVer?: GraphQLScalarType;
   Time?: GraphQLScalarType;
   TimeZone?: GraphQLScalarType;
   Timestamp?: GraphQLScalarType;
+  Trip?: TripResolvers<ContextType>;
   URL?: GraphQLScalarType;
   USCurrency?: GraphQLScalarType;
   UUID?: GraphQLScalarType;

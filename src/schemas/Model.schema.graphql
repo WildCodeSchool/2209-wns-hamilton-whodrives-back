@@ -1,7 +1,6 @@
 type Model {
   id: ID!
   name: String
-  cars: String
 }
 
 type Query {
@@ -10,7 +9,7 @@ type Query {
 }
 
 type Mutation {
-  createModel( name: String,cars: String): Model
-  updateModel(id: ID!, name: String,cars: String): Model
+  createModel( name: String): Model
+  updateModel(id: ID!, name: String): Model
   deleteModel(id: ID!): Model
 }
