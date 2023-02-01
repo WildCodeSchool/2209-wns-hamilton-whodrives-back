@@ -15,17 +15,8 @@ export default class UserInfo {
     @Column({length: 45})
     country: string;
 
-    @Column({length: 45})
-    firstname: string;
-
-    @Column({length: 45})
-    lastname: string;
-
     @Column()
     age: number;
-
-    @Column({nullable: true})
-    birthday: Date;
 
     // max lenght 10
     @Column({length: 100})
