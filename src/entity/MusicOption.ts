@@ -11,6 +11,6 @@ export default class MusicOption {
     content: string
 
     @OneToMany(() => About , about => about.musicOption)
-    about: About[];
+    about: About;
 
 }

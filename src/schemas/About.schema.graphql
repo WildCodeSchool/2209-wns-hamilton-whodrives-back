@@ -3,16 +3,16 @@ type About {
     animal: Boolean
     description: String
     smoke: Boolean
-    chatOption: ChatOption
-    musicOption: MusicOption
+    chatOptionId: ChatOption
+    musicOptionId: MusicOption
 }
-
 
 type Query {
     about: About!
 }
 
 type Mutation {
-    createAbout( animal: Boolean!, description: String!, smoke: Boolean!, chatOption:ID, musicOption:ID): About
-    updateAbout( id: ID !, animal: Boolean, description: String, smoke: Boolean, chatOption:ID, musicOption:ID): About
+    createAbout( animal: Boolean!, description: String!, smoke: Boolean!, chatOptionId:ID!, musicOptionId:ID!): About
+    updateAbout( id: ID !, animal: Boolean, description: String, smoke: Boolean): About
+    updateMusicAndChatOption( id: ID !, chatOptionId:ID!, musicOptionId:ID!): About
 }

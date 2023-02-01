@@ -1,7 +1,6 @@
 import AboutController from "../controller/About";
-import * as bcrypt from 'bcrypt'; 
-import { create_UUID, generateToken } from "../lib/utilities";
-import { MutationCreateAboutArgs, MutationUpdateAboutArgs } from "@/graphgen";
+import { MutationCreateAboutArgs, MutationUpdateAboutArgs, MutationUpdateMusicAndChatOptionArgs } from "@/graphgen";
+
 
 export default {
     Query: {
@@ -12,9 +11,8 @@ export default {
     },
     Mutation: {
         createAbout: async (_: any, args: MutationCreateAboutArgs, { res }: any) => {
-            const { animal, description, smoke, chatOption, musicOption } = args;
-            console.log(args)
-            let about = await new AboutController().createAbout({ animal, description,smoke, chatOption, musicOption});
+            const { animal, description, smoke, chatOptionId, musicOptionId } = args;
+            let about = await new AboutController().createAbout({ animal, description,smoke, chatOptionId, musicOptionId});
             return about;
         },
         
@@ -23,5 +21,11 @@ export default {
             let about = await new AboutController().updateAbout({ id, animal, description,smoke });
             return about;
         },
+
+        updateMusicAndChatOption: async (_: any, args: MutationUpdateMusicAndChatOptionArgs, { res }: any) => {
+            const { id, chatOptionId, musicOptionId } = args;
+            let about = await new AboutController().updateMusicAndChatOption({ id, chatOptionId, musicOptionId });
+            return about;
+        }
 }
 }

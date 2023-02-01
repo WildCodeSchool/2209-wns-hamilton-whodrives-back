@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 import datasource from "../lib/datasource";
 import About from "../entity/About";
-import MusicOption from "src/entity/MusicOption";
-import ChatOption from "src/entity/ChatOption";
-import { MutationCreateAboutArgs, MutationUpdateAboutArgs } from "@/graphgen";
+import MusicOption from "../entity/MusicOption";
+import ChatOption from "../entity/ChatOption";
+import { MutationCreateAboutArgs, MutationUpdateAboutArgs, MutationUpdateMusicAndChatOptionArgs } from "@/graphgen";
 
 class AboutController {
   db: Repository<About>;
@@ -29,33 +29,60 @@ class AboutController {
     return await this.dbOptionChat.findOneBy({id: +chatOptionId});
   }
 
-  async createAbout({animal, description, smoke, chatOption, musicOption}:MutationCreateAboutArgs) {
 
-   // const ChatOption = await this.dbOptionChat.findOne({where: {id: chatOption}});
-   // const MusicOption = await this.dbOptionMusic.findOne({where: {id: musicOption}});
-    const about = await this.db.save({
-      animal,
-      description,
-      smoke,
-      ChatOption,
-      MusicOption
-    });
-    return about;
+
+  async createAbout({animal, description, smoke, chatOptionId, musicOptionId}:MutationCreateAboutArgs) {
+
+    
+    const musicOption = await this.dbOptionMusic.findOne({where: {id: +musicOptionId}});
+    const chatOption = await this.dbOptionChat.findOne({where: {id: +chatOptionId}})
+    if(musicOption && chatOption){
+
+      const about = await this.db.save({animal, smoke, description, musicOption , chatOption});
+      return about;
+    } else {
+      throw new Error("Please check your preferences");
+    }
+   
   }
 
-  async updateAbout({id, animal, description, smoke, chatOption,musicOption}:MutationUpdateAboutArgs) {
+  async updateAbout({id, animal, description, smoke}:MutationUpdateAboutArgs) {
     const about = await this.db.findOne({ where: { id: +id } });
-   // const ChatOption = await this.dbOptionChat.findOne({where: {id: chatOption}});
-   // const MusicOption = await this.dbOptionMusic.findOne({where: {id: musicOption}});
 
     return await this.db.save({
       ...about,
       animal,
       description,
-      smoke,
-      ChatOption,
-      MusicOption
+      smoke
+      
     });
+
+  }
+
+  async updateMusicAndChatOption({id, chatOptionId, musicOptionId}:MutationUpdateMusicAndChatOptionArgs) {
+    const about = await this.db.findOne({ where: { id: +id } });
+    const musicOption = await this.dbOptionMusic.findOne({where: {id: +musicOptionId}});
+    const chatOption = await this.dbOptionChat.findOne({where: {id: +chatOptionId}})
+    if(musicOption && chatOption){
+      return await this.db.save({
+        ...about,
+        musicOption,
+        chatOption
+      });
+    } else if (!musicOption && chatOption){
+      return await this.db.save({
+        ...about,
+        chatOption
+      });
+    } else if (musicOption && !chatOption){
+      return await this.db.save({
+        ...about,
+        musicOption
+      });
+    } else {
+      throw new Error("Please check your preferences");
+    }
+    
   }
   
   

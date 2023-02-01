@@ -11,6 +11,6 @@ export default class ChatOption {
     content: string;
 
     @OneToMany(() => About, about => about.chatOption)
-    about: About[];
+    about: About;
     
 }

@@ -78,10 +78,10 @@ export type Scalars = {
 export type About = {
   __typename?: 'About';
   animal?: Maybe<Scalars['Boolean']>;
-  chatOption?: Maybe<ChatOption>;
+  chatOptionId?: Maybe<ChatOption>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  musicOption?: Maybe<MusicOption>;
+  musicOptionId?: Maybe<MusicOption>;
   smoke?: Maybe<Scalars['Boolean']>;
 };
 
@@ -129,6 +129,7 @@ export type Mutation = {
   updateCar?: Maybe<Car>;
   updateChatOption?: Maybe<ChatOption>;
   updateModel?: Maybe<Model>;
+  updateMusicAndChatOption?: Maybe<About>;
   updateMusicOption?: Maybe<MusicOption>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
@@ -137,9 +138,9 @@ export type Mutation = {
 
 export type MutationCreateAboutArgs = {
   animal: Scalars['Boolean'];
-  chatOption?: InputMaybe<Scalars['ID']>;
+  chatOptionId: Scalars['ID'];
   description: Scalars['String'];
-  musicOption?: InputMaybe<Scalars['ID']>;
+  musicOptionId: Scalars['ID'];
   smoke: Scalars['Boolean'];
 };
 
@@ -211,10 +212,8 @@ export type MutationLoginUserArgs = {
 
 export type MutationUpdateAboutArgs = {
   animal?: InputMaybe<Scalars['Boolean']>;
-  chatOption?: InputMaybe<Scalars['ID']>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
-  musicOption?: InputMaybe<Scalars['ID']>;
   smoke?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -237,6 +236,13 @@ export type MutationUpdateModelArgs = {
   cars?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationUpdateMusicAndChatOptionArgs = {
+  chatOptionId: Scalars['ID'];
+  id: Scalars['ID'];
+  musicOptionId: Scalars['ID'];
 };
 
 
@@ -577,10 +583,10 @@ export type ResolversParentTypes = {
 
 export type AboutResolvers<ContextType = any, ParentType extends ResolversParentTypes['About'] = ResolversParentTypes['About']> = {
   animal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  chatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType>;
+  chatOptionId?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType>;
+  musicOptionId?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType>;
   smoke?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -745,7 +751,7 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'description' | 'smoke'>>;
+  createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'id' | 'modelId' | 'seat'>>;
   createChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationCreateChatOptionArgs, 'content'>>;
   createModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, Partial<MutationCreateModelArgs>>;
@@ -760,6 +766,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
   updateChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationUpdateChatOptionArgs, 'content' | 'id'>>;
   updateModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationUpdateModelArgs, 'id'>>;
+  updateMusicAndChatOption?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateMusicAndChatOptionArgs, 'chatOptionId' | 'id' | 'musicOptionId'>>;
   updateMusicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<MutationUpdateMusicOptionArgs, 'content' | 'id'>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
