@@ -2,10 +2,7 @@ type UserInfo {
     id: ID!
     city: String,
     country: String,
-    firstname: String,
-    lastname: String,
     age: Int,
-    birthday: Date,
     address: String 
 }
 
@@ -16,6 +13,6 @@ type Query {
 
 
 type Mutation {
-    updateUserInfo (id: ID!, city: String, country: String, firstname: String, lastname: String, age: Int, birthday: Date, address: String): UserInfo
-    createUserInfo (city: String, country: String, firstname: String, lastname: String, age: Int, birthday: Date, address: String, profilPictureId: Int): UserInfo
+    updateUserInfo (id: ID!, city: String, country: String,  age: Int, address: String): UserInfo
+    createUserInfo (city: String, country: String,age: Int,  address: String, profilPictureId: Int): UserInfo
 }

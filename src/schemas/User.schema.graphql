@@ -2,6 +2,9 @@ type User {
   id: ID!
   username: String
   password: String
+  firstname: String
+  lastname: String
+  date_of_birth: Date
   email: String
   phone: String
   userId: ID
@@ -19,15 +22,21 @@ type Mutation {
   createUser(
     username: String!
     password: String!
+    firstname: String
+    lastname: String
+    date_of_birth: Date!
     email: String!
     phone: String!
   ): User
   updateUser(
     id: ID!
-    username: String
-    password: String
-    email: String
-    phone: String
+    username: String!
+    password: String!
+    firstname: String!
+    lastname: String!
+    date_of_birth: Date!
+    email: String!
+    phone: String!
     userId: ID
   ): User
   deleteUser(id: ID!): Res

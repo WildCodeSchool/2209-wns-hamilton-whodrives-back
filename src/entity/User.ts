@@ -13,6 +13,15 @@ export default class User {
     @Column({unique: true})
     username: string;
 
+    @Column({length: 45,nullable: true})
+    firstname: string;
+
+    @Column({length: 45,nullable: true})
+    lastname: string;
+
+    @Column({nullable: true})
+    date_of_birth: Date;
+
     @Column({length: 140})
     password: string;
 

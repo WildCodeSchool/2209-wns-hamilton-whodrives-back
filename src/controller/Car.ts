@@ -29,12 +29,20 @@ class CarController {
   }
 
   async addCar({ seat, modelId, optionId }: MutationCreateCarArgs) {
-    const car = await this.db.save({
-      seat,
-      modelId,
-      optionId
-    });
-      return car;
+
+    const option =await this.dbOptions.findOne({where: {id :optionId}})
+    let data: any = {seat,model,option}
+    if (model){
+      data.model= model
+    }
+    if (option){
+      data.option= option
+    }
+      const car = await this.db.save(
+        data,
+      );
+      console.log(car)
+      return car; 
   }
 
   async updateCar({ id, seat, modelId, optionId }: MutationUpdateCarArgs) {
