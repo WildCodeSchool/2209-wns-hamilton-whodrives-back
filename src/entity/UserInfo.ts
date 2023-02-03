@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import About from './About';
-import ProfilPicture from './ProfilPicture';
+import ProfilPicture from './ProfilePicture';
 import User from './User';
 
 @Entity("user_info")

@@ -8,6 +8,7 @@ import modelResolver from "./model.resolver";
 import ChatOptionResolver from "./ChatOption.resolver";
 import MusicOptionResolver from "./MusicOption.resolver";
 import AboutResolver from "./About.resolver";
-const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver, ChatOptionResolver, MusicOptionResolver, AboutResolver];
+import ProfilePictureResolver from "./ProfilePicture.resolver";
+const resolvers = [ userResolver, carResolver, scalarResolvers, userInfoResolver,modelResolver, ChatOptionResolver, MusicOptionResolver, AboutResolver, ProfilePictureResolver];
 
 export default mergeResolvers(resolvers);

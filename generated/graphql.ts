@@ -99,6 +99,13 @@ export type ChatOption = {
   id: Scalars['ID'];
 };
 
+export type File = {
+  __typename?: 'File';
+  file: Scalars['Float'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type Model = {
   __typename?: 'Model';
   cars?: Maybe<Scalars['String']>;
@@ -125,6 +132,7 @@ export type Mutation = {
   deleteModel?: Maybe<Model>;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
+  singleUpload: File;
   updateAbout?: Maybe<About>;
   updateCar?: Maybe<Car>;
   updateChatOption?: Maybe<ChatOption>;
@@ -210,6 +218,11 @@ export type MutationLoginUserArgs = {
 };
 
 
+export type MutationSingleUploadArgs = {
+  file: Scalars['Float'];
+};
+
+
 export type MutationUpdateAboutArgs = {
   animal?: InputMaybe<Scalars['Boolean']>;
   description?: InputMaybe<Scalars['String']>;
@@ -263,6 +276,7 @@ export type MutationUpdateUserArgs = {
 
 
 export type MutationUpdateUserInfoArgs = {
+  aboutId?: InputMaybe<Scalars['ID']>;
   address?: InputMaybe<Scalars['String']>;
   age?: InputMaybe<Scalars['Int']>;
   birthday?: InputMaybe<Scalars['Date']>;
@@ -344,6 +358,7 @@ export type User = {
 
 export type UserInfo = {
   __typename?: 'UserInfo';
+  aboutId?: Maybe<Scalars['ID']>;
   address?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['Int']>;
   birthday?: Maybe<Scalars['Date']>;
@@ -438,6 +453,8 @@ export type ResolversTypes = {
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
+  File: ResolverTypeWrapper<File>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
   GUID: ResolverTypeWrapper<Scalars['GUID']>;
   HSL: ResolverTypeWrapper<Scalars['HSL']>;
   HSLA: ResolverTypeWrapper<Scalars['HSLA']>;
@@ -518,6 +535,8 @@ export type ResolversParentTypes = {
   DateTime: Scalars['DateTime'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
+  File: File;
+  Float: Scalars['Float'];
   GUID: Scalars['GUID'];
   HSL: Scalars['HSL'];
   HSLA: Scalars['HSLA'];
@@ -649,6 +668,13 @@ export interface EmailAddressScalarConfig extends GraphQLScalarTypeConfig<Resolv
   name: 'EmailAddress';
 }
 
+export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
+  file?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface GuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GUID'], any> {
   name: 'GUID';
 }
@@ -762,6 +788,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationDeleteModelArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
+  singleUpload?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<MutationSingleUploadArgs, 'file'>>;
   updateAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateAboutArgs, 'id'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
   updateChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationUpdateChatOptionArgs, 'content' | 'id'>>;
@@ -915,6 +942,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
 };
 
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
+  aboutId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   birthday?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
@@ -949,6 +977,7 @@ export type Resolvers<ContextType = any> = {
   DateTime?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
+  File?: FileResolvers<ContextType>;
   GUID?: GraphQLScalarType;
   HSL?: GraphQLScalarType;
   HSLA?: GraphQLScalarType;

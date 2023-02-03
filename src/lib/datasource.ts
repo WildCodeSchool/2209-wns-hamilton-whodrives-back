@@ -7,7 +7,7 @@ import Model from "../entity/Model";
 import CarPicture from "../entity/CarPicture";
 import Options from "../entity/Option";
 import UserInfo from "../entity/UserInfo";
-import ProfilPicture from "../entity/ProfilPicture";
+import ProfilPicture from "../entity/ProfilePicture";
 import Badge from "../entity/Badge";
 import About from "../entity/About";
 import ChatOption from "../entity/ChatOption";

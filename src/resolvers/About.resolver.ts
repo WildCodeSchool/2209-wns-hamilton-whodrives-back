@@ -1,5 +1,8 @@
 import AboutController from "../controller/About";
 import { MutationCreateAboutArgs, MutationUpdateAboutArgs, MutationUpdateMusicAndChatOptionArgs } from "@/graphgen";
+import { IUserLogged } from "./Interface";
+import UserInfo from "../entity/UserInfo";
+import UserInfoController from "../controller/UserInfo";
 
 
 export default {
@@ -10,9 +13,16 @@ export default {
 
     },
     Mutation: {
-        createAbout: async (_: any, args: MutationCreateAboutArgs, { res }: any) => {
+        createAbout: async (_: any, args: MutationCreateAboutArgs,{ userLogged }: IUserLogged) => {
+            let msg = "user is not connected"
+            if (!userLogged) {
+                throw new Error(msg)
+            }
+            let userId = userLogged.id;
             const { animal, description, smoke, chatOptionId, musicOptionId } = args;
             let about = await new AboutController().createAbout({ animal, description,smoke, chatOptionId, musicOptionId});
+            let userInfoAbout = await new UserInfoController().assignAbout({ userLogged }, about)
+            console.log(about);
             return about;
         },
         
