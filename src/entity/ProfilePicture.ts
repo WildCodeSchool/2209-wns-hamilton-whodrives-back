@@ -1,7 +1,7 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import UserInfo from './UserInfo';
 
-@Entity("profil_picture")
+@Entity("profile_picture")
 export default class ProfilPicture {
     
     @PrimaryGeneratedColumn()

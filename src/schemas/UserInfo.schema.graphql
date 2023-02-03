@@ -4,13 +4,13 @@ type UserInfo {
     country: String,
     age: Int,
     address: String 
+    aboutId: ID
 }
 
 type Query {
     getUserInfo(id: ID!): UserInfo
     getUserInfos: [UserInfo]
 }
-
 
 type Mutation {
     updateUserInfo (id: ID!, city: String, country: String,  age: Int, address: String): UserInfo

@@ -18,11 +18,11 @@ export default class About {
     @Column()
     smoke: boolean;
 
-    @ManyToOne(() => ChatOption, chatOption => chatOption.about)
-    chatOption: ChatOption[];
+    @ManyToOne(() => ChatOption, chatOption => chatOption.about, {nullable: true})
+    chatOption?: ChatOption;
 
-    @ManyToOne(() => MusicOption, musicOption => musicOption.about)
-    musicOption: MusicOption[];
+    @ManyToOne(() => MusicOption, musicOption => musicOption.about,{nullable: true})
+    musicOption?: MusicOption;
 
     @OneToMany(() => UserInfo, userInfo => userInfo.about)
     userInfo: UserInfo[];

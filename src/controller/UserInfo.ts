@@ -1,9 +1,11 @@
 import { ChildEntity, Repository } from "typeorm";
 import datasource from "../lib/datasource";
 import UserInfo from "../entity/UserInfo";
-import ProfilPicture from "../entity/ProfilPicture";
+import ProfilPicture from "../entity/ProfilePicture";
 import User from "../entity/User";
 import { MutationCreateUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
+import { IUserLogged } from "../resolvers/Interface";
+import About from "../entity/About";
 
 
 const SECRET:string = 'secret'
@@ -29,7 +31,6 @@ class UserInfoController {
 
 async createUserInfo({ city, country, age, address, profilPictureId }: MutationCreateUserInfoArgs) {
 
-
     const userInfo = await this.db.save({
         city,
         country,
@@ -48,8 +49,6 @@ async createUserInfo({ city, country, age, address, profilPictureId }: MutationC
    // });
     return userInfo;
 
-
-
 }
 // update le user cible grace a son token 
 async updateUserInfo({ id, city, country,age, address}: MutationUpdateUserInfoArgs ){
@@ -66,11 +65,19 @@ async updateUserInfo({ id, city, country,age, address}: MutationUpdateUserInfoAr
       });
 
 console.log(userInfo);
-        
-    
 
-    
 }
+
+async assignAbout({ userLogged }: IUserLogged, about: About) {
+    return await this.db.save({
+        ...userLogged,
+        about
+    });
+}
+
+
+
+
 }
 
 

@@ -13,8 +13,6 @@ export default {
             return await new UserInfoController().listUsersInfo();
         },
 
-
-
         getUserInfo: async (_: any, { id }: { id: number }, { userLogged }: any, infos: any) => {
             return await new UserInfoController().getUserInfoById(id);
         }
