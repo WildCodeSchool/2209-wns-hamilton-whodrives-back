@@ -1,8 +1,8 @@
 type Car {
   id: ID!
   seat: Int!
-  modelId: ID!
-  optionId: ID
+  model: Model
+  #option: Option
 }
 
 type Query {
@@ -11,7 +11,7 @@ type Query {
 }
 
 type Mutation {
-  createCar(id: ID!, seat: Int!, modelId: ID!, optionId: ID): Car
-  updateCar(id: ID!, seat: Int, modelId: ID, optionId: ID): Car
+  createCar( seat: Int!, modelId: Int, optionId: Int): Car
+  updateCar(id: ID!, seat: Int, modelId: Int, optionId: Int): Car
   deleteCar(id: ID!): Car
 }

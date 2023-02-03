@@ -17,15 +17,15 @@ export default {
   },
   Mutation: {
     createUser: async (_: any, args: MutationCreateUserArgs, { res }: ExpressContext) => {
-      const { username, password, email, phone } = args;
+      const { username, password,  firstname,lastname,date_of_birth, email, phone } = args;
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
-      let user = await new UserController().addUser({ username, password: hashed, email, phone});
+      let user = await new UserController().addUser({ username, password: hashed, firstname,lastname,date_of_birth, email, phone});
       return user
     },
     updateUser: async (_:any , args: MutationUpdateUserArgs, { res }: ExpressContext) => {
-      const {id,username, email, phone } = args;
-      let user = await new UserController().updateUser({id,username, email, phone})
+      const {id,username, password,  firstname,lastname,date_of_birth, email, phone } = args;
+      let user = await new UserController().updateUser({id,username, password,  firstname,lastname,date_of_birth, email, phone})
       return user
     },
 

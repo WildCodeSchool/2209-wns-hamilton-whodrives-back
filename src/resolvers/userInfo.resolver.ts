@@ -26,15 +26,15 @@ export default {
             }
             let userId = userLogged.id;
             console.log(userLogged)
-            const { city, country, firstname, lastname, age, birthday, address, profilPictureId, } = args;
-            let userInfo = await new UserInfoController().createUserInfo({ city, country, firstname, lastname, age, birthday, address, profilPictureId });
+            const { city, country, age, address, profilPictureId, } = args;
+            let userInfo = await new UserInfoController().createUserInfo({ city, country, age, address, profilPictureId });
             let user = await new UserController().assignUserInfos({ userLogged }, userInfo)
             console.log(userId);
             return userInfo
         },
         updateUserInfo: async (_: any, args: MutationUpdateUserInfoArgs, { res }: ExpressContext) => {
-            const { id, city, country, firstname, lastname, age, birthday, address } = args;
-            let userInfo = await new UserInfoController().updateUserInfo({ id, city, country, firstname, lastname, age, birthday, address });
+            const { id, city, country,  age,  address } = args;
+            let userInfo = await new UserInfoController().updateUserInfo({ id, city, country,  age, address });
             return userInfo;
         }
     }

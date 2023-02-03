@@ -12,11 +12,11 @@ import Badge from "../entity/Badge";
 import About from "../entity/About";
 import ChatOption from "../entity/ChatOption";
 import MusicOption from "../entity/MusicOption";
-import Trajet from "../entity/Trajet";
 import Roles from "../entity/Roles";
 import Rating from "../entity/Rating";
 import Receipt from "../entity/Receipt";
 import ConfirmMail from "../entity/ConfirmMail";
+import Trip from "../entity/Trip";
 dotenv.config();
 
 export default new DataSource({
@@ -26,7 +26,7 @@ export default new DataSource({
   username: process.env.DATABASE_USER,
   password: process.env.DATABASE_PASSWORD,
   database: process.env.DATABASE_DB,
-  entities: [User,UserInfo, ProfilPicture, Badge, About, ChatOption, MusicOption, Trajet, Roles, Rating, Receipt, ConfirmMail, Car, Model, Options, CarPicture ],
+  entities: [User,UserInfo, ProfilPicture, Badge, About, ChatOption, MusicOption, Trip, Roles, Rating, Receipt, ConfirmMail, Car, Model, Options, CarPicture ],
   synchronize: true,
   // logging: ["query", "error"]
 })
