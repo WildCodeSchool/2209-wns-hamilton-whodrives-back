@@ -85,6 +85,13 @@ export type About = {
   smoke?: Maybe<Scalars['Boolean']>;
 };
 
+export type Badge = {
+  __typename?: 'Badge';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type Car = {
   __typename?: 'Car';
   id: Scalars['ID'];
@@ -97,13 +104,6 @@ export type ChatOption = {
   __typename?: 'ChatOption';
   content: Scalars['String'];
   id: Scalars['ID'];
-};
-
-export type File = {
-  __typename?: 'File';
-  file: Scalars['Float'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
 };
 
 export type Model = {
@@ -122,18 +122,20 @@ export type MusicOption = {
 export type Mutation = {
   __typename?: 'Mutation';
   createAbout?: Maybe<About>;
+  createBadge?: Maybe<Badge>;
   createCar?: Maybe<Car>;
   createChatOption?: Maybe<ChatOption>;
   createModel?: Maybe<Model>;
   createMusicOption?: Maybe<MusicOption>;
   createUser?: Maybe<User>;
   createUserInfo?: Maybe<UserInfo>;
+  deleteBadge?: Maybe<Badge>;
   deleteCar?: Maybe<Car>;
   deleteModel?: Maybe<Model>;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
-  singleUpload: File;
   updateAbout?: Maybe<About>;
+  updateBadge?: Maybe<Badge>;
   updateCar?: Maybe<Car>;
   updateChatOption?: Maybe<ChatOption>;
   updateModel?: Maybe<Model>;
@@ -150,6 +152,12 @@ export type MutationCreateAboutArgs = {
   description: Scalars['String'];
   musicOptionId: Scalars['ID'];
   smoke: Scalars['Boolean'];
+};
+
+
+export type MutationCreateBadgeArgs = {
+  description: Scalars['String'];
+  name: Scalars['String'];
 };
 
 
@@ -197,6 +205,11 @@ export type MutationCreateUserInfoArgs = {
 };
 
 
+export type MutationDeleteBadgeArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type MutationDeleteCarArgs = {
   id: Scalars['ID'];
 };
@@ -218,16 +231,18 @@ export type MutationLoginUserArgs = {
 };
 
 
-export type MutationSingleUploadArgs = {
-  file: Scalars['Float'];
-};
-
-
 export type MutationUpdateAboutArgs = {
   animal?: InputMaybe<Scalars['Boolean']>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   smoke?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+export type MutationUpdateBadgeArgs = {
+  description?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  name?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -289,6 +304,8 @@ export type MutationUpdateUserInfoArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  Badge?: Maybe<Badge>;
+  Badges?: Maybe<Array<Maybe<Badge>>>;
   Model?: Maybe<Model>;
   Models?: Maybe<Array<Maybe<Model>>>;
   about: About;
@@ -302,6 +319,11 @@ export type Query = {
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
+};
+
+
+export type QueryBadgeArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -440,6 +462,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   About: ResolverTypeWrapper<About>;
   AccountNumber: ResolverTypeWrapper<Scalars['AccountNumber']>;
+  Badge: ResolverTypeWrapper<Badge>;
   BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Byte: ResolverTypeWrapper<Scalars['Byte']>;
@@ -453,8 +476,6 @@ export type ResolversTypes = {
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
-  File: ResolverTypeWrapper<File>;
-  Float: ResolverTypeWrapper<Scalars['Float']>;
   GUID: ResolverTypeWrapper<Scalars['GUID']>;
   HSL: ResolverTypeWrapper<Scalars['HSL']>;
   HSLA: ResolverTypeWrapper<Scalars['HSLA']>;
@@ -522,6 +543,7 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   About: About;
   AccountNumber: Scalars['AccountNumber'];
+  Badge: Badge;
   BigInt: Scalars['BigInt'];
   Boolean: Scalars['Boolean'];
   Byte: Scalars['Byte'];
@@ -535,8 +557,6 @@ export type ResolversParentTypes = {
   DateTime: Scalars['DateTime'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
-  File: File;
-  Float: Scalars['Float'];
   GUID: Scalars['GUID'];
   HSL: Scalars['HSL'];
   HSLA: Scalars['HSLA'];
@@ -614,6 +634,13 @@ export interface AccountNumberScalarConfig extends GraphQLScalarTypeConfig<Resol
   name: 'AccountNumber';
 }
 
+export type BadgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Badge'] = ResolversParentTypes['Badge']> = {
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
   name: 'BigInt';
 }
@@ -667,13 +694,6 @@ export interface DurationScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 export interface EmailAddressScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['EmailAddress'], any> {
   name: 'EmailAddress';
 }
-
-export type FileResolvers<ContextType = any, ParentType extends ResolversParentTypes['File'] = ResolversParentTypes['File']> = {
-  file?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
 
 export interface GuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['GUID'], any> {
   name: 'GUID';
@@ -778,18 +798,20 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
+  createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'id' | 'modelId' | 'seat'>>;
   createChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationCreateChatOptionArgs, 'content'>>;
   createModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, Partial<MutationCreateModelArgs>>;
   createMusicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<MutationCreateMusicOptionArgs, 'content'>>;
   createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
+  deleteBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationDeleteBadgeArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
   deleteModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationDeleteModelArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
-  singleUpload?: Resolver<ResolversTypes['File'], ParentType, ContextType, RequireFields<MutationSingleUploadArgs, 'file'>>;
   updateAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateAboutArgs, 'id'>>;
+  updateBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationUpdateBadgeArgs, 'id'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
   updateChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationUpdateChatOptionArgs, 'content' | 'id'>>;
   updateModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationUpdateModelArgs, 'id'>>;
@@ -852,6 +874,8 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  Badge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<QueryBadgeArgs, 'id'>>;
+  Badges?: Resolver<Maybe<Array<Maybe<ResolversTypes['Badge']>>>, ParentType, ContextType>;
   Model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<QueryModelArgs, 'id'>>;
   Models?: Resolver<Maybe<Array<Maybe<ResolversTypes['Model']>>>, ParentType, ContextType>;
   about?: Resolver<ResolversTypes['About'], ParentType, ContextType>;
@@ -965,6 +989,7 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type Resolvers<ContextType = any> = {
   About?: AboutResolvers<ContextType>;
   AccountNumber?: GraphQLScalarType;
+  Badge?: BadgeResolvers<ContextType>;
   BigInt?: GraphQLScalarType;
   Byte?: GraphQLScalarType;
   Car?: CarResolvers<ContextType>;
@@ -977,7 +1002,6 @@ export type Resolvers<ContextType = any> = {
   DateTime?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
-  File?: FileResolvers<ContextType>;
   GUID?: GraphQLScalarType;
   HSL?: GraphQLScalarType;
   HSLA?: GraphQLScalarType;
