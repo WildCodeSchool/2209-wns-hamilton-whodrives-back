@@ -3,7 +3,6 @@ import {
   MutationUpdateUserInfoArgs,
 } from "@/graphgen";
 import UserInfoController from "../controller/UserInfo";
-// import getFieldNames from "graphql-list-fields";
 import { ExpressContext } from "apollo-server-express";
 import { IUserLogged } from "./Interface";
 import UserController from "../controller/User";
@@ -35,7 +34,6 @@ export default {
         throw new Error(msg);
       }
       let userId = userLogged.id;
-      console.log(userLogged);
       const { city, country, age, address, profilPictureId } = args;
       let userInfo = await new UserInfoController().createUserInfo({
         city,
@@ -48,7 +46,6 @@ export default {
         { userLogged },
         userInfo
       );
-      console.log(userId);
       return userInfo;
     },
 

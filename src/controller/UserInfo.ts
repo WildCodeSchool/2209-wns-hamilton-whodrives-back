@@ -1,4 +1,4 @@
-import { ChildEntity, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import datasource from "../lib/datasource";
 import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilePicture";
@@ -9,8 +9,6 @@ import {
 } from "@/graphgen";
 import { IUserLogged } from "../resolvers/Interface";
 import About from "../entity/About";
-
-const SECRET: string = "secret";
 
 class UserInfoController {
   db: Repository<UserInfo>;
@@ -44,13 +42,6 @@ class UserInfoController {
       address,
       profilPictureId,
     });
-
-    //  const user = await this.dbUsere.findOne({where: {id: + TokenKind}});
-    // on update le user cible avec l'id du user info cree
-    //await this.dbUsere.save({
-    //   ...user,
-    //  userInfoId: userInfo.id
-    // });
     return userInfo;
   }
 
@@ -65,14 +56,11 @@ class UserInfoController {
     const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
       ...userInfo,
-      // city: city ?? undefined,
       city,
       country,
       age,
       address,
     });
-
-    console.log(userInfo);
   }
 
   async assignAbout({ userLogged }: IUserLogged, about: About) {

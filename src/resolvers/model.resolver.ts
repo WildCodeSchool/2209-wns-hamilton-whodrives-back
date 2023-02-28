@@ -11,6 +11,7 @@ export default {
       return await new ModelController().getModel(id);
     },
   },
+
   Mutation: {
     createModel: async (
       _: any,
@@ -18,8 +19,8 @@ export default {
       { res }: ExpressContext
     ) => {
       const { name } = args;
-      let car = await new ModelController().addModel({ name });
-      return car;
+      let Model = await new ModelController().addModel({ name });
+      return Model;
     },
 
     updateModel: async (

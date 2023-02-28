@@ -21,6 +21,7 @@ export default {
       return await new RatingController().getRating(id);
     },
   },
+
   Mutation: {
     createRating: async (
       _: any,

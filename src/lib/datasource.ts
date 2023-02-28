@@ -45,5 +45,4 @@ export default new DataSource({
     CarPicture,
   ],
   synchronize: true,
-  // logging: ["query", "error"]
 });

@@ -44,7 +44,6 @@ class BadgeController {
     const badge = await this.db.findOne({ where: { id: +id } });
     if (badge) {
       let result = await this.db.delete(id);
-      console.log(result);
       if (result?.affected != 0) {
         return { msg: "badge supprimé" };
       } else {

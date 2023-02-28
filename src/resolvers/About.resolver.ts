@@ -5,7 +5,6 @@ import {
   MutationUpdateMusicAndChatOptionArgs,
 } from "@/graphgen";
 import { IUserLogged } from "./Interface";
-import UserInfo from "../entity/UserInfo";
 import UserInfoController from "../controller/UserInfo";
 
 export default {
@@ -44,7 +43,6 @@ export default {
         { userLogged },
         about
       );
-      console.log(about);
       return about;
     },
 

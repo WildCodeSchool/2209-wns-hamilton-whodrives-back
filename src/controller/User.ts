@@ -79,19 +79,17 @@ class UserController {
   }
 
   async deleteUser({ id }: MutationDeleteUserArgs) {
-    let msg = "user Introuvable";
-    let msg2 = "error request";
+    let msg = "User not found";
+    let msg2 = "Error request";
     const user = await this.db.findOne({ where: { id: +id } });
     if (user) {
       let result = await this.db.delete(id);
-      console.log(result);
       if (result?.affected != 0) {
-        return { msg: "user supprimé" };
+        return { msg: "User deleted" };
       } else {
         return msg2;
       }
     } else {
-      console.log("toto");
       return { msg };
     }
   }

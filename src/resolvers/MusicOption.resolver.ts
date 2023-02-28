@@ -1,5 +1,4 @@
 import {
-  MutationCreateAboutArgs,
   MutationCreateMusicOptionArgs,
   MutationUpdateMusicOptionArgs,
 } from "@/graphgen";

@@ -17,7 +17,7 @@ class ModelController {
   }
 
   async addModel({ name }: { name: string }) {
-    const model = await this.db.save({ name });
+    const Model = await this.db.save({ name });
     return Model;
   }
 

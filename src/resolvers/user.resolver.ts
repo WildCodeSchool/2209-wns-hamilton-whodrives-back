@@ -1,7 +1,6 @@
 import UserController from "../controller/User";
 import * as bcrypt from "bcrypt";
-import { create_UUID, generateToken } from "../lib/utilities";
-import { IUserLogged } from "./Interface";
+import { generateToken } from "../lib/utilities";
 import { ExpressContext } from "apollo-server-express";
 import {
   MutationCreateUserArgs,
@@ -13,7 +12,6 @@ import {
 export default {
   Query: {
     users: async (_: any, {}, { userLogged }: any, infos: any) => {
-      console.log(userLogged);
       return await new UserController().listUsers();
     },
 

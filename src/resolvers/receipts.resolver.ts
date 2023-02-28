@@ -21,6 +21,7 @@ export default {
       return await new ReceiptsController().getReceipts(id);
     },
   },
+
   Mutation: {
     createReceipts: async (
       _: any,

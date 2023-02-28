@@ -30,6 +30,7 @@ class CarController {
 
   async addCar({ seat, modelId, optionId }: MutationCreateCarArgs) {
     const option = await this.dbOptions.findOne({ where: { id: optionId } });
+    const model = await this.dbModel.findOne({ where: { id: modelId } });
     let data: any = { seat, model, option };
     if (model) {
       data.model = model;
@@ -38,7 +39,6 @@ class CarController {
       data.option = option;
     }
     const car = await this.db.save(data);
-    console.log(car);
     return car;
   }
 

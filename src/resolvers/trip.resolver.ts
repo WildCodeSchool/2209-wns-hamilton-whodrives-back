@@ -21,6 +21,7 @@ export default {
       return await new TripController().getTrip(id);
     },
   },
+
   Mutation: {
     createTrip: async (
       _: any,

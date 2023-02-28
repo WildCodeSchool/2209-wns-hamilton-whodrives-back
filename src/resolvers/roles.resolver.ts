@@ -11,6 +11,7 @@ export default {
       return await new RolesController().getRole(id);
     },
   },
+
   Mutation: {
     createRole: async (
       _: any,

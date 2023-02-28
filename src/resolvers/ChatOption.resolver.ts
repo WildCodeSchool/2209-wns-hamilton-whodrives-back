@@ -27,7 +27,6 @@ export default {
       { res }: any
     ) => {
       const { content } = args;
-      console.log(args);
       let chatOption = await new ChatOptionController().createChatOption({
         content,
       });

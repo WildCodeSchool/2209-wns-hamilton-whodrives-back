@@ -2,7 +2,7 @@ import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import express from "express";
 import http from "http";
-import datasource from './lib/datasource';
+import datasource from "./lib/datasource";
 import { getUser } from "./lib/utilities";
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
@@ -14,10 +14,9 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const corsConfig = {
-        origin: ["http://localhost:3000", "https://studio.apollographql.com"],
-        credentials: true,
-      }
-
+  origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+  credentials: true,
+};
 
 //cette fonction permet de démarrer le serveur
 
