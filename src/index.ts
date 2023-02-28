@@ -2,25 +2,23 @@ import { ApolloServer } from "apollo-server-express";
 import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import express from "express";
 import http from "http";
-import datasource from './lib/datasource';
+import datasource from "./lib/datasource";
 import { getUser } from "./lib/utilities";
-
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
-
 import { makeExecutableSchema } from "@graphql-tools/schema";
-
 import cors from "cors";
 import cookieParser from "cookie-parser";
-
 import * as dotenv from "dotenv";
 
 dotenv.config();
 
 const corsConfig = {
-        origin: ["http://localhost:3000", "https://studio.apollographql.com"],
-        credentials: true,
-      }
+  origin: ["http://localhost:3000", "https://studio.apollographql.com"],
+  credentials: true,
+};
+
+//cette fonction permet de démarrer le serveur
 
 async function startApolloServer() {
   const app = express();
@@ -36,7 +34,9 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => {
+      // permet de récupérer l'utilisateur connecté
       let userLogged: any = await getUser(req.headers.authorization as string);
+      //on retourne les infos de l'utilisateur connecté dans le contexte de l'application, ainsi on pourra les récupérer dans les resolvers
       return {
         req,
         res,

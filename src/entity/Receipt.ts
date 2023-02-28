@@ -1,18 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany,ManyToOne, JoinTable, ManyToMany } from "typeorm";
-import User from "./User"
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import User from "./User";
 
 @Entity("receipts")
 export default class Receipts {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  file_name: string;
 
-
-    @Column()
-    file_name: string;
-
-
-    @ManyToOne(() => User, (user) => user.receipts)
-    user: User
+  @ManyToOne(() => User, (user) => user.receipts)
+  user: User[];
 }
-

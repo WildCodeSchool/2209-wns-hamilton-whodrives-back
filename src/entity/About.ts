@@ -1,32 +1,38 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import ChatOption from "./ChatOption";
 import MusicOption from "./MusicOption";
 import UserInfo from "./UserInfo";
 
-
 @Entity("about")
 export default class About {
-    
-        @PrimaryGeneratedColumn()
-        id: number;
-    
-        @Column()
-        animal: boolean;
-    
-        @Column()
-        description: string;
-    
-        @Column()
-        smoke: boolean;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-        @ManyToOne(() => ChatOption, chatOption => chatOption.about)
-        chatOption: ChatOption;
+  @Column()
+  animal: boolean;
 
-        @ManyToOne(() => MusicOption, musicOption => musicOption.about)
-        musicOption: MusicOption;
+  @Column()
+  description: string;
 
-        @OneToMany(() => UserInfo, userInfo => userInfo.about)
-        userInfo: UserInfo[];
-    
-    }
+  @Column()
+  smoke: boolean;
 
+  @ManyToOne(() => ChatOption, (chatOption) => chatOption.about, {
+    nullable: true,
+  })
+  chatOption?: ChatOption;
+
+  @ManyToOne(() => MusicOption, (musicOption) => musicOption.about, {
+    nullable: true,
+  })
+  musicOption?: MusicOption;
+
+  @OneToMany(() => UserInfo, (userInfo) => userInfo.about)
+  userInfo: UserInfo[];
+}

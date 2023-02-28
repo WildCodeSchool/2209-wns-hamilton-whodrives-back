@@ -1,20 +1,24 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinTable, ManyToMany } from "typeorm";
-import User from "./User"
+import {
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import User from "./User";
 
 @Entity("rating")
 export default class Rating {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column()
+  note: number;
 
-    @Column()
-    note: number;
-    
-    @Column()
-    content: string;
+  @Column({ length: 255 })
+  content: string;
 
-    @ManyToMany(() => User)
-    @JoinTable()
-    User: User[]
+  @ManyToMany(() => User)
+  @JoinTable()
+  User: User;
 }
-

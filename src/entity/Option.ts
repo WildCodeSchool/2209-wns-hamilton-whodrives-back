@@ -1,17 +1,20 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Car from "./Car";
 
-import Car from './Car';
+@Entity("options")
+export default class Options {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-@Entity("option")
-export default class Option {
+  @Column()
+  air_conditioner: boolean;
 
-    @PrimaryGeneratedColumn()
-    id: number;
-    
-    @Column()
-    air_conditioner: boolean;
-
-    @OneToMany(() => Car, (car) => car.options)
-    cars: Car[];
-
+  @OneToOne(() => Car, (car) => car.options)
+  car: Car;
 }

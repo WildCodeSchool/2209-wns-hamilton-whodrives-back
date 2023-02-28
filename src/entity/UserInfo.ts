@@ -1,52 +1,38 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
-import ProfilPicture from "./ProfilPicture";
-import User from "./User";
-import Badge from "./Badge";
-import ChatOption from "./ChatOption";
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import About from "./About";
+import ProfilPicture from "./ProfilePicture";
+import User from "./User";
 
 @Entity("user_info")
 export default class UserInfo {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @Column({ length: 64 })
+  city: string;
 
-    @Column()
-    city: string;
+  @Column({ length: 45 })
+  country: string;
 
-    @Column()
-    country: string;
+  @Column()
+  age: number;
 
-    @Column()
-    firstname: string;
+  // max lenght 10
+  @Column({ length: 100 })
+  address: string;
 
-    @Column()
-    lastname: string;
+  @ManyToOne(() => ProfilPicture, (profilPicture) => profilPicture.userInfo)
+  profilPicture: ProfilPicture[];
 
-    @Column()
-    age: string
+  @ManyToOne(() => About, (about) => about.userInfo)
+  about: About[];
 
-    @Column({nullable: true})
-    birthday: Date;
-
-    @Column()
-    phone: string;
-
-    @Column()
-    address: string;
-
-    @ManyToOne(() => ProfilPicture, profilPicture => profilPicture.userInfo)
-    profilPicture: ProfilPicture;
-
-    @ManyToOne(() => About, about => about.userInfo)
-    about: About;
-
-    @OneToMany(() => User , user => user.userInfo)
-    user: User[];
-
-   
-
-
-   
-    
+  @OneToMany(() => User, (user) => user.userInfo)
+  user: User[];
 }
