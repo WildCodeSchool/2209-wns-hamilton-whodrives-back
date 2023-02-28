@@ -6,6 +6,7 @@ export default {
     Models: async (_: any, {}, context: any, infos: any) => {
       return await new ModelController().listModel();
     },
+
     Model: async (_: any, { id }: { id: number }, context: any, infos: any) => {
       return await new ModelController().getModel(id);
     },
