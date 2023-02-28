@@ -1,8 +1,8 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 import User from './User';
 
-@Entity("trajet")
-export default class Trajet {
+@Entity("trip")
+export default class Trip {
 
     @PrimaryGeneratedColumn()
     id: number;

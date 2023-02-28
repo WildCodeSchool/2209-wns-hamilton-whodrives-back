@@ -22,12 +22,15 @@ class UserController {
     return await this.db.findOne({ where: { email } });
   }
 
-  async addUser({ username, password, email, phone }: MutationCreateUserArgs) {
+  async addUser({ username, password, email, phone,  firstname,lastname,date_of_birth }: MutationCreateUserArgs) {
     const user = await this.db.save({
       username,
       password,
       email,
-      phone
+      phone,
+      firstname,
+      lastname,
+      date_of_birth
     });
     return user;
   }
@@ -37,13 +40,10 @@ class UserController {
       userInfo
     });
   }
-  async updateUser({ id, username, email, phone }: MutationUpdateUserArgs) {
+  async updateUser({ id, username, password, email, phone,  firstname,lastname,date_of_birth }: MutationUpdateUserArgs) {
     const user = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
-      ...user,
-      username,
-      email,
-      phone
+      ...user,username, password, email, phone,  firstname,lastname,date_of_birth
     });
   }
   async deleteUser({ id }: MutationDeleteUserArgs) {

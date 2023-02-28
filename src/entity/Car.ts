@@ -23,7 +23,7 @@ export default class Car {
     @JoinColumn()
     options: Options;
 
-    @ManyToOne(() => Model, (model) => model.cars)
+    @ManyToOne(() => Model, (model) => model.cars,{eager: true})
     model: Model;
 
 }

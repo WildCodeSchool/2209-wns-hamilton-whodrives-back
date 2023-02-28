@@ -29,15 +29,12 @@ class UserInfoController {
     return await this.db.findOneBy({ id });
     }
 
-async createUserInfo({ city, country, firstname, lastname, age, birthday, address, profilPictureId }: MutationCreateUserInfoArgs) {
+async createUserInfo({ city, country, age, address, profilPictureId }: MutationCreateUserInfoArgs) {
 
     const userInfo = await this.db.save({
         city,
         country,
-        firstname,
-        lastname,
         age,
-        birthday,
         address,
         profilPictureId,
 
@@ -54,7 +51,7 @@ async createUserInfo({ city, country, firstname, lastname, age, birthday, addres
 
 }
 // update le user cible grace a son token 
-async updateUserInfo({ id, city, country, firstname, lastname, age, birthday, address}: MutationUpdateUserInfoArgs ){
+async updateUserInfo({ id, city, country,age, address}: MutationUpdateUserInfoArgs ){
     const userInfo = await this.db.findOne({where: {id: + id}});
     
     
@@ -63,10 +60,7 @@ async updateUserInfo({ id, city, country, firstname, lastname, age, birthday, ad
        // city: city ?? undefined,
         city,
         country,
-        firstname,
-        lastname,
         age,
-        birthday,
         address
       });
 
