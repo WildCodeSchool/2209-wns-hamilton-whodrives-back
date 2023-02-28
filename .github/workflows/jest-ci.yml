@@ -8,12 +8,12 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      # - name: Go to back and run tests
-      #   run: npm i && npm test
+      - name: Go to back
+        run: npm i
 
   docker:
     needs: test-back
-    # if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
