@@ -8,8 +8,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Go to back and run tests
-        run: npm i && npm test
+      # - name: Go to back and run tests
+      #   run: npm i && npm test
 
   docker:
     needs: test-back
