@@ -13,6 +13,7 @@ export function generateToken(email: string) {
   console.log("token ici" + token);
   return token;
 }
+
 //Fonction permettant de générer un ID unique
 export function create_UUID() {
   var dt = new Date().getTime();

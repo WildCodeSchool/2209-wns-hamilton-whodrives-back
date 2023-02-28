@@ -6,11 +6,13 @@ type Badge {
 
 type Query {
   Badges: [Badge]
-  Badge (id: ID!): Badge
+  Badge(id: ID!): Badge
 }
 
 type Mutation {
-  createBadge (name: String!, description: String!): Badge
-  updateBadge (id: ID!, name: String, description: String): Badge
-  deleteBadge (id: ID!): Badge
+  createBadge(name: String!, description: String!): Badge
+
+  updateBadge(id: ID!, name: String, description: String): Badge
+
+  deleteBadge(id: ID!): Badge
 }

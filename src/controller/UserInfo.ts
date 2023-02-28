@@ -3,13 +3,14 @@ import datasource from "../lib/datasource";
 import UserInfo from "../entity/UserInfo";
 import ProfilPicture from "../entity/ProfilePicture";
 import User from "../entity/User";
-import { MutationCreateUserInfoArgs, MutationUpdateUserInfoArgs } from "@/graphgen";
+import {
+  MutationCreateUserInfoArgs,
+  MutationUpdateUserInfoArgs,
+} from "@/graphgen";
 import { IUserLogged } from "../resolvers/Interface";
 import About from "../entity/About";
 
-
-const SECRET:string = 'secret'
-
+const SECRET: string = "secret";
 
 class UserInfoController {
   db: Repository<UserInfo>;
@@ -27,58 +28,59 @@ class UserInfoController {
 
   async getUserInfoById(id: number) {
     return await this.db.findOneBy({ id });
-    }
+  }
 
-async createUserInfo({ city, country, age, address, profilPictureId }: MutationCreateUserInfoArgs) {
-
+  async createUserInfo({
+    city,
+    country,
+    age,
+    address,
+    profilPictureId,
+  }: MutationCreateUserInfoArgs) {
     const userInfo = await this.db.save({
-        city,
-        country,
-        age,
-        address,
-        profilPictureId,
-
+      city,
+      country,
+      age,
+      address,
+      profilPictureId,
     });
 
-
-  //  const user = await this.dbUsere.findOne({where: {id: + TokenKind}});
+    //  const user = await this.dbUsere.findOne({where: {id: + TokenKind}});
     // on update le user cible avec l'id du user info cree
     //await this.dbUsere.save({
-     //   ...user,
-      //  userInfoId: userInfo.id
-   // });
+    //   ...user,
+    //  userInfoId: userInfo.id
+    // });
     return userInfo;
+  }
 
-}
-// update le user cible grace a son token 
-async updateUserInfo({ id, city, country,age, address}: MutationUpdateUserInfoArgs ){
-    const userInfo = await this.db.findOne({where: {id: + id}});
-    
-    
-      return await this.db.save({
-        ...userInfo,
-       // city: city ?? undefined,
-        city,
-        country,
-        age,
-        address
-      });
-
-console.log(userInfo);
-
-}
-
-async assignAbout({ userLogged }: IUserLogged, about: About) {
+  // update le user cible grace a son token
+  async updateUserInfo({
+    id,
+    city,
+    country,
+    age,
+    address,
+  }: MutationUpdateUserInfoArgs) {
+    const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
-        ...userLogged,
-        about
+      ...userInfo,
+      // city: city ?? undefined,
+      city,
+      country,
+      age,
+      address,
     });
+
+    console.log(userInfo);
+  }
+
+  async assignAbout({ userLogged }: IUserLogged, about: About) {
+    return await this.db.save({
+      ...userLogged,
+      about,
+    });
+  }
 }
-
-
-
-
-}
-
 
 export default UserInfoController;

@@ -9,7 +9,7 @@ type Query {
 }
 
 type Mutation {
-  createReceipts( file_name: String): Receipts
-  updateReceipts(id: ID!,file_name: String): Receipts
+  createReceipts(file_name: String): Receipts
+  updateReceipts(id: ID!, file_name: String): Receipts
   deleteReceipts(id: ID!): Receipts
 }

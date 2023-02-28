@@ -9,15 +9,18 @@ type User {
   phone: String
   userId: ID
 }
+
 type RegisterUser {
   email: String
   success: Boolean
   token: String
 }
+
 type Query {
   users: [User]
   user(id: ID!): User
 }
+
 type Mutation {
   createUser(
     username: String!
@@ -40,12 +43,9 @@ type Mutation {
     userId: ID
   ): User
   deleteUser(id: ID!): Res
-  loginUser(
-    email: String!
-    password: String!
-  ): RegisterUser
+  loginUser(email: String!, password: String!): RegisterUser
 }
 
-type Res{
-msg: String
-} 
+type Res {
+  msg: String
+}

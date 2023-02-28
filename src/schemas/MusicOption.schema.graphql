@@ -1,14 +1,14 @@
 type MusicOption {
-    id: ID!
-    content: String!
+  id: ID!
+  content: String!
 }
 
 type Query {
-    musicOptions: [MusicOption]
-    musicOption(id: ID!): MusicOption
+  musicOptions: [MusicOption]
+  musicOption(id: ID!): MusicOption
 }
 
 type Mutation {
-    createMusicOption(content: String!): MusicOption
-    updateMusicOption(id: ID!, content: String!): MusicOption
+  createMusicOption(content: String!): MusicOption
+  updateMusicOption(id: ID!, content: String!): MusicOption
 }

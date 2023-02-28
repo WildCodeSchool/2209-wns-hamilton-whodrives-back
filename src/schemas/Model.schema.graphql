@@ -9,7 +9,7 @@ type Query {
 }
 
 type Mutation {
-  createModel( name: String): Model
+  createModel(name: String): Model
   updateModel(id: ID!, name: String): Model
   deleteModel(id: ID!): Model
 }

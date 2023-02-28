@@ -1,16 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import Car from './Car';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Car from "./Car";
 
 @Entity("model")
 export default class Model {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
-    
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @OneToMany(() => Car, (car) => car.model)
-    cars: Car[];
-
+  @OneToMany(() => Car, (car) => car.model)
+  cars: Car[];
 }

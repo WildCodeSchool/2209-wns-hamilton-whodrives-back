@@ -1,7 +1,7 @@
 type Rating {
   id: ID!
-  note: Int, 
-  content: String,
+  note: Int
+  content: String
 }
 
 type Query {
@@ -10,7 +10,7 @@ type Query {
 }
 
 type Mutation {
-  createRating(  note: Int, content: String,): Rating
-  updateRating(id: ID!,note: Int,content: String): Rating
+  createRating(note: Int, content: String): Rating
+  updateRating(id: ID!, note: Int, content: String): Rating
   deleteRating(id: ID!): Rating
 }

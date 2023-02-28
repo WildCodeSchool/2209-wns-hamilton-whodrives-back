@@ -1,16 +1,14 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import About from './About';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import About from "./About";
 
 @Entity("music_option")
 export default class MusicOption {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number
+  @Column()
+  content: string;
 
-    @Column()
-    content: string
-
-    @OneToMany(() => About , about => about.musicOption)
-    about: About;
-
+  @OneToMany(() => About, (about) => about.musicOption)
+  about: About;
 }

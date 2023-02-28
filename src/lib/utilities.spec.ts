@@ -8,5 +8,3 @@
 //     address: string,
 //     birthday: Date
 //   }
-  
-  

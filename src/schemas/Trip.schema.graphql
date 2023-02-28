@@ -1,17 +1,30 @@
 type Trip {
-    id: ID!,
-    departure_places: String,
-    destination: String,
-    date_departure: Date,
-    arrival_date: Date,
-    hour_departure: Date,
+  id: ID!
+  departure_places: String
+  destination: String
+  date_departure: Date
+  arrival_date: Date
+  hour_departure: Date
 }
 type Query {
-    getTrip(id: ID!): Trip
-    getTrips: [Trip]
+  getTrip(id: ID!): Trip
+  getTrips: [Trip]
 }
 type Mutation {
-  createTrip(departure_places: String,destination: String,date_departure: Date,arrival_date: Date,hour_departure: Date): Trip
-  updateTrip(id: ID!,departure_places: String,destination: String,date_departure: Date,arrival_date: Date,hour_departure: Date): Trip
+  createTrip(
+    departure_places: String
+    destination: String
+    date_departure: Date
+    arrival_date: Date
+    hour_departure: Date
+  ): Trip
+  updateTrip(
+    id: ID!
+    departure_places: String
+    destination: String
+    date_departure: Date
+    arrival_date: Date
+    hour_departure: Date
+  ): Trip
   deleteTrip(id: ID!): Trip
 }
