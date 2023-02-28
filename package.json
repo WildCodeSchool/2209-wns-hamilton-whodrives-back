@@ -29,6 +29,7 @@
     "concurrently": "^7.5.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
+    "express-fileupload": "^1.4.0",
     "graphql": "^16.6.0",
     "graphql-list-fields": "^2.0.2",
     "graphql-scalars": "^1.19.0",

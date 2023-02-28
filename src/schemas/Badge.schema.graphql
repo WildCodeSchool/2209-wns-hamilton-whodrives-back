@@ -1,0 +1,16 @@
+type Badge {
+  id: ID!
+  name: String!
+  description: String!
+}
+
+type Query {
+  Badges: [Badge]
+  Badge (id: ID!): Badge
+}
+
+type Mutation {
+  createBadge (name: String!, description: String!): Badge
+  updateBadge (id: ID!, name: String, description: String): Badge
+  deleteBadge (id: ID!): Badge
+}
