@@ -1,6 +1,6 @@
 FROM node:lts-alpine
 
-RUN apk update && apk add bash git
+# RUN apk update && apk add bash git
 RUN mkdir app
 WORKDIR /app
 
