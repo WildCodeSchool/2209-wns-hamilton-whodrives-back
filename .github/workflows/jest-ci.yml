@@ -1,6 +1,12 @@
 name: jest-and-docker-ci
 
-on: push
+on:
+  push:
+    branches: ["docker-ci"]
+# on:
+#   pull_request:
+#     types: ["opened", "closed"]
+#     branches: ["docker-ci"]
 
 jobs:
   test-back:
@@ -13,7 +19,7 @@ jobs:
 
   docker:
     needs: test-back
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
