@@ -8,6 +8,7 @@ services:
       - PORT=3000
     env_file:
     - database.env
+    - ./.env
     volumes:
       - ../2209-wns-hamilton-whodrives-front/src:/app/src
     ports:
