@@ -12,7 +12,7 @@ COPY tsconfig.json ./
 RUN npm install
 
 COPY .env ./
-COPY database.env ./
+# COPY database.env ./
 
 # COPY database.postgres ./
 

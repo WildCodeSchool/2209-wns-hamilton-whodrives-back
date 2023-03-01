@@ -33,6 +33,10 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v4
+        # env:
+        #   POSTGRES_USER: ${{ secrets.USER }}
+        #   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        #   POSTGRES_DB: ${{ secrets.DB }}
         with:
           push: true
           # context: "{{defaultContext}}:back"
