@@ -9,7 +9,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Go to back
-        run: npm i && npm run test
+        run: npm i && npm run testdev
 
   docker:
     needs: test-back

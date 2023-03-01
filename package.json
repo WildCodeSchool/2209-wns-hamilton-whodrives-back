@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "jest --watchAll",
+    "testdev": "jest",
     "start": "ts-node-dev --respawn --transpile-only --poll src/index.ts",
     "generate": "graphql-codegen --watch --config codegen.yml"
   },
