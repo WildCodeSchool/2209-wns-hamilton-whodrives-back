@@ -1,57 +1,111 @@
 import UserController from "../controller/User";
-// import getFieldNames from "graphql-list-fields";
-import {MutationCreateUserArgs, MutationLoginUserArgs} from "@/graphgen";
-import * as bcrypt from 'bcrypt'; 
-import { create_UUID, generateToken } from "../lib/utilities";
+import * as bcrypt from "bcrypt";
+import { generateToken } from "../lib/utilities";
 import { ExpressContext } from "apollo-server-express";
-// import { IGenerateToken } from "src/lib/utilities.spec";
-import {checkRights} from "../lib/utilities";
+import {
+  MutationCreateUserArgs,
+  MutationDeleteUserArgs,
+  MutationLoginUserArgs,
+  MutationUpdateUserArgs,
+} from "@/graphgen";
 
 export default {
   Query: {
-    users: async (_: any, {}, {userLogged}: any, infos: any) => {
-      
-      // const fields = getFieldNames(infos);
-      // return await new UserController().listUsers();
+    users: async (_: any, {}, { userLogged }: any, infos: any) => {
       return await new UserController().listUsers();
     },
+
     user: async (_: any, { id }: { id: number }, context: any, infos: any) => {
-      // const fields = getFieldNames(infos);
       return await new UserController().getUser(id);
-    }
+    },
   },
+
   Mutation: {
-    createUser: async (_: any, args: MutationCreateUserArgs, { res }: ExpressContext) => {
-      console.log(args);
-      const { username, password, email, phone } = args;
+    createUser: async (
+      _: any,
+      args: MutationCreateUserArgs,
+      { res }: ExpressContext
+    ) => {
+      const {
+        username,
+        password,
+        firstname,
+        lastname,
+        date_of_birth,
+        email,
+        phone,
+      } = args;
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
-      let user = await new UserController().addUser({ username, password: hashed, email, phone});
-
-      // let token = generateToken(email);
-
- 
-      // return {email, success: true, token};
-      return user
+      let user = await new UserController().addUser({
+        username,
+        password: hashed,
+        firstname,
+        lastname,
+        date_of_birth,
+        email,
+        phone,
+      });
+      return user;
     },
-     loginUser: async (_: any, args: MutationLoginUserArgs, { res }: ExpressContext) => {
-      const {password, email} = args;
-      let user = await new UserController().getUserByEmail({email});
 
-       if (!user) {
-         return "pas le bon compte";
-       } 
-       const valid = await bcrypt.compare(password, user.password);
+    updateUser: async (
+      _: any,
+      args: MutationUpdateUserArgs,
+      { res }: ExpressContext
+    ) => {
+      const {
+        id,
+        username,
+        password,
+        firstname,
+        lastname,
+        date_of_birth,
+        email,
+        phone,
+      } = args;
+      let user = await new UserController().updateUser({
+        id,
+        username,
+        password,
+        firstname,
+        lastname,
+        date_of_birth,
+        email,
+        phone,
+      });
+      return user;
+    },
 
-       if (!valid) {
-         return "pas le bon mdp";
+    loginUser: async (
+      _: any,
+      args: MutationLoginUserArgs,
+      { res }: ExpressContext
+    ) => {
+      const { password, email } = args;
+      let user = await new UserController().getUserByEmail({ email });
+      if (!user) {
+        return {
+          email: "invalid Login",
+        };
       }
-       let token = generateToken(email);
+      const valid = await bcrypt.compare(password, user.password);
+      if (!valid) {
+        return {
+          email: "invalid Login",
+        };
+      }
+      let token = generateToken(email);
+      return { email, success: true, token, user };
+    },
 
- 
-       return {email, success: true, token,user};
-
-     }
-     
-    }
-  }
+    deleteUser: async (
+      _: any,
+      args: MutationDeleteUserArgs,
+      { res }: ExpressContext
+    ) => {
+      const { id } = args;
+      return await new UserController().deleteUser({ id });
+    },
+  },
+};

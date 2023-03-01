@@ -1,40 +1,51 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-
-import Car from './Car';
-import ConfirmMail from './ConfirmMail';
-import Receipt from './Receipt';
-import UserInfo from './UserInfo';
-
-
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import Car from "./Car";
+import ConfirmMail from "./ConfirmMail";
+import Receipt from "./Receipt";
+import UserInfo from "./UserInfo";
 
 @Entity("user")
 export default class User {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
-    
-    @Column()
-    username: string;
+  @Column({ unique: true })
+  username: string;
 
-    @Column()
-    password: string;
+  @Column({ length: 45, nullable: true })
+  firstname: string;
 
-    @Column()
-    email: string;
+  @Column({ length: 45, nullable: true })
+  lastname: string;
 
-    @Column()
-    phone: string;
- 
-    @OneToMany(() => Receipt, (receipt) => receipt.user)
-    receipts: Receipt[]
-    
-    @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
-    confirmMails: ConfirmMail[]
+  @Column({ nullable: true })
+  date_of_birth: Date;
 
-    @OneToMany(() => Car, (car) => car.users)
-    cars: Car[];
+  @Column({ length: 140 })
+  password: string;
 
-    @ManyToOne(() => UserInfo, userInfo => userInfo.user)
-    userInfo: UserInfo;
+  //email is unique
+  @Column({ unique: true })
+  email: string;
 
+  @Column({ unique: true })
+  phone: string;
+
+  @OneToMany(() => Receipt, (receipt) => receipt.user)
+  receipts: Receipt[];
+
+  @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
+  confirmMails: ConfirmMail[];
+
+  @OneToMany(() => Car, (car) => car.user)
+  cars: Car[];
+
+  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user)
+  userInfo: UserInfo;
 }

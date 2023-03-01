@@ -1,20 +1,20 @@
 type User {
   id: ID!
   username: String
-  # firstname: String
-  # lastname: String
   password: String
+  firstname: String
+  lastname: String
+  date_of_birth: Date
   email: String
   phone: String
-  # address: String
-  # birthday: Date
+  userId: ID
 }
+
 type RegisterUser {
   email: String
   success: Boolean
   token: String
 }
-
 
 type Query {
   users: [User]
@@ -24,29 +24,28 @@ type Query {
 type Mutation {
   createUser(
     username: String!
-    # firstname: String!
-    # lastname: String!
     password: String!
+    firstname: String
+    lastname: String
+    date_of_birth: Date!
     email: String!
     phone: String!
-    # address: String!
-    # birthday: Date
   ): User
   updateUser(
     id: ID!
     username: String!
-    # firstname: String!
-    # lastname: String!
     password: String!
+    firstname: String!
+    lastname: String!
+    date_of_birth: Date!
     email: String!
     phone: String!
-    # address: String!
-    # birthday: Date
+    userId: ID
   ): User
-  deleteUser(id: ID!): User
-  loginUser(
-    email: String!
-    password: String!
-  ): RegisterUser
+  deleteUser(id: ID!): Res
+  loginUser(email: String!, password: String!): RegisterUser
 }
 
+type Res {
+  msg: String
+}

@@ -1,17 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToOne, ManyToMany, JoinTable } from "typeorm";
-import UserInfo from "./UserInfo";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import About from "./About";
 
 @Entity("chat_option")
 export default class ChatOption {
-    
-        @PrimaryGeneratedColumn()
-        id: number;
-    
-        @Column()
-        content: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-        @OneToMany(() => About, about => about.chatOption)
-        about: About[];
-    
-    }
+  @Column()
+  content: string;
+
+  @OneToMany(() => About, (about) => about.chatOption)
+  about: About;
+}

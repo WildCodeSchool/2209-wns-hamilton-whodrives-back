@@ -1,0 +1,16 @@
+type Rating {
+  id: ID!
+  note: Int
+  content: String
+}
+
+type Query {
+  Ratings: [Rating]
+  Rating(id: ID!): Rating
+}
+
+type Mutation {
+  createRating(note: Int, content: String): Rating
+  updateRating(id: ID!, note: Int, content: String): Rating
+  deleteRating(id: ID!): Rating
+}
