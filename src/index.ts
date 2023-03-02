@@ -7,6 +7,7 @@ import { getUser } from "./lib/utilities";
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+const { graphqlUploadExpress } = require('graphql-upload/graphqlUpload.mjs');
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
@@ -24,7 +25,7 @@ async function startApolloServer() {
   const app = express();
   app.use(cors(corsConfig));
   app.use(cookieParser());
-
+  app.use(graphqlUploadExpress())
   const httpServer = http.createServer(app);
 
   const schema = makeExecutableSchema({

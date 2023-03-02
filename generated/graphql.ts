@@ -71,6 +71,7 @@ export type Scalars = {
   UUID: any;
   UnsignedFloat: any;
   UnsignedInt: any;
+  Upload: any;
   UtcOffset: any;
   Void: any;
 };
@@ -99,6 +100,12 @@ export type Car = {
   seat: Scalars['Int'];
 };
 
+export type CarPicture = {
+  __typename?: 'CarPicture';
+  id: Scalars['ID'];
+  path: Scalars['String'];
+};
+
 export type ChatOption = {
   __typename?: 'ChatOption';
   content: Scalars['String'];
@@ -119,6 +126,7 @@ export type MusicOption = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addPicture: CarPicture;
   createAbout?: Maybe<About>;
   createBadge?: Maybe<Badge>;
   createCar?: Maybe<Car>;
@@ -153,6 +161,12 @@ export type Mutation = {
   updateTrip?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
+};
+
+
+export type MutationAddPictureArgs = {
+  carId: Scalars['ID'];
+  file: Scalars['Upload'];
 };
 
 
@@ -604,6 +618,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Byte: ResolverTypeWrapper<Scalars['Byte']>;
   Car: ResolverTypeWrapper<Car>;
+  CarPicture: ResolverTypeWrapper<CarPicture>;
   ChatOption: ResolverTypeWrapper<ChatOption>;
   CountryCode: ResolverTypeWrapper<Scalars['CountryCode']>;
   Cuid: ResolverTypeWrapper<Scalars['Cuid']>;
@@ -674,6 +689,7 @@ export type ResolversTypes = {
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
   UnsignedFloat: ResolverTypeWrapper<Scalars['UnsignedFloat']>;
   UnsignedInt: ResolverTypeWrapper<Scalars['UnsignedInt']>;
+  Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInfo: ResolverTypeWrapper<UserInfo>;
   UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
@@ -689,6 +705,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Byte: Scalars['Byte'];
   Car: Car;
+  CarPicture: CarPicture;
   ChatOption: ChatOption;
   CountryCode: Scalars['CountryCode'];
   Cuid: Scalars['Cuid'];
@@ -759,6 +776,7 @@ export type ResolversParentTypes = {
   UUID: Scalars['UUID'];
   UnsignedFloat: Scalars['UnsignedFloat'];
   UnsignedInt: Scalars['UnsignedInt'];
+  Upload: Scalars['Upload'];
   User: User;
   UserInfo: UserInfo;
   UtcOffset: Scalars['UtcOffset'];
@@ -798,6 +816,12 @@ export type CarResolvers<ContextType = any, ParentType extends ResolversParentTy
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType>;
   seat?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CarPictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['CarPicture'] = ResolversParentTypes['CarPicture']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -940,6 +964,7 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
@@ -1147,6 +1172,10 @@ export interface UnsignedIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'UnsignedInt';
 }
 
+export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
+  name: 'Upload';
+}
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   date_of_birth?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1185,6 +1214,7 @@ export type Resolvers<ContextType = any> = {
   BigInt?: GraphQLScalarType;
   Byte?: GraphQLScalarType;
   Car?: CarResolvers<ContextType>;
+  CarPicture?: CarPictureResolvers<ContextType>;
   ChatOption?: ChatOptionResolvers<ContextType>;
   CountryCode?: GraphQLScalarType;
   Cuid?: GraphQLScalarType;
@@ -1252,6 +1282,7 @@ export type Resolvers<ContextType = any> = {
   UUID?: GraphQLScalarType;
   UnsignedFloat?: GraphQLScalarType;
   UnsignedInt?: GraphQLScalarType;
+  Upload?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
   UserInfo?: UserInfoResolvers<ContextType>;
   UtcOffset?: GraphQLScalarType;
