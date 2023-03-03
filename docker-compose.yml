@@ -6,9 +6,6 @@ services:
     container_name: whodrives-front
     environment:
       - PORT=3000
-    env_file:
-    - database.env
-    - ./.env
     volumes:
       - ../2209-wns-hamilton-whodrives-front/src:/app/src
     ports:
@@ -23,6 +20,9 @@ services:
     container_name: whodrives-back
     environment:
       - PORT=4000
+    env_file:
+      - database.env
+      - ./.env
     volumes:
       - ./src:/app/src
     ports:

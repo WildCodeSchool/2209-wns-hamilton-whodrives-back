@@ -3,23 +3,18 @@ name: jest-and-docker-ci
 on:
   push:
     branches: ["docker-ci"]
-# on:
-#   pull_request:
-#     types: ["opened", "closed"]
-#     branches: ["docker-ci"]
 
 jobs:
-  test-back:
+  test-front:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Go to back
-        run: npm i && npm run testdev
+      - name: Go to front
+        run: npm i
 
   docker:
-    needs: test-back
-    # if: github.ref == 'refs/heads/main'
+    needs: test-front
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -33,12 +28,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v4
-        # env:
-        #   POSTGRES_USER: ${{ secrets.USER }}
-        #   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-        #   POSTGRES_DB: ${{ secrets.DB }}
         with:
           push: true
-          # context: "{{defaultContext}}:back"
           file: ./Dockerfile
-          tags: whodrives/whodrives-back:latest
+          tags: whodrives/whodrives-front:latest
