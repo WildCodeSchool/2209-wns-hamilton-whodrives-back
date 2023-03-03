@@ -5,16 +5,16 @@ on:
     branches: ["docker-ci"]
 
 jobs:
-  test-front:
+  test-back:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Go to front
+      - name: Go to back
         run: npm i
 
   docker:
-    needs: test-front
+    needs: test-back
     runs-on: ubuntu-latest
     steps:
       - name: Set up QEMU
@@ -31,4 +31,4 @@ jobs:
         with:
           push: true
           file: ./Dockerfile
-          tags: whodrives/whodrives-front:latest
+          tags: whodrives/whodrives-back:latest
