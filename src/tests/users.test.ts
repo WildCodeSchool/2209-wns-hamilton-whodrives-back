@@ -4,6 +4,6 @@ test("check rights", () => {
   try {
     checkRights(null);
   } catch (e: any) {
-    expect(e.message).toBe("Vous devez être connecté à l'application");
+    expect(e.message).toBe("Vous devez être connecté");
   }
 });
