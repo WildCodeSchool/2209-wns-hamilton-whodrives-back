@@ -31,4 +31,4 @@ jobs:
         with:
           push: true
           file: ./Dockerfile
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/whodrives-back:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_BACK_TEST }}:latest
