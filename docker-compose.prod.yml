@@ -1,0 +1,67 @@
+version: '3.7'
+
+services:
+  front:
+    image: whodriveswcs/whodrives-front-prod
+    environment:
+      - PORT=3000
+    command: sh -c "npm run build"
+    volumes:
+      - web-client-build:/app/build
+    ports:
+      - 3000:3000
+    depends_on:
+      - back
+
+  back:
+    image: whodriveswcs/whodrives-back-prod
+    environment:
+      - PORT=4000
+    env_file:
+      - database.env
+      - ./.env
+    ports:
+      - 4000:4000
+    depends_on:
+      - db
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"
+
+  db:
+    image: postgres:13
+    hostname: postgres
+    container_name: whodrives-postgres
+    restart: always
+    ports:
+      - 5432:5432
+    env_file:
+      - database.env
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  nginx:
+    image: nginx:1.21.3
+    depends_on:
+      - back
+      - front
+    restart: always
+    ports:
+      - ${GATEWAY_PORT:-8000}:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - web-client-build:/web-client-build
+      - ./logs:/var/log/nginx
+
+volumes:
+  postgres:
+    name: whodrives-db
+  web-client-build:
+
+networks:
+  grape:
