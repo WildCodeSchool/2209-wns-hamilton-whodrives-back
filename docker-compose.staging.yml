@@ -30,7 +30,6 @@ services:
   db:
     image: postgres:13
     hostname: postgres
-    container_name: whodrives-postgres
     restart: always
     ports:
       - 5432:5432
@@ -62,6 +61,3 @@ volumes:
   postgres:
     name: whodrives-db
   web-client-build:
-
-networks:
-  grape:
