@@ -10,8 +10,6 @@ services:
       - web-client-build:/app/build
     ports:
       - 3000:3000
-    networks:
-      - grape
     depends_on:
       - back
 
@@ -24,8 +22,6 @@ services:
       - ./.env
     ports:
       - 4000:4000
-    networks:
-      - grape
     depends_on:
       - db
     extra_hosts:
@@ -40,8 +36,6 @@ services:
       - 5432:5432
     env_file:
       - database.env
-    networks:
-      - grape
     volumes:
       - postgres:/var/lib/postgresql/data
 
@@ -68,6 +62,7 @@ volumes:
   postgres:
     name: whodrives-db
   web-client-build:
+
 
 networks:
   grape:
