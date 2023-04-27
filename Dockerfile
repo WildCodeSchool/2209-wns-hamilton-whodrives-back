@@ -17,5 +17,7 @@ COPY database.env ./
 # COPY database.postgres ./
 
 COPY src src
+COPY uploads uploads
+COPY public public
 
 CMD npm start

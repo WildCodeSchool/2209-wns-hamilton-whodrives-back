@@ -3,6 +3,7 @@ type Car {
   seat: Int!
   model: Model
   #option: Option
+  carPictures: [CarPicture]
 }
 
 type Query {
