@@ -22,6 +22,7 @@
   "dependencies": {
     "@graphql-tools/load-files": "^6.6.1",
     "@graphql-tools/merge": "^8.3.6",
+    "@types/graphql-upload": "^15.0.2",
     "apollo-server": "^3.10.3",
     "apollo-server-express": "^3.11.1",
     "apollo-upload-client": "^17.0.0",
@@ -33,7 +34,7 @@
     "graphql": "^16.6.0",
     "graphql-list-fields": "^2.0.2",
     "graphql-scalars": "^1.19.0",
-    "graphql-upload": "^16.0.2",
+    "graphql-upload": "^15.0.2",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
@@ -53,5 +54,13 @@
     "@types/graphql-list-fields": "^2.0.3",
     "@types/node": "^18.11.9",
     "typescript": "4.6.3"
+  },
+  "exports": {
+    "./graphqlUploadExpress.js": {
+      "import": "./node_modules/graphql-upload/graphqlUploadExpress.js"
+    },
+    "./GraphQLUpload.js": {
+      "import": "./node_modules/graphql-upload/GraphQLUpload.js"
+    }
   }
 }
