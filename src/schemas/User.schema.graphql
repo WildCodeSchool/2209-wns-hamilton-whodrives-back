@@ -7,7 +7,7 @@ type User {
   date_of_birth: Date
   email: String
   phone: String
-  userId: ID
+  userInfoId: ID
 }
 
 type RegisterUser {
@@ -40,7 +40,7 @@ type Mutation {
     date_of_birth: Date!
     email: String!
     phone: String!
-    userId: ID
+    userInfoId: ID
   ): User
   deleteUser(id: ID!): Res
   loginUser(email: String!, password: String!): RegisterUser

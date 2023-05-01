@@ -21,7 +21,6 @@ export type Scalars = {
   DID: any;
   Date: any;
   DateTime: any;
-  DeweyDecimal: any;
   Duration: any;
   EmailAddress: any;
   GUID: any;
@@ -31,7 +30,6 @@ export type Scalars = {
   Hexadecimal: any;
   IBAN: any;
   IP: any;
-  IPCPatent: any;
   IPv4: any;
   IPv6: any;
   ISBN: any;
@@ -39,7 +37,6 @@ export type Scalars = {
   JSON: any;
   JSONObject: any;
   JWT: any;
-  LCCSubclass: any;
   Latitude: any;
   LocalDate: any;
   LocalEndTime: any;
@@ -131,6 +128,7 @@ export type MusicOption = {
 export type Mutation = {
   __typename?: 'Mutation';
   addPicture: CarPicture;
+  addProfilePicture: ProfilePicture;
   createAbout?: Maybe<About>;
   createBadge?: Maybe<Badge>;
   createCar?: Maybe<Car>;
@@ -171,6 +169,12 @@ export type Mutation = {
 export type MutationAddPictureArgs = {
   carId: Scalars['ID'];
   file: Scalars['Upload'];
+};
+
+
+export type MutationAddProfilePictureArgs = {
+  file: Scalars['Upload'];
+  pictureID: Scalars['ID'];
 };
 
 
@@ -387,7 +391,7 @@ export type MutationUpdateUserArgs = {
   lastname: Scalars['String'];
   password: Scalars['String'];
   phone: Scalars['String'];
-  userId?: InputMaybe<Scalars['ID']>;
+  userInfoId?: InputMaybe<Scalars['ID']>;
   username: Scalars['String'];
 };
 
@@ -398,6 +402,12 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+};
+
+export type ProfilePicture = {
+  __typename?: 'ProfilePicture';
+  id: Scalars['ID'];
+  path: Scalars['String'];
 };
 
 export type Query = {
@@ -532,7 +542,7 @@ export type User = {
   lastname?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['ID']>;
+  userInfoId?: Maybe<Scalars['ID']>;
   username?: Maybe<Scalars['String']>;
 };
 
@@ -544,6 +554,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilPictureId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -630,7 +641,6 @@ export type ResolversTypes = {
   DID: ResolverTypeWrapper<Scalars['DID']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
-  DeweyDecimal: ResolverTypeWrapper<Scalars['DeweyDecimal']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   GUID: ResolverTypeWrapper<Scalars['GUID']>;
@@ -641,7 +651,6 @@ export type ResolversTypes = {
   IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   IP: ResolverTypeWrapper<Scalars['IP']>;
-  IPCPatent: ResolverTypeWrapper<Scalars['IPCPatent']>;
   IPv4: ResolverTypeWrapper<Scalars['IPv4']>;
   IPv6: ResolverTypeWrapper<Scalars['IPv6']>;
   ISBN: ResolverTypeWrapper<Scalars['ISBN']>;
@@ -650,7 +659,6 @@ export type ResolversTypes = {
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
   JWT: ResolverTypeWrapper<Scalars['JWT']>;
-  LCCSubclass: ResolverTypeWrapper<Scalars['LCCSubclass']>;
   Latitude: ResolverTypeWrapper<Scalars['Latitude']>;
   LocalDate: ResolverTypeWrapper<Scalars['LocalDate']>;
   LocalEndTime: ResolverTypeWrapper<Scalars['LocalEndTime']>;
@@ -675,6 +683,7 @@ export type ResolversTypes = {
   PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']>;
   PositiveInt: ResolverTypeWrapper<Scalars['PositiveInt']>;
   PostalCode: ResolverTypeWrapper<Scalars['PostalCode']>;
+  ProfilePicture: ResolverTypeWrapper<ProfilePicture>;
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
@@ -720,7 +729,6 @@ export type ResolversParentTypes = {
   DID: Scalars['DID'];
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
-  DeweyDecimal: Scalars['DeweyDecimal'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
   GUID: Scalars['GUID'];
@@ -731,7 +739,6 @@ export type ResolversParentTypes = {
   IBAN: Scalars['IBAN'];
   ID: Scalars['ID'];
   IP: Scalars['IP'];
-  IPCPatent: Scalars['IPCPatent'];
   IPv4: Scalars['IPv4'];
   IPv6: Scalars['IPv6'];
   ISBN: Scalars['ISBN'];
@@ -740,7 +747,6 @@ export type ResolversParentTypes = {
   JSON: Scalars['JSON'];
   JSONObject: Scalars['JSONObject'];
   JWT: Scalars['JWT'];
-  LCCSubclass: Scalars['LCCSubclass'];
   Latitude: Scalars['Latitude'];
   LocalDate: Scalars['LocalDate'];
   LocalEndTime: Scalars['LocalEndTime'];
@@ -765,6 +771,7 @@ export type ResolversParentTypes = {
   PositiveFloat: Scalars['PositiveFloat'];
   PositiveInt: Scalars['PositiveInt'];
   PostalCode: Scalars['PostalCode'];
+  ProfilePicture: ProfilePicture;
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
@@ -866,10 +873,6 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: 'DateTime';
 }
 
-export interface DeweyDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DeweyDecimal'], any> {
-  name: 'DeweyDecimal';
-}
-
 export interface DurationScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Duration'], any> {
   name: 'Duration';
 }
@@ -906,10 +909,6 @@ export interface IpScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['
   name: 'IP';
 }
 
-export interface IpcPatentScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPCPatent'], any> {
-  name: 'IPCPatent';
-}
-
 export interface IPv4ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPv4'], any> {
   name: 'IPv4';
 }
@@ -936,10 +935,6 @@ export interface JsonObjectScalarConfig extends GraphQLScalarTypeConfig<Resolver
 
 export interface JwtScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['JWT'], any> {
   name: 'JWT';
-}
-
-export interface LccSubclassScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['LCCSubclass'], any> {
-  name: 'LCCSubclass';
 }
 
 export interface LatitudeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Latitude'], any> {
@@ -988,6 +983,7 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
+  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'pictureID'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
@@ -1075,6 +1071,12 @@ export interface PositiveIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
 export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['PostalCode'], any> {
   name: 'PostalCode';
 }
+
+export type ProfilePictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfilePicture'] = ResolversParentTypes['ProfilePicture']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   Badge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<QueryBadgeArgs, 'id'>>;
@@ -1207,7 +1209,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  userInfoId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -1219,6 +1221,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1245,7 +1248,6 @@ export type Resolvers<ContextType = any> = {
   DID?: GraphQLScalarType;
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
-  DeweyDecimal?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
   GUID?: GraphQLScalarType;
@@ -1255,7 +1257,6 @@ export type Resolvers<ContextType = any> = {
   Hexadecimal?: GraphQLScalarType;
   IBAN?: GraphQLScalarType;
   IP?: GraphQLScalarType;
-  IPCPatent?: GraphQLScalarType;
   IPv4?: GraphQLScalarType;
   IPv6?: GraphQLScalarType;
   ISBN?: GraphQLScalarType;
@@ -1263,7 +1264,6 @@ export type Resolvers<ContextType = any> = {
   JSON?: GraphQLScalarType;
   JSONObject?: GraphQLScalarType;
   JWT?: GraphQLScalarType;
-  LCCSubclass?: GraphQLScalarType;
   Latitude?: GraphQLScalarType;
   LocalDate?: GraphQLScalarType;
   LocalEndTime?: GraphQLScalarType;
@@ -1288,6 +1288,7 @@ export type Resolvers<ContextType = any> = {
   PositiveFloat?: GraphQLScalarType;
   PositiveInt?: GraphQLScalarType;
   PostalCode?: GraphQLScalarType;
+  ProfilePicture?: ProfilePictureResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;

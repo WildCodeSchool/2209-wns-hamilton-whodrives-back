@@ -1,26 +1,53 @@
+import ProfilPicture from "../entity/ProfilePicture";
 import { Repository } from "typeorm";
+import UserInfo from "src/entity/UserInfo";
 import datasource from "../lib/datasource";
-import ProfilePicture from "../entity/ProfilePicture";
+import { createWriteStream } from "fs";
+import { finished } from "stream/promises";
+import stream from "stream";
+import fs from "fs";
+import { MutationAddProfilePictureArgs } from "@/graphgen";
 
 class ProfilePictureController {
+  db: Repository<ProfilPicture>;
+  dbProfile: Repository<UserInfo>;
 
-     db: Repository<ProfilePicture>;
-
-     constructor() {
-         this.db = datasource.getRepository("ProfilePicture");
-     }
-
-     singleUpload = async ({ file }: { file: any }) => {
-        const { createReadStream, filename, mimetype, encoding } = await file;
-        const stream = createReadStream();
-         const url = `http://localhost:4000/uploadProfilPicture/${filename}`;
-         const profilPicture = await this.db.save({
-         path: url,
-
-     });
-        return profilPicture;
-     }
-
+constructor() {
+  this.db = datasource.getRepository("ProfilePicture");
+  this.dbProfile = datasource.getRepository("UserInfo");
 }
-
+async addProfilePicture({ pictureID, file }: MutationAddProfilePictureArgs) {
+  const { createReadStream, filename } = await file;
+  if (!createReadStream || !filename) {
+    throw new Error("No file uploaded");
+  }
+  const stream = createReadStream();
+  const tempPath = `uploads/${filename}`;
+  const newFileName = `${Date.now()}-${filename}`;
+  const out = require("fs").createWriteStream(tempPath);
+  stream.pipe(out);
+  await finished(out);
+  const profile = await this.dbProfile.findOne({ where: { id: +pictureID } });
+  if (!profile) {
+    throw new Error("Profile not found");
+  }
+  const savedPicture = await this.db.save({
+    path: newFileName,
+  });
+  profile.profilPicture = [savedPicture];
+  this.dbProfile.save({ ...profile });
+  if (savedPicture) {}
+  const newPath = `public/profile/${newFileName}`;
+  fs.copyFile(tempPath, newPath, function (err) {
+    if (err) throw err;
+    console.log(
+      `Copie du fichier ${newFileName} vers le dossier public/profile`
+    );
+  });
+  return {
+    id: savedPicture.id,
+    path: newFileName,
+  };
+}
+}
 export default ProfilePictureController;

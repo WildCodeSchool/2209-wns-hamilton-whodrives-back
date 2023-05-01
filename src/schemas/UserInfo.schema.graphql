@@ -5,6 +5,7 @@ type UserInfo {
   age: Int
   address: String
   aboutId: ID
+  profilPictureId: ID
 }
 
 type Query {

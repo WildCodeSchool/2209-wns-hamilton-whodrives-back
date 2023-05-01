@@ -46,6 +46,6 @@ export default class User {
   @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
 
-  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user)
+  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {eager: true})
   userInfo: UserInfo;
 }

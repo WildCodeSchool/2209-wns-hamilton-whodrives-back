@@ -63,12 +63,7 @@ class UserInfoController {
     });
   }
 
-  async assignAbout({ userLogged }: IUserLogged, about: About) {
-    return await this.db.save({
-      ...userLogged,
-      about,
-    });
-  }
+
 }
 
 export default UserInfoController;

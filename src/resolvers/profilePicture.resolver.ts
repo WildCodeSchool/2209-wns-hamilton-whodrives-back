@@ -1,10 +1,11 @@
 import { ExpressContext } from "apollo-server-express";
-import { MutationAddPictureArgs } from "@/graphgen";
-import CarPictureController from "../controller/CarPicture";
+import {MutationAddProfilePictureArgs} from "@/graphgen";
+import ProfilePictureController from "../controller/ProfilePicture";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 
-const carPictureController = new CarPictureController();
+const profilePictureController = new ProfilePictureController();
+
 
 export default {
   Query: {},
@@ -12,12 +13,12 @@ export default {
   Mutation: {
     addPicture: async (
       parent: any,
-      { carId, file }: MutationAddPictureArgs,
+      { pictureID, file }: MutationAddProfilePictureArgs,
       context: ExpressContext
     ) => {
       try {
-        const carPicture = await carPictureController.addCarPicture({
-          carId,
+        const carPicture = await profilePictureController.addProfilePicture({
+          pictureID,
           file,
         });
         return carPicture;
@@ -26,7 +27,7 @@ export default {
         return {
           success: false,
           message: error.message,
-          carPicture: null,
+          profilePicture: null,
         };
       }
     },

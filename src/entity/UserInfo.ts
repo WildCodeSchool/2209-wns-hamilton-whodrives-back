@@ -30,8 +30,8 @@ export default class UserInfo {
   @ManyToOne(() => ProfilPicture, (profilPicture) => profilPicture.userInfo)
   profilPicture: ProfilPicture[];
 
-  @ManyToOne(() => About, (about) => about.userInfo)
-  about: About[];
+  @ManyToOne(() => About, (about) => about.userInfo , {eager: true})
+  about: About;
 
   @OneToMany(() => User, (user) => user.userInfo)
   user: User[];

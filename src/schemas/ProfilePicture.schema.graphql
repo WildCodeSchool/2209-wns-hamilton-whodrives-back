@@ -1,0 +1,9 @@
+ scalar Upload
+ type ProfilePicture {
+    id: ID!
+    path: String!
+  }
+
+  type Mutation {
+    addProfilePicture(pictureID: ID!, file: Upload!): ProfilePicture!
+  }

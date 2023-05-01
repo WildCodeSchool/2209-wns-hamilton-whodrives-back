@@ -3,21 +3,25 @@ import datasource from "../lib/datasource";
 import About from "../entity/About";
 import MusicOption from "../entity/MusicOption";
 import ChatOption from "../entity/ChatOption";
+import UserInfo from "../entity/UserInfo";
 import {
   MutationCreateAboutArgs,
   MutationUpdateAboutArgs,
   MutationUpdateMusicAndChatOptionArgs,
 } from "@/graphgen";
+import { request } from "http";
 
 class AboutController {
   db: Repository<About>;
   dbOptionMusic: Repository<MusicOption>;
   dbOptionChat: Repository<ChatOption>;
+  dbUserInfo: Repository<UserInfo>;
 
   constructor() {
     this.db = datasource.getRepository("About");
     this.dbOptionMusic = datasource.getRepository("MusicOption");
     this.dbOptionChat = datasource.getRepository("ChatOption");
+    this.dbUserInfo = datasource.getRepository("UserInfo");
   }
 
   //Liste de toute les preferences de l'utilisateur y compris les preferences de musique et de chat(communication)
@@ -59,7 +63,14 @@ class AboutController {
       throw new Error("Please check your preferences");
     }
   }
-
+  async assignAbout({ userLogged }, about: About) {
+    const useinfoID = userLogged.userInfo.id;
+    console.log("useID", useinfoID);
+    return await this.dbUserInfo.save({
+      id: useinfoID,
+      about,
+    });
+  }
   async updateAbout({
     id,
     animal,
