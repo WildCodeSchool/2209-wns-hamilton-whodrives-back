@@ -79,10 +79,10 @@ export type Scalars = {
 export type About = {
   __typename?: 'About';
   animal?: Maybe<Scalars['Boolean']>;
-  chatOptionId?: Maybe<ChatOption>;
+  chatOptionId?: Maybe<Array<Maybe<ChatOption>>>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  musicOptionId?: Maybe<MusicOption>;
+  musicOptionId?: Maybe<Array<Maybe<MusicOption>>>;
   smoke?: Maybe<Scalars['Boolean']>;
 };
 
@@ -422,7 +422,8 @@ export type Query = {
   Receipts?: Maybe<Array<Maybe<Receipts>>>;
   Role?: Maybe<Roles>;
   Roles?: Maybe<Array<Maybe<Roles>>>;
-  about: About;
+  about?: Maybe<About>;
+  abouts?: Maybe<Array<Maybe<About>>>;
   car?: Maybe<Car>;
   cars?: Maybe<Array<Maybe<Car>>>;
   chatOption?: Maybe<ChatOption>;
@@ -434,6 +435,7 @@ export type Query = {
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
   user?: Maybe<User>;
+  userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -459,6 +461,11 @@ export type QueryReceiptArgs = {
 
 
 export type QueryRoleArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAboutArgs = {
   id: Scalars['ID'];
 };
 
@@ -489,7 +496,7 @@ export type QueryMusicOptionArgs = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Rating = {
@@ -542,13 +549,13 @@ export type User = {
   lastname?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
-  userInfoId?: Maybe<Scalars['ID']>;
+  userInfo?: Maybe<UserInfo>;
   username?: Maybe<Scalars['String']>;
 };
 
 export type UserInfo = {
   __typename?: 'UserInfo';
-  aboutId?: Maybe<Scalars['ID']>;
+  aboutId?: Maybe<About>;
   address?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['String']>;
@@ -802,10 +809,10 @@ export type ResolversParentTypes = {
 
 export type AboutResolvers<ContextType = any, ParentType extends ResolversParentTypes['About'] = ResolversParentTypes['About']> = {
   animal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  chatOptionId?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType>;
+  chatOptionId?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChatOption']>>>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  musicOptionId?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType>;
+  musicOptionId?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
   smoke?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -1089,7 +1096,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   Receipts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Receipts']>>>, ParentType, ContextType>;
   Role?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
   Roles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Roles']>>>, ParentType, ContextType>;
-  about?: Resolver<ResolversTypes['About'], ParentType, ContextType>;
+  about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<QueryAboutArgs, 'id'>>;
+  abouts?: Resolver<Maybe<Array<Maybe<ResolversTypes['About']>>>, ParentType, ContextType>;
   car?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<QueryCarArgs, 'id'>>;
   cars?: Resolver<Maybe<Array<Maybe<ResolversTypes['Car']>>>, ParentType, ContextType>;
   chatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<QueryChatOptionArgs, 'id'>>;
@@ -1100,7 +1108,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
+  userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
 };
 
@@ -1209,13 +1218,13 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  userInfoId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  userInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType>;
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
-  aboutId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  aboutId?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

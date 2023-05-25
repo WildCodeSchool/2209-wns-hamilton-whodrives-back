@@ -7,7 +7,7 @@ type User {
   date_of_birth: Date
   email: String
   phone: String
-  userInfoId: ID
+  userInfo: UserInfo
 }
 
 type RegisterUser {
@@ -18,7 +18,8 @@ type RegisterUser {
 
 type Query {
   users: [User]
-  user(id: ID!): User
+  user(id: ID): User
+  userLogged: User!
 }
 
 type Mutation {

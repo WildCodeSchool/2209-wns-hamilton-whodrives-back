@@ -4,7 +4,7 @@ type UserInfo {
   country: String
   age: Int
   address: String
-  aboutId: ID
+  aboutId: About
   profilPictureId: ID
 }
 

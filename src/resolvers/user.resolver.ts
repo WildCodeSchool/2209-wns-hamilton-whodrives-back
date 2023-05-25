@@ -2,6 +2,7 @@ import UserController from "../controller/User";
 import * as bcrypt from "bcrypt";
 import { generateToken } from "../lib/utilities";
 import { ExpressContext } from "apollo-server-express";
+import { IUserLogged } from "../resolvers/Interface";
 import {
   MutationCreateUserArgs,
   MutationDeleteUserArgs,
@@ -11,13 +12,16 @@ import {
 
 export default {
   Query: {
-    users: async (_: any, {}, { userLogged }: any, infos: any) => {
+    users: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().listUsers();
     },
 
     user: async (_: any, { id }: { id: number }, context: any, infos: any) => {
       return await new UserController().getUser(id);
     },
+    userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+      return await new UserController().getUserLogged({ userLogged });
+    }
   },
 
   Mutation: {
@@ -83,7 +87,7 @@ export default {
       { res }: ExpressContext
     ) => {
       const { password, email } = args;
-      let user = await new UserController().getUserByEmail({ email });
+      let user = await new UserController().getUserByEmail(email);
       if (!user) {
         return {
           email: "invalid Login",

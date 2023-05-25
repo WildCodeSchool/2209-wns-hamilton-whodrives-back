@@ -19,12 +19,17 @@ class UserController {
     return await this.db.find();
   }
 
+  async getUserLogged({ userLogged }: IUserLogged){
+    let userIdLogged = userLogged.id;
+    console.log(userIdLogged)
+    return await this.db.findOne({where: {id: userIdLogged}})
+  }
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
   }
 
-  async getUserByEmail({ email }: { email: string }) {
-    return await this.db.findOne({ where: { email } });
+  async getUserByEmail(email :string) {
+    return await this.db.findOne( {where: {email} });
   }
 
   async addUser({
