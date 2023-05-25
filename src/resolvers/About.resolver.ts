@@ -40,7 +40,6 @@ export default {
         musicOptionId,
         
       });
-      console.log(about, "about")
       let userInfoAbout = await new AboutController().assignAbout(
         { userLogged },
         about

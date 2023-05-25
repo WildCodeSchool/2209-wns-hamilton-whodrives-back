@@ -35,12 +35,8 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => {
-      // permet de récupérer l'utilisateur connecté
-      console.log("le token " + req.headers.authorization);
     
       let userLogged: any = await getUser(req.headers.authorization as string);
-      console.log("user" , userLogged);
-      //on retourne les infos de l'utilisateur connecté dans le contexte de l'application, ainsi on pourra les récupérer dans les resolvers
       return {
         req,
         res,

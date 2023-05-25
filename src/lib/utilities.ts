@@ -32,7 +32,6 @@ export async function getUser(authorization: string) {
       try {
         jwt.verify(token, SECRET_KEY, async (err: any, payload: any) => {
           if (payload && Object.keys(payload).length) {
-            console.log(payload);
             let user = await new UserController().getUserByEmail(payload.email);
             resolve(user);
           }

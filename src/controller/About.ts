@@ -64,10 +64,10 @@ class AboutController {
     }
   }
   async assignAbout({ userLogged }, about: About) {
-    const useinfoID = userLogged.userInfo.id;
-    console.log("useID", useinfoID);
+    const userInfoID = userLogged.userInfo.id;
+    console.log("useID", userInfoID);
     return await this.dbUserInfo.save({
-      id: useinfoID,
+      id: userInfoID,
       about,
     });
   }
