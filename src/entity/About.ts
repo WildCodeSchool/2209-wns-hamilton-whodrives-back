@@ -24,12 +24,12 @@ export default class About {
   smoke: boolean;
 
   @ManyToOne(() => ChatOption, (chatOption) => chatOption.about, {
-    nullable: true,
+    nullable: true,eager: true
   })
   chatOption?: ChatOption;
 
   @ManyToOne(() => MusicOption, (musicOption) => musicOption.about, {
-    nullable: true,
+    nullable: true,eager: true
   })
   musicOption?: MusicOption;
 

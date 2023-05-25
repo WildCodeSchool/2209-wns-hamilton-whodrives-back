@@ -6,12 +6,11 @@ services:
     container_name: whodrives-front
     environment:
       - PORT=3000
+      - NODE_ENV=development
     volumes:
       - ../2209-wns-hamilton-whodrives-front/src:/app/src
     ports:
       - 3000:3000
-    networks:
-      - grape
     depends_on:
       - back
 
@@ -25,10 +24,10 @@ services:
       - ./.env
     volumes:
       - ./src:/app/src
+      - ./uploads:/app/uploads
+      - ./public:/app/public
     ports:
       - 4000:4000
-    networks:
-      - grape
     depends_on:
       - db
     extra_hosts:
@@ -43,8 +42,6 @@ services:
       - 5432:5432
     env_file:
       - database.env
-    networks:
-      - grape
     volumes:
       - postgres:/var/lib/postgresql/data
 
@@ -52,11 +49,8 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 8089:8080
 
 volumes:
   postgres:
     name: whodrives-db
-
-networks:
-  grape:

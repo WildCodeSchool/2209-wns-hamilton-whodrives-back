@@ -38,8 +38,9 @@ export default {
         smoke,
         chatOptionId,
         musicOptionId,
+        
       });
-      let userInfoAbout = await new UserInfoController().assignAbout(
+      let userInfoAbout = await new AboutController().assignAbout(
         { userLogged },
         about
       );

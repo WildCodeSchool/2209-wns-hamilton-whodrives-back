@@ -7,6 +7,7 @@ import { getUser } from "./lib/utilities";
 import typeDefs from "./schemas";
 import resolvers from "./resolvers";
 import { makeExecutableSchema } from "@graphql-tools/schema";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import * as dotenv from "dotenv";
@@ -24,7 +25,7 @@ async function startApolloServer() {
   const app = express();
   app.use(cors(corsConfig));
   app.use(cookieParser());
-
+  app.use(graphqlUploadExpress());
   const httpServer = http.createServer(app);
 
   const schema = makeExecutableSchema({
@@ -34,9 +35,8 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => {
-      // permet de récupérer l'utilisateur connecté
+    
       let userLogged: any = await getUser(req.headers.authorization as string);
-      //on retourne les infos de l'utilisateur connecté dans le contexte de l'application, ainsi on pourra les récupérer dans les resolvers
       return {
         req,
         res,

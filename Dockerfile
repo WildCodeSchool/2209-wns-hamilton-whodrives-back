@@ -11,6 +11,8 @@ RUN npm install
 
 
 COPY src src
+COPY uploads uploads
+COPY public public
 
 
 CMD npm start

@@ -17,7 +17,7 @@ class CarController {
   }
 
   async listCars() {
-    return await this.db.find();
+    return await this.db.find({ select: { carPictures: true } });
   }
 
   async getCar(id: number) {

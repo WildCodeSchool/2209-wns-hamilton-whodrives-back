@@ -1,0 +1,9 @@
+ scalar Upload
+ type CarPicture {
+    id: ID!
+    path: String!
+  }
+
+  type Mutation {
+    addPicture(carId: ID!, file: Upload!): CarPicture!
+  }

@@ -3,12 +3,13 @@ type About {
   animal: Boolean
   description: String
   smoke: Boolean
-  chatOptionId: ChatOption
-  musicOptionId: MusicOption
+  chatOptionId: [ChatOption]
+  musicOptionId: [MusicOption]
 }
 
 type Query {
-  about: About!
+  abouts: [About]
+  about(id: ID!): About
 }
 
 type Mutation {

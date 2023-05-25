@@ -71,6 +71,7 @@ export type Scalars = {
   UUID: any;
   UnsignedFloat: any;
   UnsignedInt: any;
+  Upload: any;
   UtcOffset: any;
   Void: any;
 };
@@ -78,10 +79,10 @@ export type Scalars = {
 export type About = {
   __typename?: 'About';
   animal?: Maybe<Scalars['Boolean']>;
-  chatOptionId?: Maybe<ChatOption>;
+  chatOptionId?: Maybe<Array<Maybe<ChatOption>>>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  musicOptionId?: Maybe<MusicOption>;
+  musicOptionId?: Maybe<Array<Maybe<MusicOption>>>;
   smoke?: Maybe<Scalars['Boolean']>;
 };
 
@@ -94,9 +95,16 @@ export type Badge = {
 
 export type Car = {
   __typename?: 'Car';
+  carPictures?: Maybe<Array<Maybe<CarPicture>>>;
   id: Scalars['ID'];
   model?: Maybe<Model>;
   seat: Scalars['Int'];
+};
+
+export type CarPicture = {
+  __typename?: 'CarPicture';
+  id: Scalars['ID'];
+  path: Scalars['String'];
 };
 
 export type ChatOption = {
@@ -119,6 +127,8 @@ export type MusicOption = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addPicture: CarPicture;
+  addProfilePicture: ProfilePicture;
   createAbout?: Maybe<About>;
   createBadge?: Maybe<Badge>;
   createCar?: Maybe<Car>;
@@ -153,6 +163,18 @@ export type Mutation = {
   updateTrip?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
+};
+
+
+export type MutationAddPictureArgs = {
+  carId: Scalars['ID'];
+  file: Scalars['Upload'];
+};
+
+
+export type MutationAddProfilePictureArgs = {
+  file: Scalars['Upload'];
+  pictureID: Scalars['ID'];
 };
 
 
@@ -369,7 +391,7 @@ export type MutationUpdateUserArgs = {
   lastname: Scalars['String'];
   password: Scalars['String'];
   phone: Scalars['String'];
-  userId?: InputMaybe<Scalars['ID']>;
+  userInfoId?: InputMaybe<Scalars['ID']>;
   username: Scalars['String'];
 };
 
@@ -380,6 +402,12 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+};
+
+export type ProfilePicture = {
+  __typename?: 'ProfilePicture';
+  id: Scalars['ID'];
+  path: Scalars['String'];
 };
 
 export type Query = {
@@ -394,7 +422,8 @@ export type Query = {
   Receipts?: Maybe<Array<Maybe<Receipts>>>;
   Role?: Maybe<Roles>;
   Roles?: Maybe<Array<Maybe<Roles>>>;
-  about: About;
+  about?: Maybe<About>;
+  abouts?: Maybe<Array<Maybe<About>>>;
   car?: Maybe<Car>;
   cars?: Maybe<Array<Maybe<Car>>>;
   chatOption?: Maybe<ChatOption>;
@@ -406,6 +435,7 @@ export type Query = {
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
   user?: Maybe<User>;
+  userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
 };
 
@@ -431,6 +461,11 @@ export type QueryReceiptArgs = {
 
 
 export type QueryRoleArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type QueryAboutArgs = {
   id: Scalars['ID'];
 };
 
@@ -461,7 +496,7 @@ export type QueryMusicOptionArgs = {
 
 
 export type QueryUserArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Rating = {
@@ -514,18 +549,19 @@ export type User = {
   lastname?: Maybe<Scalars['String']>;
   password?: Maybe<Scalars['String']>;
   phone?: Maybe<Scalars['String']>;
-  userId?: Maybe<Scalars['ID']>;
+  userInfo?: Maybe<UserInfo>;
   username?: Maybe<Scalars['String']>;
 };
 
 export type UserInfo = {
   __typename?: 'UserInfo';
-  aboutId?: Maybe<Scalars['ID']>;
+  aboutId?: Maybe<About>;
   address?: Maybe<Scalars['String']>;
   age?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilPictureId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -604,6 +640,7 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Byte: ResolverTypeWrapper<Scalars['Byte']>;
   Car: ResolverTypeWrapper<Car>;
+  CarPicture: ResolverTypeWrapper<CarPicture>;
   ChatOption: ResolverTypeWrapper<ChatOption>;
   CountryCode: ResolverTypeWrapper<Scalars['CountryCode']>;
   Cuid: ResolverTypeWrapper<Scalars['Cuid']>;
@@ -653,6 +690,7 @@ export type ResolversTypes = {
   PositiveFloat: ResolverTypeWrapper<Scalars['PositiveFloat']>;
   PositiveInt: ResolverTypeWrapper<Scalars['PositiveInt']>;
   PostalCode: ResolverTypeWrapper<Scalars['PostalCode']>;
+  ProfilePicture: ResolverTypeWrapper<ProfilePicture>;
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
@@ -674,6 +712,7 @@ export type ResolversTypes = {
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
   UnsignedFloat: ResolverTypeWrapper<Scalars['UnsignedFloat']>;
   UnsignedInt: ResolverTypeWrapper<Scalars['UnsignedInt']>;
+  Upload: ResolverTypeWrapper<Scalars['Upload']>;
   User: ResolverTypeWrapper<User>;
   UserInfo: ResolverTypeWrapper<UserInfo>;
   UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
@@ -689,6 +728,7 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   Byte: Scalars['Byte'];
   Car: Car;
+  CarPicture: CarPicture;
   ChatOption: ChatOption;
   CountryCode: Scalars['CountryCode'];
   Cuid: Scalars['Cuid'];
@@ -738,6 +778,7 @@ export type ResolversParentTypes = {
   PositiveFloat: Scalars['PositiveFloat'];
   PositiveInt: Scalars['PositiveInt'];
   PostalCode: Scalars['PostalCode'];
+  ProfilePicture: ProfilePicture;
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
@@ -759,6 +800,7 @@ export type ResolversParentTypes = {
   UUID: Scalars['UUID'];
   UnsignedFloat: Scalars['UnsignedFloat'];
   UnsignedInt: Scalars['UnsignedInt'];
+  Upload: Scalars['Upload'];
   User: User;
   UserInfo: UserInfo;
   UtcOffset: Scalars['UtcOffset'];
@@ -767,10 +809,10 @@ export type ResolversParentTypes = {
 
 export type AboutResolvers<ContextType = any, ParentType extends ResolversParentTypes['About'] = ResolversParentTypes['About']> = {
   animal?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
-  chatOptionId?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType>;
+  chatOptionId?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChatOption']>>>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  musicOptionId?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType>;
+  musicOptionId?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
   smoke?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
@@ -795,9 +837,16 @@ export interface ByteScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type CarResolvers<ContextType = any, ParentType extends ResolversParentTypes['Car'] = ResolversParentTypes['Car']> = {
+  carPictures?: Resolver<Maybe<Array<Maybe<ResolversTypes['CarPicture']>>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType>;
   seat?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CarPictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['CarPicture'] = ResolversParentTypes['CarPicture']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -940,6 +989,8 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
+  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'pictureID'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
@@ -1028,6 +1079,12 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
   name: 'PostalCode';
 }
 
+export type ProfilePictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfilePicture'] = ResolversParentTypes['ProfilePicture']> = {
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   Badge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<QueryBadgeArgs, 'id'>>;
   Badges?: Resolver<Maybe<Array<Maybe<ResolversTypes['Badge']>>>, ParentType, ContextType>;
@@ -1039,7 +1096,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   Receipts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Receipts']>>>, ParentType, ContextType>;
   Role?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
   Roles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Roles']>>>, ParentType, ContextType>;
-  about?: Resolver<ResolversTypes['About'], ParentType, ContextType>;
+  about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<QueryAboutArgs, 'id'>>;
+  abouts?: Resolver<Maybe<Array<Maybe<ResolversTypes['About']>>>, ParentType, ContextType>;
   car?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<QueryCarArgs, 'id'>>;
   cars?: Resolver<Maybe<Array<Maybe<ResolversTypes['Car']>>>, ParentType, ContextType>;
   chatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<QueryChatOptionArgs, 'id'>>;
@@ -1050,7 +1108,8 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
-  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
+  userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
 };
 
@@ -1147,6 +1206,10 @@ export interface UnsignedIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'UnsignedInt';
 }
 
+export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Upload'], any> {
+  name: 'Upload';
+}
+
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   date_of_birth?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1155,18 +1218,19 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  userInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType>;
   username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
-  aboutId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  aboutId?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1185,6 +1249,7 @@ export type Resolvers<ContextType = any> = {
   BigInt?: GraphQLScalarType;
   Byte?: GraphQLScalarType;
   Car?: CarResolvers<ContextType>;
+  CarPicture?: CarPictureResolvers<ContextType>;
   ChatOption?: ChatOptionResolvers<ContextType>;
   CountryCode?: GraphQLScalarType;
   Cuid?: GraphQLScalarType;
@@ -1232,6 +1297,7 @@ export type Resolvers<ContextType = any> = {
   PositiveFloat?: GraphQLScalarType;
   PositiveInt?: GraphQLScalarType;
   PostalCode?: GraphQLScalarType;
+  ProfilePicture?: ProfilePictureResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
@@ -1252,6 +1318,7 @@ export type Resolvers<ContextType = any> = {
   UUID?: GraphQLScalarType;
   UnsignedFloat?: GraphQLScalarType;
   UnsignedInt?: GraphQLScalarType;
+  Upload?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
   UserInfo?: UserInfoResolvers<ContextType>;
   UtcOffset?: GraphQLScalarType;

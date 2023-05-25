@@ -12,11 +12,13 @@ import rolesResolver from "./roles.resolver";
 import ratingResolver from "./rating.resolver";
 import TripResolver from "./trip.resolver";
 import receiptsResolver from "./receipts.resolver";
+import carPictureResolver from "./carPicture.resolver"; // ajout du resolver!
 
 const resolvers = [
   userResolver,
   badgeResolver,
   carResolver,
+  carPictureResolver,
   scalarResolvers,
   userInfoResolver,
   modelResolver,
