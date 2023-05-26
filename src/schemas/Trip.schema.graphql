@@ -4,7 +4,7 @@ type Trip {
   destination: String
   date_departure: Date
   arrival_date: Date
-  hour_departure: Date
+  hour_departure: String
 }
 type Query {
   getTrip(id: ID!): Trip
@@ -16,7 +16,7 @@ type Mutation {
     destination: String
     date_departure: Date
     arrival_date: Date
-    hour_departure: Date
+    hour_departure: String
   ): Trip
   updateTrip(
     id: ID!
@@ -24,7 +24,7 @@ type Mutation {
     destination: String
     date_departure: Date
     arrival_date: Date
-    hour_departure: Date
+    hour_departure: String
   ): Trip
   deleteTrip(id: ID!): Trip
 }

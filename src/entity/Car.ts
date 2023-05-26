@@ -21,7 +21,7 @@ export default class Car {
   seat: number;
 
   @ManyToOne(() => User, (user) => user.cars)
-  user: User[];
+  user: User;
 
   @OneToMany(() => CarPicture, (carPicture) => carPicture.cars, { eager: true })
   carPictures: CarPicture[];
