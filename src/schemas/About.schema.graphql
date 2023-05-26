@@ -3,8 +3,8 @@ type About {
   animal: Boolean
   description: String
   smoke: Boolean
-  chatOptionId: [ChatOption]
-  musicOptionId: [MusicOption]
+  chatOption: ChatOption
+  musicOption: MusicOption
 }
 
 type Query {

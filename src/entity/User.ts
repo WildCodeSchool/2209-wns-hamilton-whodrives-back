@@ -43,7 +43,7 @@ export default class User {
   @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
   confirmMails: ConfirmMail[];
 
-  @OneToMany(() => Car, (car) => car.user)
+  @OneToMany(() => Car, (car) => car.user,{eager: true})
   cars: Car[];
 
   @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {eager: true})

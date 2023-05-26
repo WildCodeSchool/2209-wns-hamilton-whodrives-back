@@ -4,6 +4,7 @@ import Car from "../entity/Car";
 import Model from "../entity/Model";
 import Options from "../entity/Option";
 import datasource from "../lib/datasource";
+import { IUserLogged } from "../resolvers/Interface";
 import { IErrors } from "./Car.d";
 
 class CarController {
@@ -28,10 +29,12 @@ class CarController {
     return await this.db.findOneBy({ user: { id: userId } });
   }
 
-  async addCar({ seat, modelId, optionId }: MutationCreateCarArgs) {
+  async addCar({ seat, modelId, optionId }: MutationCreateCarArgs,  { userLogged }: IUserLogged) {
     const option = await this.dbOptions.findOne({ where: { id: optionId } });
     const model = await this.dbModel.findOne({ where: { id: modelId } });
-    let data: any = { seat, model, option };
+    let userIdLogged = userLogged.id;
+    const user = {id: userIdLogged};
+    let data: any = { seat, model, option ,user};
     if (model) {
       data.model = model;
     }
