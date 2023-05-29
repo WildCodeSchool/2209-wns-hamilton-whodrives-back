@@ -24,6 +24,22 @@ class UserController {
     console.log(userIdLogged)
     return await this.db.findOne({where: {id: userIdLogged}})
   }
+  async getUserTrips({ userLogged }: IUserLogged) {
+    try {
+      const userIdLogged = userLogged.id;
+      const user = await this.db.findOne({ where: { id: userIdLogged }, relations: ["trips"] });
+  
+      if (!user) {
+        throw new Error("Utilisateur non trouvé");
+      }
+  
+      return user.trips;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);
+      throw error;
+    }
+  }
+  
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
   }

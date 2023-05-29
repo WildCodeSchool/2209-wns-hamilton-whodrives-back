@@ -5,6 +5,10 @@ import {
 } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import TripController from "../controller/Trips";
+import { IUserLogged } from "../resolvers/Interface";
+import { getUser } from "src/lib/utilities";
+import { user } from "pg/lib/defaults";
+import User from "src/entity/User";
 
 export default {
   Query: {
@@ -26,23 +30,35 @@ export default {
     createTrip: async (
       _: any,
       args: MutationCreateTripArgs,
-      { res }: ExpressContext
+      userLogged: User,
+      { req }: ExpressContext
     ) => {
       const {
         departure_places,
         destination,
         date_departure,
         arrival_date,
-        hour_departure,
+        price,
+        description,
       } = args;
-      let Trip = await new TripController().addTrip({
-        departure_places,
-        destination,
-        date_departure,
-        arrival_date,
-        hour_departure,
-      });
-      return Trip;
+    
+      if (!userLogged) {
+        throw new Error("Utilisateur non connecté"); // Vérifier si l'utilisateur est connecté
+      }
+    
+      const trip = await new TripController().addTrip(
+        {
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+        },
+        userLogged // Passer directement l'objet userLogged au lieu de l'encapsuler dans un autre objet
+      );
+    
+      return trip;
     },
 
     updateTrip: async (
@@ -56,7 +72,8 @@ export default {
         destination,
         date_departure,
         arrival_date,
-        hour_departure,
+        price,
+        description, 
       } = args;
       let Trip = await new TripController().updateTrip({
         id,
@@ -64,7 +81,8 @@ export default {
         destination,
         date_departure,
         arrival_date,
-        hour_departure,
+        price,
+        description, 
       });
       return Trip;
     },

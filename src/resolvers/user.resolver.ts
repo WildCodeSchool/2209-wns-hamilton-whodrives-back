@@ -9,6 +9,8 @@ import {
   MutationLoginUserArgs,
   MutationUpdateUserArgs,
 } from "@/graphgen";
+import Trip from "../entity/Trip";
+import { Repository } from "typeorm";
 
 export default {
   Query: {
@@ -21,7 +23,11 @@ export default {
     },
     userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
+    },
+    UserTrips : async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+      return await new UserController().getUserTrips({ userLogged });
     }
+
   },
 
   Mutation: {

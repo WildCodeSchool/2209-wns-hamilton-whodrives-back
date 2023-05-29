@@ -2,9 +2,11 @@ type Trip {
   id: ID!
   departure_places: String
   destination: String
-  date_departure: Date
-  arrival_date: Date
-  hour_departure: String
+  date_departure: Timestamp
+  arrival_date: Timestamp
+  price: Int
+  description: String
+  users: [User]
 }
 type Query {
   getTrip(id: ID!): Trip
@@ -14,17 +16,22 @@ type Mutation {
   createTrip(
     departure_places: String
     destination: String
-    date_departure: Date
-    arrival_date: Date
-    hour_departure: String
+    date_departure: Timestamp
+    arrival_date: Timestamp
+    price: Int
+    description: String
   ): Trip
   updateTrip(
     id: ID!
     departure_places: String
     destination: String
-    date_departure: Date
-    arrival_date: Date
-    hour_departure: String
+    date_departure: Timestamp
+    arrival_date: Timestamp
+    price: Int
+    description: String
   ): Trip
   deleteTrip(id: ID!): Trip
 }
+
+
+
