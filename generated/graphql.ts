@@ -21,6 +21,7 @@ export type Scalars = {
   DID: any;
   Date: any;
   DateTime: any;
+  DeweyDecimal: any;
   Duration: any;
   EmailAddress: any;
   GUID: any;
@@ -30,6 +31,7 @@ export type Scalars = {
   Hexadecimal: any;
   IBAN: any;
   IP: any;
+  IPCPatent: any;
   IPv4: any;
   IPv6: any;
   ISBN: any;
@@ -37,8 +39,10 @@ export type Scalars = {
   JSON: any;
   JSONObject: any;
   JWT: any;
+  LCCSubclass: any;
   Latitude: any;
   LocalDate: any;
+  LocalDateTime: any;
   LocalEndTime: any;
   LocalTime: any;
   Locale: any;
@@ -436,6 +440,7 @@ export type Query = {
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
+  search?: Maybe<Array<Maybe<Trip>>>;
   user?: Maybe<User>;
   userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
@@ -497,6 +502,11 @@ export type QueryMusicOptionArgs = {
 };
 
 
+export type QuerySearchArgs = {
+  searchInfos?: InputMaybe<SearchInfos>;
+};
+
+
 export type QueryUserArgs = {
   id?: InputMaybe<Scalars['ID']>;
 };
@@ -530,6 +540,13 @@ export type Roles = {
   __typename?: 'Roles';
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
+};
+
+export type SearchInfos = {
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  places?: InputMaybe<Scalars['Int']>;
 };
 
 export type Trip = {
@@ -651,6 +668,7 @@ export type ResolversTypes = {
   DID: ResolverTypeWrapper<Scalars['DID']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  DeweyDecimal: ResolverTypeWrapper<Scalars['DeweyDecimal']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
   GUID: ResolverTypeWrapper<Scalars['GUID']>;
@@ -661,6 +679,7 @@ export type ResolversTypes = {
   IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   IP: ResolverTypeWrapper<Scalars['IP']>;
+  IPCPatent: ResolverTypeWrapper<Scalars['IPCPatent']>;
   IPv4: ResolverTypeWrapper<Scalars['IPv4']>;
   IPv6: ResolverTypeWrapper<Scalars['IPv6']>;
   ISBN: ResolverTypeWrapper<Scalars['ISBN']>;
@@ -669,8 +688,10 @@ export type ResolversTypes = {
   JSON: ResolverTypeWrapper<Scalars['JSON']>;
   JSONObject: ResolverTypeWrapper<Scalars['JSONObject']>;
   JWT: ResolverTypeWrapper<Scalars['JWT']>;
+  LCCSubclass: ResolverTypeWrapper<Scalars['LCCSubclass']>;
   Latitude: ResolverTypeWrapper<Scalars['Latitude']>;
   LocalDate: ResolverTypeWrapper<Scalars['LocalDate']>;
+  LocalDateTime: ResolverTypeWrapper<Scalars['LocalDateTime']>;
   LocalEndTime: ResolverTypeWrapper<Scalars['LocalEndTime']>;
   LocalTime: ResolverTypeWrapper<Scalars['LocalTime']>;
   Locale: ResolverTypeWrapper<Scalars['Locale']>;
@@ -704,6 +725,7 @@ export type ResolversTypes = {
   Roles: ResolverTypeWrapper<Roles>;
   RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
   SafeInt: ResolverTypeWrapper<Scalars['SafeInt']>;
+  SearchInfos: SearchInfos;
   SemVer: ResolverTypeWrapper<Scalars['SemVer']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Time: ResolverTypeWrapper<Scalars['Time']>;
@@ -739,6 +761,7 @@ export type ResolversParentTypes = {
   DID: Scalars['DID'];
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
+  DeweyDecimal: Scalars['DeweyDecimal'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
   GUID: Scalars['GUID'];
@@ -749,6 +772,7 @@ export type ResolversParentTypes = {
   IBAN: Scalars['IBAN'];
   ID: Scalars['ID'];
   IP: Scalars['IP'];
+  IPCPatent: Scalars['IPCPatent'];
   IPv4: Scalars['IPv4'];
   IPv6: Scalars['IPv6'];
   ISBN: Scalars['ISBN'];
@@ -757,8 +781,10 @@ export type ResolversParentTypes = {
   JSON: Scalars['JSON'];
   JSONObject: Scalars['JSONObject'];
   JWT: Scalars['JWT'];
+  LCCSubclass: Scalars['LCCSubclass'];
   Latitude: Scalars['Latitude'];
   LocalDate: Scalars['LocalDate'];
+  LocalDateTime: Scalars['LocalDateTime'];
   LocalEndTime: Scalars['LocalEndTime'];
   LocalTime: Scalars['LocalTime'];
   Locale: Scalars['Locale'];
@@ -792,6 +818,7 @@ export type ResolversParentTypes = {
   Roles: Roles;
   RoutingNumber: Scalars['RoutingNumber'];
   SafeInt: Scalars['SafeInt'];
+  SearchInfos: SearchInfos;
   SemVer: Scalars['SemVer'];
   String: Scalars['String'];
   Time: Scalars['Time'];
@@ -884,6 +911,10 @@ export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversT
   name: 'DateTime';
 }
 
+export interface DeweyDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DeweyDecimal'], any> {
+  name: 'DeweyDecimal';
+}
+
 export interface DurationScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Duration'], any> {
   name: 'Duration';
 }
@@ -920,6 +951,10 @@ export interface IpScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['
   name: 'IP';
 }
 
+export interface IpcPatentScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPCPatent'], any> {
+  name: 'IPCPatent';
+}
+
 export interface IPv4ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPv4'], any> {
   name: 'IPv4';
 }
@@ -948,12 +983,20 @@ export interface JwtScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
   name: 'JWT';
 }
 
+export interface LccSubclassScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['LCCSubclass'], any> {
+  name: 'LCCSubclass';
+}
+
 export interface LatitudeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Latitude'], any> {
   name: 'Latitude';
 }
 
 export interface LocalDateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['LocalDate'], any> {
   name: 'LocalDate';
+}
+
+export interface LocalDateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['LocalDateTime'], any> {
+  name: 'LocalDateTime';
 }
 
 export interface LocalEndTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['LocalEndTime'], any> {
@@ -1112,6 +1155,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
+  search?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QuerySearchArgs>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
   userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
@@ -1262,6 +1306,7 @@ export type Resolvers<ContextType = any> = {
   DID?: GraphQLScalarType;
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
+  DeweyDecimal?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
   GUID?: GraphQLScalarType;
@@ -1271,6 +1316,7 @@ export type Resolvers<ContextType = any> = {
   Hexadecimal?: GraphQLScalarType;
   IBAN?: GraphQLScalarType;
   IP?: GraphQLScalarType;
+  IPCPatent?: GraphQLScalarType;
   IPv4?: GraphQLScalarType;
   IPv6?: GraphQLScalarType;
   ISBN?: GraphQLScalarType;
@@ -1278,8 +1324,10 @@ export type Resolvers<ContextType = any> = {
   JSON?: GraphQLScalarType;
   JSONObject?: GraphQLScalarType;
   JWT?: GraphQLScalarType;
+  LCCSubclass?: GraphQLScalarType;
   Latitude?: GraphQLScalarType;
   LocalDate?: GraphQLScalarType;
+  LocalDateTime?: GraphQLScalarType;
   LocalEndTime?: GraphQLScalarType;
   LocalTime?: GraphQLScalarType;
   Locale?: GraphQLScalarType;

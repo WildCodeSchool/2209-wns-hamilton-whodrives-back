@@ -9,6 +9,7 @@ type Trip {
 type Query {
   getTrip(id: ID!): Trip
   getTrips: [Trip]
+  search(searchInfos: SearchInfos): [Trip]
 }
 type Mutation {
   createTrip(
@@ -27,4 +28,11 @@ type Mutation {
     hour_departure: String
   ): Trip
   deleteTrip(id: ID!): Trip
+}
+
+input SearchInfos {
+  departure_places: String
+  destination: String
+  date_departure: Date
+  places: Int
 }

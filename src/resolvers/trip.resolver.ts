@@ -20,6 +20,19 @@ export default {
     ) => {
       return await new TripController().getTrip(id);
     },
+
+    search: async (
+      _: any,
+      { departure_places, destination, date_departure, places }: any,
+      context: any
+    ) => {
+      return await new TripController().search({
+        departure_places,
+        destination,
+        date_departure,
+        places,
+      });
+    },
   },
 
   Mutation: {

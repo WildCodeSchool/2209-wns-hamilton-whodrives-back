@@ -56,6 +56,22 @@ class TripController {
   async deleteTrip(id: number) {
     return await this.db.delete(id);
   }
+
+  async search({
+    arrival_date,
+    departure_places,
+    date_departure,
+    places,
+  }: any) {
+    //pour des filtres plus poussés il faudra faire un query builder
+    return await this.db.find({
+      where: {
+        arrival_date,
+        departure_places,
+        date_departure,
+      },
+    });
+  }
 }
 
 export default TripController;
