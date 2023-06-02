@@ -8,11 +8,15 @@ import {
 } from "@/graphgen";
 import { IUserLogged } from "../resolvers/Interface";
 import UserInfo from "../entity/UserInfo";
+import { FindOneOptions } from "typeorm";
+import Trip from "src/entity/Trip";
 
 class UserController {
   db: Repository<User>;
+  trip: Repository<Trip>;
   constructor() {
     this.db = datasource.getRepository("User");
+    this.trip = datasource.getRepository("Trip");
   }
 
   async listUsers() {
@@ -24,21 +28,42 @@ class UserController {
     console.log(userIdLogged)
     return await this.db.findOne({where: {id: userIdLogged}})
   }
-  async getUserTrips({ userLogged }: IUserLogged) {
+
+  async getUserTripsLoggedUser({userLogged}: IUserLogged) {
     try {
       const userIdLogged = userLogged.id;
-      const user = await this.db.findOne({ where: { id: userIdLogged }, relations: ["trips"] });
+      const user = await this.db.findOne({ where: { id: userIdLogged } });
   
       if (!user) {
         throw new Error("Utilisateur non trouvé");
       }
   
-      return user.trips;
+      const trips = await this.trip.createQueryBuilder("trip")
+      .leftJoinAndSelect("trip.users", "users")
+      .where("users.id = :userId", { userId: userIdLogged })
+      .getMany();
+      console.log("ici",trips)
+      return trips;
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);
       throw error;
     }
   }
+  async getAllUserTrips() {
+    try {
+      const users = await this.db.createQueryBuilder("user")
+        .leftJoinAndSelect("user.trips", "trip")
+        .getMany();
+  
+      const trips = users.flatMap(user => user.trips);
+  
+      return trips;
+    } catch (error) {
+      console.error("Erreur lors de la récupération des voyages des utilisateurs :", error);
+      throw error;
+    }
+  }
+
   
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
