@@ -63,7 +63,32 @@ class UserController {
       throw error;
     }
   }
-
+  async selectTrip({ userLogged, tripId }: IUserLogged & { tripId: number }) {
+    try {
+      const trip = await this.trip.findOne({ where: { id: tripId }, relations: ["users"] });
+  
+      if (!trip) {
+        throw new Error("Voyage non trouvé");
+      }
+  
+      const userIdLogged = userLogged.id;
+      const selectedUser = await this.db.findOne({ where: { id: userIdLogged } });
+  
+      if (!selectedUser) {
+        throw new Error("Utilisateur non autorisé à sélectionner ce voyage");
+      }
+  
+      trip.users.push(selectedUser); // Ajouter l'utilisateur sélectionné à la liste des utilisateurs du voyage
+  
+      await this.trip.save(trip); // Enregistrer les modifications du voyage
+  
+      return trip;
+    } catch (error) {
+      console.error("Erreur lors de la sélection du voyage :", error);
+      throw error;
+    }
+  }
+  
   
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
