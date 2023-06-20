@@ -25,7 +25,6 @@ class UserController {
 
   async getUserLogged({ userLogged }: IUserLogged){
     let userIdLogged = userLogged.id;
-    console.log(userIdLogged)
     return await this.db.findOne({where: {id: userIdLogged}})
   }
 
@@ -42,7 +41,6 @@ class UserController {
       .leftJoinAndSelect("trip.users", "users")
       .where("users.id = :userId", { userId: userIdLogged })
       .getMany();
-      console.log("ici",trips)
       return trips;
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);

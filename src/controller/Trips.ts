@@ -10,15 +10,12 @@ class TripController {
   constructor() {
     this.db = datasource.getRepository("Trip");
   }
-
   async listTrip() {
     return await this.db.find();
   }
-
   async getTrip(id: number) {
     return await this.db.findOneBy({ id });
   }
-
   async addTrip(
     {
       departure_places,
@@ -37,13 +34,9 @@ class TripController {
     trip.arrival_date = new Date(arrival_date);
     trip.price = price;
     trip.description = description;
-  
     const users = userLogged;
-    console.log(users);
     const user = await datasource.getRepository(User).findOne({ where: { id: users.id } });
-    console.log(user);
     trip.users = [user];
-  
     const savedTrip = await this.db.save(trip);
     return savedTrip;
   }
@@ -68,7 +61,6 @@ class TripController {
       description,
     });
   }
-
   async deleteTrip(id: number) {
     return await this.db.delete(id);
   }

@@ -128,7 +128,6 @@ export default {
     },
     // trip user mutation
     selectTrip: async (_: any, { tripId }: { tripId: number }, { userLogged }: IUserLogged, infos: any) => {
-      console.log(userLogged)
       return await new UserController().selectTrip({ userLogged, tripId });
     }
   },
