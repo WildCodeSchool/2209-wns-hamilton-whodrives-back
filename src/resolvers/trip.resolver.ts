@@ -15,6 +15,14 @@ export default {
     getTrips: async (_: any, {}, context: any, infos: any) => {
       return await new TripController().listTrip();
     },
+    getTripSearch: async (
+      _: any,
+      {departure_places,destination,date_departure,arrival_date,price,description} : {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string},
+      context: any,
+      infos: any
+    ) => {
+      return await new TripController().getTripSearch({departure_places,destination,date_departure,arrival_date,price,description});
+    },
 
     getTrip: async (
       _: any,
@@ -85,15 +93,16 @@ export default {
         description, 
       });
       return Trip;
-    },
+     }
 
-    deleteTrip: async (
-      _: any,
-      args: MutationDeleteTripArgs,
-      { res }: ExpressContext
-    ) => {
-      const { id } = args;
-      return await new TripController().deleteTrip(+id);
-    },
-  },
-};
+  //   deleteTrip: async (
+  //     _: any,
+  //     args: MutationDeleteTripArgs,
+  //     { res }: ExpressContext
+  //   ) => {
+  //     const { id } = args;
+  //     return await new TripController().deleteTrip(+id);
+  //   },
+ }
+}
+
