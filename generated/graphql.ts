@@ -241,8 +241,9 @@ export type MutationCreateTripArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -383,9 +384,10 @@ export type MutationUpdateTripArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  price?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -541,9 +543,11 @@ export type Trip = {
   arrival_date?: Maybe<Scalars['Date']>;
   date_departure?: Maybe<Scalars['Date']>;
   departure_places?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
   destination?: Maybe<Scalars['String']>;
-  hour_departure?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  price?: Maybe<Scalars['Int']>;
+  users: Array<User>;
 };
 
 export type User = {
@@ -1212,9 +1216,11 @@ export type TripResolvers<ContextType = any, ParentType extends ResolversParentT
   arrival_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   date_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   departure_places?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  hour_departure?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
+  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

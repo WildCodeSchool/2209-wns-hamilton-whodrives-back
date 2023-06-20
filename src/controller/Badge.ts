@@ -7,10 +7,13 @@ import {
   MutationUpdateBadgeArgs,
 } from "@/graphgen";
 
+
+
 class BadgeController {
   db: Repository<Badge>;
   constructor() {
     this.db = datasource.getRepository("Badge");
+
   }
 
   async listBadges() {

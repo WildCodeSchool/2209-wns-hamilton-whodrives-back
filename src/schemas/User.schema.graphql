@@ -1,14 +1,15 @@
 type User {
   id: ID!
-  username: String
-  password: String
+  username: String!
   firstname: String
   lastname: String
-  date_of_birth: Date
-  email: String
-  phone: String
-  userInfo: UserInfo
+  date_of_birth: String
+  password: String!
+  email: String!
+  phone: String!
   cars: [Car]
+  userInfo: UserInfo
+  trips: [Trip]
 }
 
 type RegisterUser {
@@ -21,6 +22,8 @@ type Query {
   users: [User]
   user(id: ID): User
   userLogged: User!
+  UserTrips: [Trip]
+  UserTripsLoggedUser: [Trip] 
 }
 
 type Mutation {
@@ -46,6 +49,7 @@ type Mutation {
   ): User
   deleteUser(id: ID!): Res
   loginUser(email: String!, password: String!): RegisterUser
+  selectTrip(tripId: ID!): Trip
 }
 
 type Res {
