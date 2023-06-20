@@ -24,10 +24,19 @@ export default {
     userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
     },
-    UserTrips : async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
-      return await new UserController().getUserTrips({ userLogged });
+    UserTripsLoggedUser: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+      return await new UserController().getUserTripsLoggedUser({ userLogged });
+    },
+    UserTrips: async (_: any, {}: any, { userLogged }: IUserLogged, infos: any) => {
+      try {
+        const trips = await new UserController().getAllUserTrips();
+        return trips;
+      } catch (error) {
+        console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);
+        throw error;
+      }
     }
-
+    
   },
 
   Mutation: {
@@ -117,5 +126,10 @@ export default {
       const { id } = args;
       return await new UserController().deleteUser({ id });
     },
+    // trip user mutation
+    selectTrip: async (_: any, { tripId }: { tripId: number }, { userLogged }: IUserLogged, infos: any) => {
+      console.log(userLogged)
+      return await new UserController().selectTrip({ userLogged, tripId });
+    }
   },
 };
