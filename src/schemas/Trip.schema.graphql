@@ -9,6 +9,14 @@ type Trip {
   users: [User]
 }
 type Query {
+  getTripSearch(
+    departure_places: String
+    destination: String
+    date_departure: Timestamp
+    arrival_date: Timestamp
+    price: Int
+    description: String
+  ): Trip
   getTrip(id: ID!): Trip
   getTrips: [Trip]
 }
