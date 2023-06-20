@@ -7,6 +7,7 @@ import { ExpressContext } from "apollo-server-express";
 import { IUserLogged } from "./Interface";
 import UserController from "../controller/User";
 
+
 export default {
   Query: {
     getUserInfos: async (_: any, {}, { userLogged }: any, infos: any) => {

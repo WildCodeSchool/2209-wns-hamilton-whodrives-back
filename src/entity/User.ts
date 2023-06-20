@@ -1,6 +1,8 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -9,6 +11,7 @@ import Car from "./Car";
 import ConfirmMail from "./ConfirmMail";
 import Receipt from "./Receipt";
 import UserInfo from "./UserInfo";
+import Trip from "./Trip";
 
 @Entity("user")
 export default class User {
@@ -48,4 +51,8 @@ export default class User {
 
   @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {eager: true})
   userInfo: UserInfo;
+
+  @ManyToMany(() => Trip)
+  @JoinTable()
+  trips: Trip[];
 }

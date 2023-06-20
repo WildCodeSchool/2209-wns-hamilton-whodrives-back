@@ -25,9 +25,12 @@ export default class Trip {
   arrival_date: Date;
 
   @Column()
-  hour_departure: string;
+  price: number;
 
-  @ManyToMany(() => User)
+  @Column({ nullable: true })
+  description: string;
+
+  @ManyToMany(() => User, {eager: true})
   @JoinTable()
-  User: User[];
+  users: User[];
 }
