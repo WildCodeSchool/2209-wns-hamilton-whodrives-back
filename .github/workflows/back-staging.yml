@@ -50,4 +50,4 @@ jobs:
     steps:
       - name: Deploy stage
         run: |
-        curl -X GET "https://ops.hamilton4.wns.wilders.dev/hooks/update"
+          curl -X GET "https://ops.hamilton4.wns.wilders.dev/hooks/update"
