@@ -16,7 +16,7 @@ type Query {
     arrival_date: Timestamp
     price: Int
     description: String
-  ): Trip
+  ): [Trip]
   getTrip(id: ID!): Trip
   getTrips: [Trip]
 }
