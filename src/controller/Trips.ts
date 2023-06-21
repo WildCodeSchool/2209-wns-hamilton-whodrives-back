@@ -11,7 +11,7 @@ class TripController {
     this.db = datasource.getRepository("Trip");
   }
   async getTripSearch({departure_places,destination,date_departure,arrival_date,price,description}: {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string}) {
-    return await this.db.findOneBy({departure_places,destination,date_departure,arrival_date,price,description});
+    return await this.db.findBy({departure_places,destination,date_departure,arrival_date,price,description});
   }
 
   async listTrip() {
