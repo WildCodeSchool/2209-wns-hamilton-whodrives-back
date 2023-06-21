@@ -1,8 +1,10 @@
 name: jest-and-docker-ci
 
 on:
-  push:
-    branches: ["docker-ci"]
+  pull_request:
+    # push:
+    branches: ["dev"]
+    types: ["closed"]
 
 jobs:
   test-back:
