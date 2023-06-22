@@ -27,6 +27,18 @@ class UserController {
     let userIdLogged = userLogged.id;
     return await this.db.findOne({where: {id: userIdLogged}})
   }
+  async checkUserLogged({ userLogged }: IUserLogged) {
+    let msg = false;
+    if(!userLogged) return { msg };
+    let userIdLogged = userLogged.id;
+    const result = await this.db.findOne({ where: { id: userIdLogged } });
+    if (result) {
+      return { msg: true, user: result };
+    } else {
+      return { msg };
+    }
+  }
+  
 
   async getUserTripsLoggedUser({userLogged}: IUserLogged) {
     try {
