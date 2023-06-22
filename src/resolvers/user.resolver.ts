@@ -24,6 +24,9 @@ export default {
     userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
     },
+    checkUserLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+      return await new UserController().checkUserLogged({ userLogged });
+    },
     UserTripsLoggedUser: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserTripsLoggedUser({ userLogged });
     },
