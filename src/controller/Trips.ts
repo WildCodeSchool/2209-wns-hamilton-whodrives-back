@@ -37,7 +37,6 @@ class TripController {
 
   
     const user = await datasource.getRepository(User).findOne({ where: { id: userLogged.id } });
-    console.log(user, "ici le user");
     if (!user) {
       throw new Error("Utilisateur introuvable");
     }
