@@ -19,6 +19,10 @@ type RegisterUser {
   token: String
 }
 
+type Res {
+  msg: Boolean
+}
+
 type Query {
   users: [User]
   user(id: ID): User
@@ -27,6 +31,7 @@ type Query {
   UserTrips: [Trip]
   UserTripsLoggedUser: [Trip]
 }
+
 type Mutation {
   createUser(
     username: String!
@@ -37,6 +42,7 @@ type Mutation {
     email: String!
     phone: String!
   ): User
+
   updateUser(
     id: ID!
     username: String!
@@ -48,11 +54,10 @@ type Mutation {
     phone: String!
     userInfoId: ID
   ): User
-  deleteUser(id: ID!): Res
-  loginUser(email: String!, password: String!): RegisterUser
-  selectTrip(tripId: ID!): Trip
-}
 
-type Res {
-  msg: String
+  deleteUser(id: ID!): Res
+
+  loginUser(email: String!, password: String!): RegisterUser
+
+  selectTrip(tripId: ID!): Trip
 }

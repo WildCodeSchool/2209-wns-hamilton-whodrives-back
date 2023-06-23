@@ -245,7 +245,6 @@ export type MutationCreateTripArgs = {
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  driver?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -511,7 +510,6 @@ export type QueryGetTripSearchArgs = {
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  driver?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -548,11 +546,12 @@ export type RegisterUser = {
   email?: Maybe<Scalars['String']>;
   success?: Maybe<Scalars['Boolean']>;
   token?: Maybe<Scalars['String']>;
+  username?: Maybe<Scalars['String']>;
 };
 
 export type Res = {
   __typename?: 'Res';
-  msg?: Maybe<Scalars['String']>;
+  msg?: Maybe<Scalars['Boolean']>;
 };
 
 export type Roles = {
@@ -568,9 +567,8 @@ export type Trip = {
   departure_places?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   destination?: Maybe<Scalars['String']>;
-  driver?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  passenger?: Maybe<Scalars['String']>;
+  passengers: Array<User>;
   price?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
 };
@@ -1211,11 +1209,12 @@ export type RegisterUserResolvers<ContextType = any, ParentType extends Resolver
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   success?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   token?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ResResolvers<ContextType = any, ParentType extends ResolversParentTypes['Res'] = ResolversParentTypes['Res']> = {
-  msg?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  msg?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1255,9 +1254,8 @@ export type TripResolvers<ContextType = any, ParentType extends ResolversParentT
   departure_places?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  driver?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  passenger?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  passengers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
