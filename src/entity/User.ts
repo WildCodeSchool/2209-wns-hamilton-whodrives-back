@@ -53,6 +53,13 @@ export default class User {
   userInfo: UserInfo;
 
   @ManyToMany(() => Trip)
-  @JoinTable()
   trips: Trip[];
+
+  @ManyToMany(() => Trip, trip => trip.users)
+  driverTrips: Trip[];
+
+  @ManyToMany(() => Trip, trip => trip.passengers)
+  passengerTrips: Trip[];
+  
+  
 }

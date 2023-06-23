@@ -39,8 +39,7 @@ class UserController {
     }
   }
   
-
-  async getUserTripsLoggedUser({userLogged}: IUserLogged) {
+  async getUserTripsLoggedUser({ userLogged }: IUserLogged) {
     try {
       const userIdLogged = userLogged.id;
       const user = await this.db.findOne({ where: { id: userIdLogged } });
@@ -50,15 +49,20 @@ class UserController {
       }
   
       const trips = await this.trip.createQueryBuilder("trip")
-      .leftJoinAndSelect("trip.users", "users")
-      .where("users.id = :userId", { userId: userIdLogged })
-      .getMany();
+        .leftJoinAndSelect("trip.users", "users")
+        .leftJoinAndSelect("trip.passengers", "passengers")
+        .where("users.id = :userId OR passengers.id = :userId", { userId: userIdLogged })
+        .getMany();
+  
       return trips;
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);
       throw error;
     }
   }
+  
+  
+  
   async getAllUserTrips() {
     try {
       const users = await this.db.createQueryBuilder("user")
@@ -75,22 +79,24 @@ class UserController {
   }
   async selectTrip({ userLogged, tripId }: IUserLogged & { tripId: number }) {
     try {
-      const trip = await this.trip.findOne({ where: { id: tripId }, relations: ["users"] });
+      const tripRepository = this.trip;
+      const userRepository = this.db;
+  
+      const trip = await tripRepository.findOne({ where: { id: tripId }, relations: ["passengers"] });
   
       if (!trip) {
         throw new Error("Voyage non trouvé");
       }
   
-      const userIdLogged = userLogged.id;
-      const selectedUser = await this.db.findOne({ where: { id: userIdLogged } });
+      const selectedUser = await userRepository.findOne({ where: { id: userLogged.id } });
   
       if (!selectedUser) {
         throw new Error("Utilisateur non autorisé à sélectionner ce voyage");
       }
   
-      trip.users.push(selectedUser); // Ajouter l'utilisateur sélectionné à la liste des utilisateurs du voyage
+      trip.passengers = [...trip.passengers, selectedUser];
   
-      await this.trip.save(trip); // Enregistrer les modifications du voyage
+      await tripRepository.save(trip);
   
       return trip;
     } catch (error) {
@@ -98,6 +104,9 @@ class UserController {
       throw error;
     }
   }
+  
+ 
+
   
   
   async getUser(id: number) {

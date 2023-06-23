@@ -21,6 +21,7 @@ export type Scalars = {
   DID: any;
   Date: any;
   DateTime: any;
+  DateTimeISO: any;
   DeweyDecimal: any;
   Duration: any;
   EmailAddress: any;
@@ -155,6 +156,7 @@ export type Mutation = {
   deleteTrip?: Maybe<Trip>;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
+  selectTrip?: Maybe<Trip>;
   updateAbout?: Maybe<About>;
   updateBadge?: Maybe<Badge>;
   updateCar?: Maybe<Car>;
@@ -238,11 +240,12 @@ export type MutationCreateRoleArgs = {
 
 
 export type MutationCreateTripArgs = {
-  arrival_date?: InputMaybe<Scalars['Date']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  arrival_date?: InputMaybe<Scalars['Timestamp']>;
+  date_departure?: InputMaybe<Scalars['Timestamp']>;
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
+  driver?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -310,6 +313,11 @@ export type MutationDeleteUserArgs = {
 export type MutationLoginUserArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
+};
+
+
+export type MutationSelectTripArgs = {
+  tripId: Scalars['ID'];
 };
 
 
@@ -381,8 +389,8 @@ export type MutationUpdateRoleArgs = {
 
 
 export type MutationUpdateTripArgs = {
-  arrival_date?: InputMaybe<Scalars['Date']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  arrival_date?: InputMaybe<Scalars['Timestamp']>;
+  date_departure?: InputMaybe<Scalars['Timestamp']>;
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
@@ -430,13 +438,17 @@ export type Query = {
   Receipts?: Maybe<Array<Maybe<Receipts>>>;
   Role?: Maybe<Roles>;
   Roles?: Maybe<Array<Maybe<Roles>>>;
+  UserTrips?: Maybe<Array<Maybe<Trip>>>;
+  UserTripsLoggedUser?: Maybe<Array<Maybe<Trip>>>;
   about?: Maybe<About>;
   abouts?: Maybe<Array<Maybe<About>>>;
   car?: Maybe<Car>;
   cars?: Maybe<Array<Maybe<Car>>>;
   chatOption?: Maybe<ChatOption>;
   chatOptions?: Maybe<Array<Maybe<ChatOption>>>;
+  checkUserLogged?: Maybe<Res>;
   getTrip?: Maybe<Trip>;
+  getTripSearch?: Maybe<Array<Maybe<Trip>>>;
   getTrips?: Maybe<Array<Maybe<Trip>>>;
   getUserInfo?: Maybe<UserInfo>;
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
@@ -493,6 +505,17 @@ export type QueryGetTripArgs = {
 };
 
 
+export type QueryGetTripSearchArgs = {
+  arrival_date?: InputMaybe<Scalars['Timestamp']>;
+  date_departure?: InputMaybe<Scalars['Timestamp']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  driver?: InputMaybe<Scalars['String']>;
+  price?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type QueryGetUserInfoArgs = {
   id: Scalars['ID'];
 };
@@ -540,28 +563,31 @@ export type Roles = {
 
 export type Trip = {
   __typename?: 'Trip';
-  arrival_date?: Maybe<Scalars['Date']>;
-  date_departure?: Maybe<Scalars['Date']>;
+  arrival_date?: Maybe<Scalars['Timestamp']>;
+  date_departure?: Maybe<Scalars['Timestamp']>;
   departure_places?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   destination?: Maybe<Scalars['String']>;
+  driver?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  passenger?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Int']>;
-  users: Array<User>;
+  users?: Maybe<Array<Maybe<User>>>;
 };
 
 export type User = {
   __typename?: 'User';
   cars?: Maybe<Array<Maybe<Car>>>;
-  date_of_birth?: Maybe<Scalars['Date']>;
-  email?: Maybe<Scalars['String']>;
+  date_of_birth?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
   firstname?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastname?: Maybe<Scalars['String']>;
-  password?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
+  password: Scalars['String'];
+  phone: Scalars['String'];
+  trips?: Maybe<Array<Maybe<Trip>>>;
   userInfo?: Maybe<UserInfo>;
-  username?: Maybe<Scalars['String']>;
+  username: Scalars['String'];
 };
 
 export type UserInfo = {
@@ -659,6 +685,7 @@ export type ResolversTypes = {
   DID: ResolverTypeWrapper<Scalars['DID']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  DateTimeISO: ResolverTypeWrapper<Scalars['DateTimeISO']>;
   DeweyDecimal: ResolverTypeWrapper<Scalars['DeweyDecimal']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
@@ -751,6 +778,7 @@ export type ResolversParentTypes = {
   DID: Scalars['DID'];
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
+  DateTimeISO: Scalars['DateTimeISO'];
   DeweyDecimal: Scalars['DeweyDecimal'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
@@ -898,6 +926,10 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 
 export interface DateTimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTime'], any> {
   name: 'DateTime';
+}
+
+export interface DateTimeIsoScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DateTimeISO'], any> {
+  name: 'DateTimeISO';
 }
 
 export interface DeweyDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DeweyDecimal'], any> {
@@ -1048,6 +1080,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
+  selectTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationSelectTripArgs, 'tripId'>>;
   updateAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateAboutArgs, 'id'>>;
   updateBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationUpdateBadgeArgs, 'id'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
@@ -1132,13 +1165,17 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   Receipts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Receipts']>>>, ParentType, ContextType>;
   Role?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
   Roles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Roles']>>>, ParentType, ContextType>;
+  UserTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
+  UserTripsLoggedUser?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<QueryAboutArgs, 'id'>>;
   abouts?: Resolver<Maybe<Array<Maybe<ResolversTypes['About']>>>, ParentType, ContextType>;
   car?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<QueryCarArgs, 'id'>>;
   cars?: Resolver<Maybe<Array<Maybe<ResolversTypes['Car']>>>, ParentType, ContextType>;
   chatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<QueryChatOptionArgs, 'id'>>;
   chatOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['ChatOption']>>>, ParentType, ContextType>;
+  checkUserLogged?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType>;
   getTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<QueryGetTripArgs, 'id'>>;
+  getTripSearch?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QueryGetTripSearchArgs>>;
   getTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   getUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<QueryGetUserInfoArgs, 'id'>>;
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
@@ -1213,14 +1250,16 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
 }
 
 export type TripResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trip'] = ResolversParentTypes['Trip']> = {
-  arrival_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  date_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  arrival_date?: Resolver<Maybe<ResolversTypes['Timestamp']>, ParentType, ContextType>;
+  date_departure?: Resolver<Maybe<ResolversTypes['Timestamp']>, ParentType, ContextType>;
   departure_places?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  driver?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  passenger?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+  users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1250,15 +1289,16 @@ export interface UploadScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   cars?: Resolver<Maybe<Array<Maybe<ResolversTypes['Car']>>>, ParentType, ContextType>;
-  date_of_birth?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  date_of_birth?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  password?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  trips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   userInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType>;
-  username?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1296,6 +1336,7 @@ export type Resolvers<ContextType = any> = {
   DID?: GraphQLScalarType;
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
+  DateTimeISO?: GraphQLScalarType;
   DeweyDecimal?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;
