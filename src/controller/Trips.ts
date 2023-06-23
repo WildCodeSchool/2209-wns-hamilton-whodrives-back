@@ -12,8 +12,8 @@ class TripController {
     this.db = datasource.getRepository("Trip");
     this.user = datasource.getRepository("User");
   }
-  async getTripSearch({departure_places,destination,date_departure,arrival_date,price,description}: {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string}) {
-    return await this.db.findBy({departure_places,destination,date_departure,arrival_date,price,description});
+  async getTripSearch({departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available}: {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string,hour_departure:string,place_available:number}) {
+    return await this.db.findBy({departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available});
   }
 
   async listTrip() {
@@ -31,6 +31,9 @@ class TripController {
       arrival_date,
       price,
       description,
+      hour_departure,
+      place_available
+
     }: MutationCreateTripArgs,
     userLogged: User
   ) {
@@ -48,6 +51,8 @@ class TripController {
     trip.arrival_date = new Date(arrival_date);
     trip.price = price;
     trip.description = description;
+    trip.hour_departure = hour_departure;
+    trip.place_available = place_available;
   
     trip.users = [user];
   
@@ -65,6 +70,8 @@ class TripController {
     arrival_date,
     price,
     description,
+    hour_departure,
+    place_available
   }: MutationUpdateTripArgs) {
     const TripId = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
@@ -75,10 +82,14 @@ class TripController {
       arrival_date,
       price,
       description,
+      hour_departure,
+      place_available
     });
   }
 
-
+  async deleteTrip(id: number) {
+    return await this.db.delete(id);
+  }
 
 }
 

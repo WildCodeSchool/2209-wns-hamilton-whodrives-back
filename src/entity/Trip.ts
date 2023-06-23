@@ -21,6 +21,12 @@ export default class Trip {
   @Column()
   date_departure: Date;
 
+  @Column({  type: 'time',nullable: true })
+  hour_departure: string;
+  
+  @Column({default: 0})
+  place_available: number;
+
   @Column()
   arrival_date: Date;
 

@@ -2,10 +2,12 @@ type Trip {
   id: ID!
   departure_places: String
   destination: String
-  date_departure: Timestamp
-  arrival_date: Timestamp
+  date_departure: Date
+  arrival_date: Date
   price: Int
   description: String
+  hour_departure: String
+  place_available: Int
   users: [User]
   passengers: [User!]!
 }
@@ -13,10 +15,12 @@ type Query {
   getTripSearch(
     departure_places: String
     destination: String
-    date_departure: Timestamp
-    arrival_date: Timestamp
+    date_departure: Date
+    arrival_date: Date
     price: Int
     description: String
+    hour_departure: String
+    place_available: Int
   ): [Trip]
   getTrip(id: ID!): Trip
   getTrips: [Trip]
@@ -25,19 +29,23 @@ type Mutation {
   createTrip(
     departure_places: String
     destination: String
-    date_departure: Timestamp
-    arrival_date: Timestamp
+    date_departure: Date
+    arrival_date: Date
     price: Int
     description: String
+    hour_departure: String
+    place_available: Int
   ): Trip
   updateTrip(
     id: ID!
     departure_places: String
     destination: String
-    date_departure: Timestamp
-    arrival_date: Timestamp
+    date_departure: Date
+    arrival_date: Date
     price: Int
     description: String
+    hour_departure: String
+    place_available: Int
   ): Trip
   deleteTrip(id: ID!): Trip
 }
