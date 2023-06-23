@@ -33,4 +33,8 @@ export default class Trip {
   @ManyToMany(() => User, {eager: true})
   @JoinTable()
   users: User[];
+
+  @ManyToMany(() => User, user => user.passengerTrips, {eager: true})
+  @JoinTable()
+  passengers: User[];
 }

@@ -7,8 +7,10 @@ import User from "../entity/User";
 
 class TripController {
   db: Repository<Trip>;
+  user: Repository<User>;
   constructor() {
     this.db = datasource.getRepository("Trip");
+    this.user = datasource.getRepository("User");
   }
   async getTripSearch({departure_places,destination,date_departure,arrival_date,price,description}: {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string}) {
     return await this.db.findBy({departure_places,destination,date_departure,arrival_date,price,description});
@@ -21,7 +23,6 @@ class TripController {
   async getTrip(id: number) {
     return await this.db.findOneBy({ id });
   }
-
   async addTrip(
     {
       departure_places,
@@ -33,6 +34,14 @@ class TripController {
     }: MutationCreateTripArgs,
     userLogged: User
   ) {
+
+  
+    const user = await datasource.getRepository(User).findOne({ where: { id: userLogged.id } });
+    console.log(user, "ici le user");
+    if (!user) {
+      throw new Error("Utilisateur introuvable");
+    }
+  
     const trip = new Trip();
     trip.departure_places = departure_places;
     trip.destination = destination;
@@ -41,13 +50,13 @@ class TripController {
     trip.price = price;
     trip.description = description;
   
-    const users = userLogged;
-    const user = await datasource.getRepository(User).findOne({ where: { id: users.id } });
     trip.users = [user];
   
     const savedTrip = await this.db.save(trip);
     return savedTrip;
   }
+
+  
 
   async updateTrip({
     id,

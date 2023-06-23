@@ -38,7 +38,7 @@ export default {
     createTrip: async (
       _: any,
       args: MutationCreateTripArgs,
-      userLogged: User,
+      { userLogged }: IUserLogged,
       { req }: ExpressContext
     ) => {
       const {
@@ -49,11 +49,10 @@ export default {
         price,
         description,
       } = args;
-    
+      
       if (!userLogged) {
-        throw new Error("Utilisateur non connecté"); // Vérifier si l'utilisateur est connecté
+        throw new Error("Utilisateur non connecté"); 
       }
-    
       const trip = await new TripController().addTrip(
         {
           departure_places,
@@ -63,7 +62,7 @@ export default {
           price,
           description,
         },
-        userLogged // Passer directement l'objet userLogged au lieu de l'encapsuler dans un autre objet
+        userLogged 
       );
     
       return trip;
