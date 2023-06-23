@@ -14,6 +14,7 @@ type User {
 
 type RegisterUser {
   email: String
+  username: String
   success: Boolean
   token: String
 }
@@ -24,9 +25,8 @@ type Query {
   userLogged: User!
   checkUserLogged: Res
   UserTrips: [Trip]
-  UserTripsLoggedUser: [Trip] 
+  UserTripsLoggedUser: [Trip]
 }
-
 type Mutation {
   createUser(
     username: String!
