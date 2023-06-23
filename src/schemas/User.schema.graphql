@@ -18,7 +18,18 @@ type RegisterUser {
   success: Boolean
   token: String
 }
-
+type UserCreated{
+  id: ID!
+  username: String!
+  firstname: String
+  lastname: String
+  date_of_birth: String
+  email: String!
+  phone: String!
+  cars: [Car]
+  userInfo: UserInfo
+  trips: [Trip]
+}
 type Query {
   users: [User]
   user(id: ID): User
@@ -36,7 +47,7 @@ type Mutation {
     date_of_birth: Date!
     email: String!
     phone: String!
-  ): User
+  ): UserCreated
   updateUser(
     id: ID!
     username: String!
