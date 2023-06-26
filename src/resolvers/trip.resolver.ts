@@ -17,11 +17,11 @@ export default {
     },
     getTripSearch: async (
       _: any,
-      {departure_places,destination,date_departure,arrival_date,price,description} : {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string},
+      {departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available} : {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string,hour_departure:string,place_available:number},
       context: any,
       infos: any
     ) => {
-      return await new TripController().getTripSearch({departure_places,destination,date_departure,arrival_date,price,description});
+      return await new TripController().getTripSearch({departure_places,destination,date_departure,arrival_date,price,description,hour_departure ,place_available});
     },
 
     getTrip: async (
@@ -48,6 +48,8 @@ export default {
         arrival_date,
         price,
         description,
+        hour_departure,
+        place_available
       } = args;
       
       if (!userLogged) {
@@ -61,6 +63,8 @@ export default {
           arrival_date,
           price,
           description,
+          hour_departure,
+          place_available
         },
         userLogged 
       );
@@ -93,15 +97,15 @@ export default {
       });
       return Trip;
      }
-
-  //   deleteTrip: async (
-  //     _: any,
-  //     args: MutationDeleteTripArgs,
-  //     { res }: ExpressContext
-  //   ) => {
-  //     const { id } = args;
-  //     return await new TripController().deleteTrip(+id);
-  //   },
+    ,
+    deleteTrip: async (
+      _: any,
+      args: MutationDeleteTripArgs,
+      { res }: ExpressContext
+    ) => {
+      const { id } = args;
+      return await new TripController().deleteTrip(+id);
+    },
  }
 }
 

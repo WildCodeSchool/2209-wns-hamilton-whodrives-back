@@ -240,11 +240,13 @@ export type MutationCreateRoleArgs = {
 
 
 export type MutationCreateTripArgs = {
-  arrival_date?: InputMaybe<Scalars['Timestamp']>;
-  date_departure?: InputMaybe<Scalars['Timestamp']>;
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  place_available?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -388,12 +390,14 @@ export type MutationUpdateRoleArgs = {
 
 
 export type MutationUpdateTripArgs = {
-  arrival_date?: InputMaybe<Scalars['Timestamp']>;
-  date_departure?: InputMaybe<Scalars['Timestamp']>;
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  place_available?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -505,11 +509,13 @@ export type QueryGetTripArgs = {
 
 
 export type QueryGetTripSearchArgs = {
-  arrival_date?: InputMaybe<Scalars['Timestamp']>;
-  date_departure?: InputMaybe<Scalars['Timestamp']>;
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  place_available?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -562,13 +568,15 @@ export type Roles = {
 
 export type Trip = {
   __typename?: 'Trip';
-  arrival_date?: Maybe<Scalars['Timestamp']>;
-  date_departure?: Maybe<Scalars['Timestamp']>;
+  arrival_date?: Maybe<Scalars['Date']>;
+  date_departure?: Maybe<Scalars['Date']>;
   departure_places?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   destination?: Maybe<Scalars['String']>;
+  hour_departure?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   passengers: Array<User>;
+  place_available?: Maybe<Scalars['Int']>;
   price?: Maybe<Scalars['Int']>;
   users?: Maybe<Array<Maybe<User>>>;
 };
@@ -1265,13 +1273,15 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
 }
 
 export type TripResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trip'] = ResolversParentTypes['Trip']> = {
-  arrival_date?: Resolver<Maybe<ResolversTypes['Timestamp']>, ParentType, ContextType>;
-  date_departure?: Resolver<Maybe<ResolversTypes['Timestamp']>, ParentType, ContextType>;
+  arrival_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  date_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   departure_places?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  hour_departure?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   passengers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+  place_available?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
