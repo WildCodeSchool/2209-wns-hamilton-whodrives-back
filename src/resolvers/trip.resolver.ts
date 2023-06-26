@@ -68,7 +68,6 @@ export default {
         },
         userLogged 
       );
-      console.log(trip);
     
       return trip;
     },
