@@ -145,7 +145,7 @@ export type Mutation = {
   createReceipts?: Maybe<Receipts>;
   createRole?: Maybe<Roles>;
   createTrip?: Maybe<Trip>;
-  createUser?: Maybe<UserCreated>;
+  createUser?: Maybe<User>;
   createUserInfo?: Maybe<UserInfo>;
   deleteBadge?: Maybe<Badge>;
   deleteCar?: Maybe<Car>;
@@ -1091,7 +1091,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, Partial<MutationCreateReceiptsArgs>>;
   createRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, Partial<MutationCreateRoleArgs>>;
   createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
-  createUser?: Resolver<Maybe<ResolversTypes['UserCreated']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
+  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationDeleteBadgeArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
