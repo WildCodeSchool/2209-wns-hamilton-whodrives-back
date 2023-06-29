@@ -48,6 +48,8 @@ export default {
       args: MutationCreateUserArgs,
       { res }: ExpressContext
     ) => {
+        console.log(args,"probleme !!!!!!");
+        
       const {
         username,
         password,
