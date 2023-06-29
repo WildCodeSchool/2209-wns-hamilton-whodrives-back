@@ -54,7 +54,7 @@ type Mutation {
     date_of_birth: Date!
     email: String!
     phone: String!
-  ): UserCreated
+  ): User
 
   updateUser(
     id: ID!
