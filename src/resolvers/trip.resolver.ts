@@ -39,7 +39,7 @@ export default {
       _: any,
       args: MutationCreateTripArgs,
       { userLogged }: IUserLogged,
-      { req }: ExpressContext
+
     ) => {
       const {
         departure_places,
@@ -75,7 +75,7 @@ export default {
     updateTrip: async (
       _: any,
       args: MutationUpdateTripArgs,
-      { res }: ExpressContext
+      { userLogged }: IUserLogged,
     ) => {
       const {
         id,
@@ -101,10 +101,12 @@ export default {
     deleteTrip: async (
       _: any,
       args: MutationDeleteTripArgs,
-      { res }: ExpressContext
+      { userLogged }: IUserLogged,
     ) => {
       const { id } = args;
-      return await new TripController().deleteTrip(+id);
+      const test =  await new TripController().deleteTrip(+id, userLogged);
+      console.log("TEST RETURN ", test)
+      return test
     },
  }
 }

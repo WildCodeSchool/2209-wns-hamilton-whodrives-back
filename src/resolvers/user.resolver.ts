@@ -106,6 +106,7 @@ export default {
     ) => {
       const { password, email } = args;
       let user = await new UserController().getUserByEmail(email);
+      let {username} = user;
       if (!user) {
         return {
           email: "invalid Login",
@@ -118,7 +119,7 @@ export default {
         };
       }
       let token = generateToken(email);
-      return { email, success: true, token, user };
+      return { email,success: true, token,username  };
     },
 
     deleteUser: async (

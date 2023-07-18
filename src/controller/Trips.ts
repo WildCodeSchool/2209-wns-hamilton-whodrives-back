@@ -4,7 +4,7 @@ import Trip from "../entity/Trip";
 import { MutationCreateTripArgs, MutationUpdateTripArgs } from "@/graphgen";
 import { IUserLogged } from "../resolvers/Interface";
 import User from "../entity/User";
-
+import { Between } from "typeorm";
 class TripController {
   db: Repository<Trip>;
   user: Repository<User>;
@@ -12,9 +12,10 @@ class TripController {
     this.db = datasource.getRepository("Trip");
     this.user = datasource.getRepository("User");
   }
-  async getTripSearch({departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available}: {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string,hour_departure:string,place_available:number}) {
-    return await this.db.findBy({departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available});
+  async getTripSearch({ departure_places, destination, date_departure, arrival_date, price, description, hour_departure, place_available }: { departure_places: string, destination: string, date_departure: Date, arrival_date: Date, price: number, description: string, hour_departure: string, place_available: number }) {
+    return await this.db.findBy({ departure_places, destination, date_departure, arrival_date, price, description, hour_departure, place_available });
   }
+
 
   async listTrip() {
     return await this.db.find();
@@ -38,12 +39,12 @@ class TripController {
     userLogged: User
   ) {
 
-  
+
     const user = await datasource.getRepository(User).findOne({ where: { id: userLogged.id } });
     if (!user) {
       throw new Error("Utilisateur introuvable");
     }
-  
+
     const trip = new Trip();
     trip.departure_places = departure_places;
     trip.destination = destination;
@@ -53,14 +54,13 @@ class TripController {
     trip.description = description;
     trip.hour_departure = hour_departure;
     trip.place_available = place_available;
-  
+
     trip.users = [user];
-  
-    const savedTrip = await this.db.save(trip);
-    return savedTrip;
+
+    return await this.db.save(trip);
   }
 
-  
+
 
   async updateTrip({
     id,
@@ -87,8 +87,31 @@ class TripController {
     });
   }
 
-  async deleteTrip(id: number) {
-    return await this.db.delete(id);
+  async deleteTrip(id: number, userLogged: User) {
+    let msg = "Trip not found";
+    let msg2 = "Error request";
+    const trip = await this.db.findOne({ where: { id: +id } });
+
+    if (trip) {
+      const isUserDriver = trip.users.some((user) => user.username === userLogged.username);
+      if (isUserDriver) {
+        let result = await this.db.delete(id);
+        if (result?.affected != 0) {
+          return { msg: "Trip deleted" };
+        } else {
+          return msg2;
+        }
+      } else {
+        const updatedPassengers = trip.passengers.filter(
+          (passenger) => passenger.username !== userLogged.username
+        );
+        trip.passengers = updatedPassengers;
+        await this.db.save(trip);
+        return { message: "Passenger removed from the trip", success: true };
+      }
+    } else {
+      return { message: msg, success: false };
+    }
   }
 
 }
