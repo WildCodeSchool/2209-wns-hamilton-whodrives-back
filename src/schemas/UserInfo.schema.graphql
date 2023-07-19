@@ -2,7 +2,6 @@ type UserInfo {
   id: ID!
   city: String
   country: String
-  age: Int
   address: String
   about: About
   profilPictureId: ID
@@ -18,13 +17,11 @@ type Mutation {
     id: ID!
     city: String
     country: String
-    age: Int
     address: String
   ): UserInfo
   createUserInfo(
     city: String
     country: String
-    age: Int
     address: String
     profilPictureId: Int
   ): UserInfo
