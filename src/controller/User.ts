@@ -45,12 +45,17 @@ class UserController {
   }
 
   async getUserTripsLoggedUser({ userLogged }: IUserLogged) {
+    console.log("userLogged", userLogged);
     try {
       if (!userLogged) {
         throw new Error("Utilisateur non trouvé");
       }
-
-      return await this.trip.find({ where: { id: userLogged.id }, relations: ["passengers"] });
+      const trips = await this.trip.createQueryBuilder("trip")
+        .leftJoinAndSelect("trip.users", "users")
+        .leftJoinAndSelect("trip.passengers", "passengers")
+        .where("users.id = :userId OR passengers.id = :userId", { userId: userLogged.id })
+        .getMany();
+      return trips
 
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);

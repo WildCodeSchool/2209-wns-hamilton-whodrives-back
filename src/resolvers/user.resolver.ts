@@ -38,6 +38,7 @@ export default {
       infos: any
     ) => {
       return await new UserController().getUserTripsLoggedUser({ userLogged });
+      
     },
     UserTrips: async (
       _: any,
