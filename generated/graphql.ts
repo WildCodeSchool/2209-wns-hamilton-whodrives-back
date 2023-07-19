@@ -151,7 +151,7 @@ export type Mutation = {
   createReceipts?: Maybe<Receipts>;
   createRole?: Maybe<Roles>;
   createTrip?: Maybe<Trip>;
-  createUser?: Maybe<User>;
+  createUser?: Maybe<UserCreated>;
   createUserInfo?: Maybe<UserInfo>;
   deleteBadge?: Maybe<Badge>;
   deleteCar?: Maybe<Car>;
@@ -270,7 +270,6 @@ export type MutationCreateUserArgs = {
 
 export type MutationCreateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Int']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
 };
@@ -422,7 +421,6 @@ export type MutationUpdateUserArgs = {
 
 export type MutationUpdateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Int']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -620,7 +618,6 @@ export type UserInfo = {
   ProfilePicture?: Maybe<Array<Maybe<ProfilePicture>>>;
   about?: Maybe<About>;
   address?: Maybe<Scalars['String']>;
-  age?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -1104,7 +1101,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, Partial<MutationCreateReceiptsArgs>>;
   createRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, Partial<MutationCreateRoleArgs>>;
   createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
-  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
+  createUser?: Resolver<Maybe<ResolversTypes['UserCreated']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationDeleteBadgeArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
@@ -1357,7 +1354,6 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   ProfilePicture?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfilePicture']>>>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
