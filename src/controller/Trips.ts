@@ -97,9 +97,9 @@ class TripController {
       if (isUserDriver) {
         let result = await this.db.delete(id);
         if (result?.affected != 0) {
-          return { msg: "Trip deleted" };
+          return { message: "Trip deleted", success: true  };
         } else {
-          return msg2;
+          return { message: msg, success: false };
         }
       } else {
         const updatedPassengers = trip.passengers.filter(

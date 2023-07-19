@@ -104,9 +104,8 @@ export default {
       { userLogged }: IUserLogged,
     ) => {
       const { id } = args;
-      const test =  await new TripController().deleteTrip(+id, userLogged);
-      console.log("TEST RETURN ", test)
-      return test
+      const trip =  await new TripController().deleteTrip(+id, userLogged);
+      return trip
     },
  }
 }

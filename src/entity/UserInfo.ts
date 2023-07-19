@@ -20,7 +20,7 @@ export default class UserInfo {
   @Column({ length: 45 })
   country: string;
 
-  @Column()
+  @Column({nullable: true} )
   age: number;
 
   // max lenght 10
