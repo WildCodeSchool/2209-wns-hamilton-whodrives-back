@@ -20,16 +20,21 @@ class UserController {
   }
 
   async listUsers() {
-    return await this.db.find();
+    return await this.db.find({
+      select: {
+        cars: { id: true }
+      }
+    });
   }
 
-  async getUserLogged({ userLogged }: IUserLogged){
+  async getUserLogged({ userLogged }: IUserLogged) {
     let userIdLogged = userLogged.id;
-    return await this.db.findOne({where: {id: userIdLogged}})
+    const user = await this.db.findOne({ where: { id: userIdLogged } })
+    return user
   }
   async checkUserLogged({ userLogged }: IUserLogged) {
     let msg = false;
-    if(!userLogged) return { msg };
+    if (!userLogged) return { msg };
     let userIdLogged = userLogged.id;
     const result = await this.db.findOne({ where: { id: userIdLogged } });
     if (result) {
@@ -38,39 +43,31 @@ class UserController {
       return { msg };
     }
   }
-  
+
   async getUserTripsLoggedUser({ userLogged }: IUserLogged) {
     try {
-      const userIdLogged = userLogged.id;
-      const user = await this.db.findOne({ where: { id: userIdLogged } });
-  
-      if (!user) {
+      if (!userLogged) {
         throw new Error("Utilisateur non trouvé");
       }
-  
-      const trips = await this.trip.createQueryBuilder("trip")
-        .leftJoinAndSelect("trip.users", "users")
-        .leftJoinAndSelect("trip.passengers", "passengers")
-        .where("users.id = :userId OR passengers.id = :userId", { userId: userIdLogged })
-        .getMany();
-  
-      return trips;
+
+      return await this.trip.find({ where: { id: userLogged.id }, relations: ["passengers"] });
+
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages de l'utilisateur :", error);
       throw error;
     }
   }
-  
-  
-  
+
+
+
   async getAllUserTrips() {
     try {
       const users = await this.db.createQueryBuilder("user")
         .leftJoinAndSelect("user.trips", "trip")
         .getMany();
-  
+
       const trips = users.flatMap(user => user.trips);
-  
+
       return trips;
     } catch (error) {
       console.error("Erreur lors de la récupération des voyages des utilisateurs :", error);
@@ -81,40 +78,40 @@ class UserController {
     try {
       const tripRepository = this.trip;
       const userRepository = this.db;
-  
+
       const trip = await tripRepository.findOne({ where: { id: tripId }, relations: ["passengers"] });
-  
+
       if (!trip) {
         throw new Error("Voyage non trouvé");
       }
-  
+
       const selectedUser = await userRepository.findOne({ where: { id: userLogged.id } });
-  
+
       if (!selectedUser) {
         throw new Error("Utilisateur non autorisé à sélectionner ce voyage");
       }
-  
+
       trip.passengers = [...trip.passengers, selectedUser];
-  
+
       await tripRepository.save(trip);
-  
+
       return trip;
     } catch (error) {
       console.error("Erreur lors de la sélection du voyage :", error);
       throw error;
     }
   }
-  
- 
 
-  
-  
+
+
+
+
   async getUser(id: number) {
     return await this.db.findOneBy({ id });
   }
 
-  async getUserByEmail(email :string) {
-    return await this.db.findOne( {where: {email} });
+  async getUserByEmail(email: string) {
+    return await this.db.findOne({ where: { email } });
   }
 
   async addUser({
@@ -140,8 +137,8 @@ class UserController {
 
   async assignUserInfos({ userLogged }: IUserLogged, userInfo: UserInfo) {
     return await this.db.save({
-      ...userLogged,
-      userInfo,
+      id: userLogged.id,
+      userInfo
     });
   }
 

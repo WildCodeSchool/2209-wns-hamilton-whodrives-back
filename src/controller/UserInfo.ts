@@ -33,19 +33,16 @@ class UserInfoController {
     country,
     age,
     address,
-    profilPictureId,
   }: MutationCreateUserInfoArgs) {
     const userInfo = await this.db.save({
       city,
       country,
       age,
       address,
-      profilPictureId,
     });
     return userInfo;
   }
 
-  // update le user cible grace a son token
   async updateUserInfo({
     id,
     city,

@@ -3,6 +3,7 @@ import {
   Entity,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import About from "./About";
@@ -23,16 +24,13 @@ export default class UserInfo {
   @Column({nullable: true} )
   age: number;
 
-  // max lenght 10
   @Column({ length: 100 })
   address: string;
 
-  @ManyToOne(() => ProfilPicture, (profilPicture) => profilPicture.userInfo)
-  profilPicture: ProfilPicture[];
+  @OneToOne(() => ProfilPicture)
+  profilPicture: ProfilPicture;
 
-  @ManyToOne(() => About, (about) => about.userInfo , {eager: true})
+  @ManyToOne(() => About, (about) => about.userInfo)
   about: About;
 
-  @OneToMany(() => User, (user) => user.userInfo)
-  user: User[];
 }

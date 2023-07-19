@@ -1,10 +1,12 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import Car from "./Car";
@@ -46,13 +48,14 @@ export default class User {
   @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
   confirmMails: ConfirmMail[];
 
-  @OneToMany(() => Car, (car) => car.user,{eager: true})
+  @OneToMany(() => Car, (car) => car.user, {eager: true})
   cars: Car[];
 
-  @ManyToOne(() => UserInfo, (userInfo) => userInfo.user, {eager: true})
+  @OneToOne(() => UserInfo, {eager: true})
+  @JoinColumn()
   userInfo: UserInfo;
 
-  @ManyToMany(() => Trip)
+  @ManyToMany(() => Trip, trip => trip.users)
   trips: Trip[];
 
   @ManyToMany(() => Trip, trip => trip.users)

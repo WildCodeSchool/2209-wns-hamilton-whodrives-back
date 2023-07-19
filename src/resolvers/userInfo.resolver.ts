@@ -35,13 +35,12 @@ export default {
         throw new Error(msg);
       }
       let userId = userLogged.id;
-      const { city, country, age, address, profilPictureId } = args;
+      const { city, country, age, address } = args;
       let userInfo = await new UserInfoController().createUserInfo({
         city,
         country,
         age,
-        address,
-        profilPictureId,
+        address
       });
       let user = await new UserController().assignUserInfos(
         { userLogged },

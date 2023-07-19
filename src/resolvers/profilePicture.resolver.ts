@@ -17,11 +17,11 @@ export default {
       context: ExpressContext
     ) => {
       try {
-        const carPicture = await profilePictureController.addProfilePicture({
+        const profilePicture = await profilePictureController.addProfilePicture({
           pictureID,
           file,
         });
-        return carPicture;
+        return profilePicture;
       } catch (error: any) {
         console.log("ERROR", error);
         return {
