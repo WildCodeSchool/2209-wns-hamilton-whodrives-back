@@ -15,13 +15,14 @@ export default class UserInfo {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 64, nullable: true})
+  @Column({ length: 64, nullable : true})
   city: string;
 
-  @Column({ length: 45, nullable: true})
+  @Column({ length: 45, nullable : true })
   country: string;
 
-  @Column({ length: 100, nullable: true})
+  // max lenght 10
+  @Column({ length: 100, nullable : true })
   address: string;
 
   @OneToOne(() => ProfilPicture)
