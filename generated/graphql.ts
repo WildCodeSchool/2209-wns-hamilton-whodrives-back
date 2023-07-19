@@ -264,7 +264,6 @@ export type MutationCreateUserArgs = {
 
 export type MutationCreateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Int']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   profilPictureId?: InputMaybe<Scalars['Int']>;
@@ -417,7 +416,6 @@ export type MutationUpdateUserArgs = {
 
 export type MutationUpdateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
-  age?: InputMaybe<Scalars['Int']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -614,7 +612,6 @@ export type UserInfo = {
   __typename?: 'UserInfo';
   about?: Maybe<About>;
   address?: Maybe<Scalars['String']>;
-  age?: Maybe<Scalars['Int']>;
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -1343,7 +1340,6 @@ export type UserCreatedResolvers<ContextType = any, ParentType extends Resolvers
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
   about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
