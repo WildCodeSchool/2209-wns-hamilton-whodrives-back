@@ -28,7 +28,7 @@ export default class UserInfo {
   @OneToOne(() => ProfilPicture)
   profilPicture: ProfilPicture;
 
-  @ManyToOne(() => About, (about) => about.userInfo)
+  @ManyToOne(() => About, (about) => about.userInfo, {eager: true})
   about: About;
 
 }
