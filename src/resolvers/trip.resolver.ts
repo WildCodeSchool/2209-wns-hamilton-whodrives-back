@@ -17,11 +17,79 @@ export default {
     },
     getTripSearch: async (
       _: any,
-      {departure_places,destination,date_departure,arrival_date,price,description,hour_departure,place_available} : {departure_places:string,destination:string,date_departure:Date,arrival_date:Date,price:number,description:string,hour_departure:string,place_available:number},
+      {
+        departure_places,
+        destination,
+        date_departure,
+        arrival_date,
+        price,
+        description,
+        hour_departure,
+        place_available,
+      }: {
+        departure_places: string;
+        destination: string;
+        date_departure: Date;
+        arrival_date: Date;
+        price: number;
+        description: string;
+        hour_departure: string;
+        place_available: number;
+      },
       context: any,
       infos: any
     ) => {
-      return await new TripController().getTripSearch({departure_places,destination,date_departure,arrival_date,price,description,hour_departure ,place_available});
+      return await new TripController().getTripSearch({
+        departure_places,
+        destination,
+        date_departure,
+        arrival_date,
+        price,
+        description,
+        hour_departure,
+        place_available,
+      });
+    },
+    getTripSearchByHourRange: async (
+      _: any,
+      {
+        departure_places,
+        destination,
+        date_departure,
+        arrival_date,
+        price,
+        description,
+        hour_departure,
+        place_available,
+        minHour,
+        maxHour,
+      }: {
+        departure_places: string;
+        destination: string;
+        date_departure: Date;
+        arrival_date: Date;
+        price: number;
+        description: string;
+        hour_departure: string;
+        place_available: number;
+        minHour: string;
+        maxHour: string;
+      },
+      context: any,
+      infos: any
+    ) => {
+      return await new TripController().getTripSearchByHourRange({
+        departure_places,
+        destination,
+        date_departure,
+        arrival_date,
+        price,
+        description,
+        hour_departure,
+        place_available,
+        minHour,
+        maxHour,
+      });
     },
 
     getTrip: async (
@@ -49,11 +117,11 @@ export default {
         price,
         description,
         hour_departure,
-        place_available
+        place_available,
       } = args;
-      
+
       if (!userLogged) {
-        throw new Error("Utilisateur non connecté"); 
+        throw new Error("Utilisateur non connecté");
       }
       const trip = await new TripController().addTrip(
         {
@@ -64,11 +132,11 @@ export default {
           price,
           description,
           hour_departure,
-          place_available
+          place_available,
         },
-        userLogged 
+        userLogged
       );
-    
+
       return trip;
     },
 
@@ -84,7 +152,7 @@ export default {
         date_departure,
         arrival_date,
         price,
-        description, 
+        description,
       } = args;
       let Trip = await new TripController().updateTrip({
         id,
@@ -93,11 +161,10 @@ export default {
         date_departure,
         arrival_date,
         price,
-        description, 
+        description,
       });
       return Trip;
-     }
-    ,
+    },
     deleteTrip: async (
       _: any,
       args: MutationDeleteTripArgs,
@@ -106,6 +173,5 @@ export default {
       const { id } = args;
       return await new TripController().deleteTrip(+id);
     },
- }
-}
-
+  },
+};
