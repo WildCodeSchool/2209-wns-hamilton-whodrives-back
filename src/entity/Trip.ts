@@ -21,7 +21,7 @@ export default class Trip {
   @Column()
   date_departure: Date;
 
-  @Column({  type: 'time',nullable: true })
+  @Column({  type: 'time',nullable: true,  })
   hour_departure: string;
   
   @Column({default: 0})

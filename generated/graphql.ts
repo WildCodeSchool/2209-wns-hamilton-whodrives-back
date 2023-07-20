@@ -174,6 +174,7 @@ export type Mutation = {
   updateReceipts?: Maybe<Receipts>;
   updateRole?: Maybe<Roles>;
   updateTrip?: Maybe<Trip>;
+  updateTripPlace?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
 };
@@ -395,6 +396,19 @@ export type MutationUpdateRoleArgs = {
 
 
 export type MutationUpdateTripArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  place_available?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type MutationUpdateTripPlaceArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   date_departure?: InputMaybe<Scalars['Date']>;
   departure_places?: InputMaybe<Scalars['String']>;
@@ -1141,6 +1155,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationUpdateReceiptsArgs, 'id'>>;
   updateRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationUpdateRoleArgs, 'id'>>;
   updateTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripArgs, 'id'>>;
+  updateTripPlace?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripPlaceArgs, 'id'>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'date_of_birth' | 'email' | 'firstname' | 'id' | 'lastname' | 'password' | 'phone' | 'username'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
 };

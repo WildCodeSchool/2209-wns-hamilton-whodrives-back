@@ -2,6 +2,7 @@ import {
   MutationCreateTripArgs,
   MutationDeleteTripArgs,
   MutationUpdateTripArgs,
+  MutationUpdateTripPlaceArgs,
 } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import TripController from "../controller/Trips";
@@ -140,31 +141,62 @@ export default {
       return trip;
     },
 
-    updateTrip: async (
-      _: any,
-      args: MutationUpdateTripArgs,
-      { userLogged }: IUserLogged,
-    ) => {
-      const {
-        id,
-        departure_places,
-        destination,
-        date_departure,
-        arrival_date,
-        price,
-        description,
-      } = args;
-      let Trip = await new TripController().updateTrip({
-        id,
-        departure_places,
-        destination,
-        date_departure,
-        arrival_date,
-        price,
-        description,
-      });
-      return Trip;
-    },
+    updateTripPlace: async (
+        _: any,
+        args: MutationUpdateTripPlaceArgs,
+        { res }: ExpressContext
+      ) => {
+        const {
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available,
+        } = args;
+        let Trip = await new TripController().updateTripPlace({
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available, 
+        });
+        return Trip;
+      },
+
+     updateTrip: async (
+        _: any,
+        args: MutationUpdateTripArgs,
+        { res }: ExpressContext
+      ) => {
+        const {
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available,
+        } = args;
+        let Trip = await new TripController().updateTrip({
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available,
+        });
+        return Trip;
+      },
+
     deleteTrip: async (
       _: any,
       args: MutationDeleteTripArgs,

@@ -1,7 +1,7 @@
 import { Repository, Between } from "typeorm";
 import datasource from "../lib/datasource";
 import Trip from "../entity/Trip";
-import { MutationCreateTripArgs, MutationUpdateTripArgs } from "@/graphgen";
+import { MutationCreateTripArgs,MutationUpdateTripPlaceArgs,MutationUpdateTripArgs } from "@/graphgen";
 import { IUserLogged } from "../resolvers/Interface";
 import User from "../entity/User";
 
@@ -134,7 +134,34 @@ class TripController {
     return await this.db.save(trip);
   }
 
-
+  async updateTripPlace({
+    id,
+    place_available,
+  }: MutationUpdateTripPlaceArgs) {
+    const trip = await this.db.findOne({ where: { id: +id } });
+    if (!trip) {
+      throw new Error("ERROR");
+    }
+    const {
+      departure_places,
+      destination,
+      date_departure,
+      arrival_date,
+      price,
+      description,
+    } = trip;
+    trip.place_available = place_available;
+    await this.db.save(trip);
+    return {
+      ...trip,
+      departure_places,
+      destination,
+      date_departure,
+      arrival_date,
+      price,
+      description,
+    };
+  }
 
   async updateTrip({
     id,
