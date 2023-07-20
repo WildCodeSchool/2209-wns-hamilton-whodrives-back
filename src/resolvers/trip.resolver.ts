@@ -2,6 +2,7 @@ import {
   MutationCreateTripArgs,
   MutationDeleteTripArgs,
   MutationUpdateTripArgs,
+  MutationUpdateTripPlaceArgs,
 } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import TripController from "../controller/Trips";
@@ -140,9 +141,9 @@ export default {
       return trip;
     },
 
-    updateTrip: async (
+    updateTripPlace: async (
         _: any,
-        args: MutationUpdateTripArgs,
+        args: MutationUpdateTripPlaceArgs,
         { res }: ExpressContext
       ) => {
         const {
@@ -155,7 +156,7 @@ export default {
           description,
           place_available,
         } = args;
-        let Trip = await new TripController().updateTrip({
+        let Trip = await new TripController().updateTripPlace({
           id,
           departure_places,
           destination,
@@ -164,6 +165,32 @@ export default {
           price,
           description,
           place_available, 
+        });
+        return Trip;
+      },
+
+     updateTrip: async (
+        _: any,
+        args: MutationUpdateTripArgs,
+        { res }: ExpressContext
+      ) => {
+        const {
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+        } = args;
+        let Trip = await new TripController().updateTrip({
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
         });
         return Trip;
       },

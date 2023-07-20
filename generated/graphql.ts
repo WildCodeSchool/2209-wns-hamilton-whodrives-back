@@ -168,6 +168,7 @@ export type Mutation = {
   updateReceipts?: Maybe<Receipts>;
   updateRole?: Maybe<Roles>;
   updateTrip?: Maybe<Trip>;
+  updateTripPlace?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
 };
@@ -401,6 +402,19 @@ export type MutationUpdateTripArgs = {
 };
 
 
+export type MutationUpdateTripPlaceArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  id: Scalars['ID'];
+  place_available?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
+};
+
+
 export type MutationUpdateUserArgs = {
   date_of_birth: Scalars['Date'];
   email: Scalars['String'];
@@ -450,6 +464,7 @@ export type Query = {
   checkUserLogged?: Maybe<Res>;
   getTrip?: Maybe<Trip>;
   getTripSearch?: Maybe<Array<Maybe<Trip>>>;
+  getTripSearchByHourRange?: Maybe<Array<Maybe<Trip>>>;
   getTrips?: Maybe<Array<Maybe<Trip>>>;
   getUserInfo?: Maybe<UserInfo>;
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
@@ -513,6 +528,20 @@ export type QueryGetTripSearchArgs = {
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
   hour_departure?: InputMaybe<Scalars['String']>;
+  place_available?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetTripSearchByHourRangeArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  maxHour?: InputMaybe<Scalars['String']>;
+  minHour?: InputMaybe<Scalars['String']>;
   place_available?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
@@ -1111,6 +1140,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationUpdateReceiptsArgs, 'id'>>;
   updateRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationUpdateRoleArgs, 'id'>>;
   updateTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripArgs, 'id'>>;
+  updateTripPlace?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripPlaceArgs, 'id'>>;
   updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'date_of_birth' | 'email' | 'firstname' | 'id' | 'lastname' | 'password' | 'phone' | 'username'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
 };
@@ -1195,6 +1225,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   checkUserLogged?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType>;
   getTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<QueryGetTripArgs, 'id'>>;
   getTripSearch?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QueryGetTripSearchArgs>>;
+  getTripSearchByHourRange?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QueryGetTripSearchByHourRangeArgs>>;
   getTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   getUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<QueryGetUserInfoArgs, 'id'>>;
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;

@@ -48,6 +48,17 @@ type Mutation {
     hour_departure: String
     place_available: Int
   ): Trip
+  updateTripPlace(
+    id: ID!
+    departure_places: String
+    destination: String
+    date_departure: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    hour_departure: String
+    place_available: Int
+  ): Trip
   updateTrip(
     id: ID!
     departure_places: String
@@ -59,6 +70,7 @@ type Mutation {
     hour_departure: String
     place_available: Int
   ): Trip
+  
   deleteTrip(id: ID!): Trip
 }
 
