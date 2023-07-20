@@ -45,35 +45,14 @@ class CarController {
     return car;
   }
 
-  async updateCar({ id, seat, modelId, optionId }: MutationUpdateCarArgs) {
-    let errors = {} as IErrors;
-    let model = null;
-    let options = null;
-    if (modelId) {
-      model = await this.dbModel.findOneBy({ id: +modelId });
-    }
-    if (!model) {
-      errors.model = "Model not found";
-    }
-    if (optionId) {
-      options = await this.dbOptions.findOneBy({ id: +optionId });
-    }
-    if (!options) {
-      errors.options = "Options not found";
-    }
-    if (model && options) {
-      const car = await this.db.update(
-        { id: +id },
-        {
-          seat: seat ?? undefined,
-          model,
-          options,
-        }
-      );
-      return car;
-    } else {
-      return errors;
-    }
+  async updateCar({ id, seat, modelId }: MutationUpdateCarArgs) {
+    const car = await this.db.findOne({ where: { id: +id } });
+    const model = await this.dbModel.findOne({ where: { id: modelId } });
+    return await this.db.save({
+      ...car,
+      seat,
+      model,
+    });
   }
 
   async deleteCar(id: number) {

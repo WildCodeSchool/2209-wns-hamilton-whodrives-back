@@ -75,48 +75,21 @@ class AboutController {
     animal,
     description,
     smoke,
+    chatOptionId,
+    musicOptionId,
   }: MutationUpdateAboutArgs) {
+    const chatOption = await this.dbOptionChat.findOne({ where: { id: chatOptionId } });
+    const musicOption = await this.dbOptionMusic.findOne({ where: { id: musicOptionId } });
     const about = await this.db.findOne({ where: { id: +id } });
 
     return await this.db.save({
       ...about,
       animal,
+      chatOption,
       description,
+      musicOption,
       smoke,
     });
-  }
-
-  async updateMusicAndChatOption({
-    id,
-    chatOptionId,
-    musicOptionId,
-  }: MutationUpdateMusicAndChatOptionArgs) {
-    const about = await this.db.findOne({ where: { id: +id } });
-    const musicOption = await this.dbOptionMusic.findOne({
-      where: { id: +musicOptionId },
-    });
-    const chatOption = await this.dbOptionChat.findOne({
-      where: { id: +chatOptionId },
-    });
-    if (musicOption && chatOption) {
-      return await this.db.save({
-        ...about,
-        musicOption,
-        chatOption,
-      });
-    } else if (!musicOption && chatOption) {
-      return await this.db.save({
-        ...about,
-        chatOption,
-      });
-    } else if (musicOption && !chatOption) {
-      return await this.db.save({
-        ...about,
-        musicOption,
-      });
-    } else {
-      throw new Error("Please check your preferences");
-    }
   }
 }
 

@@ -30,13 +30,8 @@ export default {
       args: MutationUpdateCarArgs,
       { res }: ExpressContext
     ) => {
-      const { id, seat, modelId, optionId } = args;
-      let car = await new CarController().updateCar({
-        id,
-        seat,
-        modelId,
-        optionId,
-      });
+      const { id, seat, modelId } = args;
+      let car = await new CarController().updateCar({ id, seat, modelId });
       return car;
     },
 
