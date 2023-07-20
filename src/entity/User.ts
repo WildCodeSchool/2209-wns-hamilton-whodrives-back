@@ -32,6 +32,9 @@ export default class User {
   @Column({ nullable: true })
   date_of_birth: Date;
 
+  @Column({ nullable: true })
+  gender: string;
+
   @Column({ length: 140 })
   password: string;
 
@@ -48,21 +51,19 @@ export default class User {
   @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
   confirmMails: ConfirmMail[];
 
-  @OneToMany(() => Car, (car) => car.user, {eager: true})
+  @OneToMany(() => Car, (car) => car.user, { eager: true })
   cars: Car[];
 
-  @OneToOne(() => UserInfo, {eager: true})
+  @OneToOne(() => UserInfo, { eager: true })
   @JoinColumn()
   userInfo: UserInfo;
 
-  @ManyToMany(() => Trip, trip => trip.users)
+  @ManyToMany(() => Trip, (trip) => trip.users)
   trips: Trip[];
 
-  @ManyToMany(() => Trip, trip => trip.users)
+  @ManyToMany(() => Trip, (trip) => trip.users)
   driverTrips: Trip[];
 
-  @ManyToMany(() => Trip, trip => trip.passengers)
+  @ManyToMany(() => Trip, (trip) => trip.passengers)
   passengerTrips: Trip[];
-  
-  
 }

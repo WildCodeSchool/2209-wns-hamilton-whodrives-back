@@ -4,6 +4,7 @@ type User {
   firstname: String
   lastname: String
   date_of_birth: String
+  gender: String
   password: String!
   email: String!
   phone: String!
@@ -29,6 +30,7 @@ type UserCreated {
   firstname: String
   lastname: String
   date_of_birth: String
+  gender: String
   email: String!
   phone: String!
   cars: [Car]
@@ -52,6 +54,7 @@ type Mutation {
     firstname: String
     lastname: String
     date_of_birth: Date!
+    gender: String
     email: String!
     phone: String!
   ): UserCreated
@@ -63,6 +66,7 @@ type Mutation {
     firstname: String!
     lastname: String!
     date_of_birth: Date!
+    gender: String!
     email: String!
     phone: String!
     userInfoId: ID

@@ -261,6 +261,7 @@ export type MutationCreateUserArgs = {
   date_of_birth: Scalars['Date'];
   email: Scalars['String'];
   firstname?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<Scalars['String']>;
   lastname?: InputMaybe<Scalars['String']>;
   password: Scalars['String'];
   phone: Scalars['String'];
@@ -411,6 +412,7 @@ export type MutationUpdateUserArgs = {
   date_of_birth: Scalars['Date'];
   email: Scalars['String'];
   firstname: Scalars['String'];
+  gender: Scalars['String'];
   id: Scalars['ID'];
   lastname: Scalars['String'];
   password: Scalars['String'];
@@ -607,6 +609,7 @@ export type User = {
   date_of_birth?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstname?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastname?: Maybe<Scalars['String']>;
   password: Scalars['String'];
@@ -622,6 +625,7 @@ export type UserCreated = {
   date_of_birth?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstname?: Maybe<Scalars['String']>;
+  gender?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lastname?: Maybe<Scalars['String']>;
   phone: Scalars['String'];
@@ -1141,7 +1145,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   updateReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationUpdateReceiptsArgs, 'id'>>;
   updateRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationUpdateRoleArgs, 'id'>>;
   updateTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripArgs, 'id'>>;
-  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'date_of_birth' | 'email' | 'firstname' | 'id' | 'lastname' | 'password' | 'phone' | 'username'>>;
+  updateUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'date_of_birth' | 'email' | 'firstname' | 'gender' | 'id' | 'lastname' | 'password' | 'phone' | 'username'>>;
   updateUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<MutationUpdateUserInfoArgs, 'id'>>;
 };
 
@@ -1344,6 +1348,7 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   date_of_birth?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -1359,6 +1364,7 @@ export type UserCreatedResolvers<ContextType = any, ParentType extends Resolvers
   date_of_birth?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   firstname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   lastname?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
