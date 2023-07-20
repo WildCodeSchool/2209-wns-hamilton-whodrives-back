@@ -637,7 +637,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPictureId?: Maybe<Scalars['ID']>;
+  profilPictureId?: Maybe<ProfilePicture>;
 };
 
 
@@ -1374,7 +1374,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profilPictureId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
