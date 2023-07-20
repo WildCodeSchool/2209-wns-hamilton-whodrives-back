@@ -20,7 +20,9 @@ export default {
           carId,
           file,
         });
+        console.log("carPicture", carPicture);
         return carPicture;
+        console.log("carPicture", carPicture);
       } catch (error: any) {
         console.log("ERROR", error);
         return {

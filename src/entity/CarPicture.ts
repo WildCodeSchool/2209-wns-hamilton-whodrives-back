@@ -6,7 +6,7 @@ export default class CarPicture {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   path: string;
 
   @OneToMany(() => Car, (car) => car.carPictures)

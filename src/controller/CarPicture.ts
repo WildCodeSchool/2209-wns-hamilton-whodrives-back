@@ -41,7 +41,7 @@ class CarPictureController {
       path: newFileName,
     });
     car.carPictures = [savedPicture];
-    this.dbCar.save({ ...car }); //update, si un id est défini, le save fait l'update, sinon le create
+    this.dbCar.save(car); //update, si un id est défini, le save fait l'update, sinon le create
 
     //si tout c'est bien passé, on déplace l'image du dossier uploads vers le dossier final public/cars
     if (savedPicture) {
