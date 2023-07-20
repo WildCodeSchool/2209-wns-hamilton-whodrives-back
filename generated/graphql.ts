@@ -329,8 +329,10 @@ export type MutationSelectTripArgs = {
 
 export type MutationUpdateAboutArgs = {
   animal?: InputMaybe<Scalars['Boolean']>;
+  chatOptionId?: InputMaybe<Scalars['Int']>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  musicOptionId?: InputMaybe<Scalars['Int']>;
   smoke?: InputMaybe<Scalars['Boolean']>;
 };
 
