@@ -119,6 +119,12 @@ export type ChatOption = {
   id: Scalars['ID'];
 };
 
+export type DeleteTripResponse = {
+  __typename?: 'DeleteTripResponse';
+  message: Scalars['String'];
+  success: Scalars['Boolean'];
+};
+
 export type Model = {
   __typename?: 'Model';
   id: Scalars['ID'];
@@ -145,7 +151,7 @@ export type Mutation = {
   createReceipts?: Maybe<Receipts>;
   createRole?: Maybe<Roles>;
   createTrip?: Maybe<Trip>;
-  createUser?: Maybe<User>;
+  createUser?: Maybe<UserCreated>;
   createUserInfo?: Maybe<UserInfo>;
   deleteBadge?: Maybe<Badge>;
   deleteCar?: Maybe<Car>;
@@ -153,7 +159,7 @@ export type Mutation = {
   deleteRating?: Maybe<Rating>;
   deleteReceipts?: Maybe<Receipts>;
   deleteRole?: Maybe<Roles>;
-  deleteTrip?: Maybe<Trip>;
+  deleteTrip: DeleteTripResponse;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
   selectTrip?: Maybe<Trip>;
@@ -433,6 +439,7 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilPictureId?: InputMaybe<Scalars['Int']>;
 };
 
 export type ProfilePicture = {
@@ -644,7 +651,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPictureId?: Maybe<Scalars['ID']>;
+  profilPictureId?: Maybe<ProfilePicture>;
 };
 
 
@@ -732,6 +739,7 @@ export type ResolversTypes = {
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   DateTimeISO: ResolverTypeWrapper<Scalars['DateTimeISO']>;
+  DeleteTripResponse: ResolverTypeWrapper<DeleteTripResponse>;
   DeweyDecimal: ResolverTypeWrapper<Scalars['DeweyDecimal']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
   EmailAddress: ResolverTypeWrapper<Scalars['EmailAddress']>;
@@ -826,6 +834,7 @@ export type ResolversParentTypes = {
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
   DateTimeISO: Scalars['DateTimeISO'];
+  DeleteTripResponse: DeleteTripResponse;
   DeweyDecimal: Scalars['DeweyDecimal'];
   Duration: Scalars['Duration'];
   EmailAddress: Scalars['EmailAddress'];
@@ -980,6 +989,12 @@ export interface DateTimeIsoScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'DateTimeISO';
 }
 
+export type DeleteTripResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['DeleteTripResponse'] = ResolversParentTypes['DeleteTripResponse']> = {
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export interface DeweyDecimalScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DeweyDecimal'], any> {
   name: 'DeweyDecimal';
 }
@@ -1117,7 +1132,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, Partial<MutationCreateReceiptsArgs>>;
   createRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, Partial<MutationCreateRoleArgs>>;
   createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
-  createUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
+  createUser?: Resolver<Maybe<ResolversTypes['UserCreated']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationDeleteBadgeArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
@@ -1125,7 +1140,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<MutationDeleteRatingArgs, 'id'>>;
   deleteReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationDeleteReceiptsArgs, 'id'>>;
   deleteRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationDeleteRoleArgs, 'id'>>;
-  deleteTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
+  deleteTrip?: Resolver<ResolversTypes['DeleteTripResponse'], ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
   selectTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationSelectTripArgs, 'tripId'>>;
@@ -1374,7 +1389,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profilPictureId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1402,6 +1417,7 @@ export type Resolvers<ContextType = any> = {
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
   DateTimeISO?: GraphQLScalarType;
+  DeleteTripResponse?: DeleteTripResponseResolvers<ContextType>;
   DeweyDecimal?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
   EmailAddress?: GraphQLScalarType;

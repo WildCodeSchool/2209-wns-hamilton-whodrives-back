@@ -24,7 +24,6 @@ class AboutController {
     this.dbUserInfo = datasource.getRepository("UserInfo");
   }
 
-  //Liste de toute les preferences de l'utilisateur y compris les preferences de musique et de chat(communication)
   async getAbout(id: number) {
     return await this.db.findOneBy({ id });
   }

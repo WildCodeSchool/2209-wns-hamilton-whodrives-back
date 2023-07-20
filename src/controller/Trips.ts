@@ -84,13 +84,13 @@ class TripController {
       description,
       place_available,
     };
-    console.log("TEST", minHour, maxHour)
 
     return await this.db.findBy({
       ...filter,
       hour_departure: maxHour !== "" && minHour !== "" ? Between(minHour, maxHour) : null,
     });
   }
+
 
   async listTrip() {
     return await this.db.find();
@@ -131,8 +131,7 @@ class TripController {
 
     trip.users = [user];
 
-    const savedTrip = await this.db.save(trip);
-    return savedTrip;
+    return await this.db.save(trip);
   }
 
   async updateTripPlace({
@@ -163,6 +162,7 @@ class TripController {
       description,
     };
   }
+
   async updateTrip({
     id,
     departure_places,
@@ -186,9 +186,33 @@ class TripController {
       hour_departure,
       place_available,
     });
-}
-  async deleteTrip(id: number) {
-    return await this.db.delete(id);
+  }
+
+  async deleteTrip(id: number, userLogged: User) {
+    let msg = "Trip not found";
+    let msg2 = "Error request";
+    const trip = await this.db.findOne({ where: { id: +id } });
+
+    if (trip) {
+      const isUserDriver = trip.users.some((user) => user.username === userLogged.username);
+      if (isUserDriver) {
+        let result = await this.db.delete(id);
+        if (result?.affected != 0) {
+          return { message: "Trip deleted", success: true  };
+        } else {
+          return { message: msg, success: false };
+        }
+      } else {
+        const updatedPassengers = trip.passengers.filter(
+          (passenger) => passenger.username !== userLogged.username
+        );
+        trip.passengers = updatedPassengers;
+        await this.db.save(trip);
+        return { message: "Passenger removed from the trip", success: true };
+      }
+    } else {
+      return { message: msg, success: false };
+    }
   }
 }
 

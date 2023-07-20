@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import UserInfo from "./UserInfo";
 
 @Entity("profile_picture")
@@ -9,6 +9,4 @@ export default class ProfilPicture {
   @Column()
   path: string;
 
-  @OneToMany(() => UserInfo, (userInfo) => userInfo.profilPicture)
-  userInfo: UserInfo[];
 }
