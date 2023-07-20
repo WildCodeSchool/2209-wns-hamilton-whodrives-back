@@ -182,6 +182,7 @@ export default {
           arrival_date,
           price,
           description,
+          place_available,
         } = args;
         let Trip = await new TripController().updateTrip({
           id,
@@ -191,6 +192,7 @@ export default {
           arrival_date,
           price,
           description,
+          place_available,
         });
         return Trip;
       },
