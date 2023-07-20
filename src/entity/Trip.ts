@@ -36,7 +36,7 @@ export default class Trip {
   @Column({ nullable: true })
   description: string;
 
-  @ManyToMany(() => User, {eager: true})
+  @ManyToMany(() => User  , user => user.trips, {eager: true})
   @JoinTable()
   users: User[];
 

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Car from "./Car";
 
 @Entity("carPicture")
@@ -6,9 +6,9 @@ export default class CarPicture {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   path: string;
 
-  @ManyToOne(() => Car, (car) => car.carPictures)
-  cars: Car[];
+  @OneToMany(() => Car, (car) => car.carPictures)
+  car: Car;
 }

@@ -59,8 +59,11 @@ type Mutation {
     hour_departure: String
     place_available: Int
   ): Trip
-  deleteTrip(id: ID!): Trip
+    deleteTrip(id: ID!): DeleteTripResponse!
 }
 
 
-
+type DeleteTripResponse {
+  success: Boolean!
+  message: String!
+}

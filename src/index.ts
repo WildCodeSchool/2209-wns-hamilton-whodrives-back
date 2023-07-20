@@ -26,6 +26,9 @@ async function startApolloServer() {
   app.use(cors(corsConfig));
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
+  app.use("/cars-images", express.static("./public/cars"));
+  app.use("/profiles-images", express.static("./public/profile"));
+
   const httpServer = http.createServer(app);
 
   const schema = makeExecutableSchema({
@@ -35,7 +38,6 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => {
-    
       let userLogged: any = await getUser(req.headers.authorization as string);
       return {
         req,

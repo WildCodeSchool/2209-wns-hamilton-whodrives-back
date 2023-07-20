@@ -35,13 +35,12 @@ export default {
         throw new Error(msg);
       }
       let userId = userLogged.id;
-      const { city, country, age, address, profilPictureId } = args;
+      const { city, country, address,profilPictureId } = args;
       let userInfo = await new UserInfoController().createUserInfo({
         city,
         country,
-        age,
         address,
-        profilPictureId,
+        profilPictureId
       });
       let user = await new UserController().assignUserInfos(
         { userLogged },
@@ -55,13 +54,13 @@ export default {
       args: MutationUpdateUserInfoArgs,
       { res }: ExpressContext
     ) => {
-      const { id, city, country, age, address } = args;
+      const { id, city, country, address ,profilPictureId} = args;
       let userInfo = await new UserInfoController().updateUserInfo({
         id,
         city,
         country,
-        age,
         address,
+        profilPictureId
       });
       return userInfo;
     },

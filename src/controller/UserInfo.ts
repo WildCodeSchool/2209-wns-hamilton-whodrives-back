@@ -38,17 +38,17 @@ class UserInfoController {
       city,
       country,
       address,
-      profilPictureId,
+      profilPictureId
     });
     return userInfo;
   }
 
-  // update le user cible grace a son token
   async updateUserInfo({
     id,
     city,
     country,
     address,
+    profilPictureId
   }: MutationUpdateUserInfoArgs) {
     const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
@@ -56,6 +56,7 @@ class UserInfoController {
       city,
       country,
       address,
+      profilPictureId
     });
   }
 
