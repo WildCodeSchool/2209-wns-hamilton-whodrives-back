@@ -54,7 +54,7 @@ export default {
       args: MutationUpdateUserInfoArgs,
       { res }: ExpressContext
     ) => {
-      const { id, city, country, address } = args;
+      const { id, city, country, address ,profilPictureId} = args;
       let userInfo = await new UserInfoController().updateUserInfo({
         id,
         city,
