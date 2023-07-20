@@ -141,30 +141,32 @@ export default {
     },
 
     updateTrip: async (
-      _: any,
-      args: MutationUpdateTripArgs,
-      { res }: ExpressContext
-    ) => {
-      const {
-        id,
-        departure_places,
-        destination,
-        date_departure,
-        arrival_date,
-        price,
-        description,
-      } = args;
-      let Trip = await new TripController().updateTrip({
-        id,
-        departure_places,
-        destination,
-        date_departure,
-        arrival_date,
-        price,
-        description,
-      });
-      return Trip;
-    },
+        _: any,
+        args: MutationUpdateTripArgs,
+        { res }: ExpressContext
+      ) => {
+        const {
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available,
+        } = args;
+        let Trip = await new TripController().updateTrip({
+          id,
+          departure_places,
+          destination,
+          date_departure,
+          arrival_date,
+          price,
+          description,
+          place_available, 
+        });
+        return Trip;
+      },
     deleteTrip: async (
       _: any,
       args: MutationDeleteTripArgs,

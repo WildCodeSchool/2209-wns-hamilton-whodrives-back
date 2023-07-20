@@ -137,27 +137,31 @@ class TripController {
 
   async updateTrip({
     id,
-    departure_places,
-    destination,
-    date_departure,
-    arrival_date,
-    price,
-    description,
-    hour_departure,
     place_available,
   }: MutationUpdateTripArgs) {
-    const TripId = await this.db.findOne({ where: { id: +id } });
-    return await this.db.save({
-      ...TripId,
+    const trip = await this.db.findOne({ where: { id: +id } });
+    if (!trip) {
+      throw new Error("ERROR");
+    }
+    const {
       departure_places,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
-      hour_departure,
-      place_available,
-    });
+    } = trip;
+    trip.place_available = place_available;
+    await this.db.save(trip);
+    return {
+      ...trip,
+      departure_places,
+      destination,
+      date_departure,
+      arrival_date,
+      price,
+      description,
+    };
   }
 
   async deleteTrip(id: number) {
