@@ -129,6 +129,21 @@ export default {
           email: "invalid Login",
         };
       }
+      if (!user.password) {
+        return {
+          email: "invalid Login",
+        };
+      }
+      if (!password) {
+        return {
+          email: "invalid Login",
+        };
+      }
+      if (!user.username) {
+        return {
+          username: "invalid username",
+        };
+      }
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
         return {
