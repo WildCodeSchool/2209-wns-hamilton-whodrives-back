@@ -272,6 +272,7 @@ export type MutationCreateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
+  profilPictureId?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -424,6 +425,7 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilPictureId?: InputMaybe<Scalars['Int']>;
 };
 
 export type ProfilePicture = {
@@ -455,6 +457,7 @@ export type Query = {
   checkUserLogged?: Maybe<Res>;
   getTrip?: Maybe<Trip>;
   getTripSearch?: Maybe<Array<Maybe<Trip>>>;
+  getTripSearchByHourRange?: Maybe<Array<Maybe<Trip>>>;
   getTrips?: Maybe<Array<Maybe<Trip>>>;
   getUserInfo?: Maybe<UserInfo>;
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
@@ -518,6 +521,20 @@ export type QueryGetTripSearchArgs = {
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
   hour_departure?: InputMaybe<Scalars['String']>;
+  place_available?: InputMaybe<Scalars['Int']>;
+  price?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type QueryGetTripSearchByHourRangeArgs = {
+  arrival_date?: InputMaybe<Scalars['Date']>;
+  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_places?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  destination?: InputMaybe<Scalars['String']>;
+  hour_departure?: InputMaybe<Scalars['String']>;
+  maxHour?: InputMaybe<Scalars['String']>;
+  minHour?: InputMaybe<Scalars['String']>;
   place_available?: InputMaybe<Scalars['Int']>;
   price?: InputMaybe<Scalars['Int']>;
 };
@@ -615,12 +632,12 @@ export type UserCreated = {
 
 export type UserInfo = {
   __typename?: 'UserInfo';
-  ProfilePicture?: Maybe<Array<Maybe<ProfilePicture>>>;
   about?: Maybe<About>;
   address?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
+  profilPictureId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1208,6 +1225,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   checkUserLogged?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType>;
   getTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<QueryGetTripArgs, 'id'>>;
   getTripSearch?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QueryGetTripSearchArgs>>;
+  getTripSearchByHourRange?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType, Partial<QueryGetTripSearchByHourRangeArgs>>;
   getTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
   getUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, RequireFields<QueryGetUserInfoArgs, 'id'>>;
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
@@ -1351,12 +1369,12 @@ export type UserCreatedResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type UserInfoResolvers<ContextType = any, ParentType extends ResolversParentTypes['UserInfo'] = ResolversParentTypes['UserInfo']> = {
-  ProfilePicture?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfilePicture']>>>, ParentType, ContextType>;
   about?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
