@@ -24,8 +24,6 @@ type Mutation {
     id: ID!
     animal: Boolean
     description: String
-    chatOptionId: Int
-    musicOptionId: Int
     smoke: Boolean
   ): About
   updateMusicAndChatOption(

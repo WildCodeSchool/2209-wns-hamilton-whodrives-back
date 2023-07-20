@@ -52,16 +52,28 @@ export default {
       args: MutationUpdateAboutArgs,
       { res }: any
     ) => {
-      const { id, animal, description, smoke,chatOptionId,musicOptionId } = args;
+      const { id, animal, description, smoke } = args;
       let about = await new AboutController().updateAbout({
         id,
         animal,
         description,
-        chatOptionId,
-        musicOptionId,
         smoke,
       });
       return about;
-    }
+    },
+
+    updateMusicAndChatOption: async (
+      _: any,
+      args: MutationUpdateMusicAndChatOptionArgs,
+      { res }: any
+    ) => {
+      const { id, chatOptionId, musicOptionId } = args;
+      let about = await new AboutController().updateMusicAndChatOption({
+        id,
+        chatOptionId,
+        musicOptionId,
+      });
+      return about;
+    },
   },
 };
