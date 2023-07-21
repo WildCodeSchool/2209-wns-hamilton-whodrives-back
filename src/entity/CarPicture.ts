@@ -9,6 +9,6 @@ export default class CarPicture {
   @Column({ nullable: true })
   path: string;
 
-  @OneToMany(() => Car, (car) => car.carPictures)
+  @ManyToOne(() => Car, (car) => car.carPictures)
   car: Car;
 }

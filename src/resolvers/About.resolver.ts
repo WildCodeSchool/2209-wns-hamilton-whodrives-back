@@ -53,6 +53,7 @@ export default {
       { res }: any
     ) => {
       const { id, animal, description, smoke,chatOptionId,musicOptionId } = args;
+      console.log(args);
       let about = await new AboutController().updateAbout({
         id,
         animal,

@@ -34,20 +34,23 @@ async addProfilePicture({ pictureID, file }: MutationAddProfilePictureArgs) {
   const savedPicture = await this.db.save({
     path: newFileName,
   });
-  profile.profilPicture = [savedPicture];
-  this.dbProfile.save({ ...profile });
-  if (savedPicture) {}
-  const newPath = `public/profile/${newFileName}`;
-  fs.copyFile(tempPath, newPath, function (err) {
-    if (err) throw err;
-    console.log(
-      `Copie du fichier ${newFileName} vers le dossier public/profile`
-    );
-  });
-  return {
-    id: savedPicture.id,
-    path: newFileName,
-  };
+  if (savedPicture) {
+    const newPath = `public/profile/${newFileName}`;
+    fs.copyFile(tempPath, newPath, function (err) {
+      if (err) { throw err; }
+      console.log(
+        `Copie du fichier ${newFileName} vers le dossier public/profile`
+      );
+    });
+    console.log("TEST", {
+      id: savedPicture.id,
+      path: newFileName,
+    });
+    return {
+      id: savedPicture.id,
+      path: newFileName,
+    };
+  }
 }
 }
 export default ProfilePictureController;

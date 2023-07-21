@@ -37,25 +37,29 @@ class CarPictureController {
     }
     //partie à revoir pour l'assignation de cars
     const savedPicture = await this.db.save({
-      // cars: [car],
       path: newFileName,
+      car
     });
-    car.carPictures = [savedPicture];
-    this.dbCar.save({...car}); //update, si un id est défini, le save fait l'update, sinon le create
 
     //si tout c'est bien passé, on déplace l'image du dossier uploads vers le dossier final public/cars
     if (savedPicture) {
       const newPath = `public/cars/${newFileName}`;
       fs.copyFile(tempPath, newPath, function (err) {
-        if (err) throw err;
+        if (err) { throw err; }
         console.log(
           `Copie du fichier ${newFileName} vers le dossier public/cars`
         );
+      });
+      console.log("TEST", {
+        id: savedPicture.id,
+        path: newFileName,
       });
       return {
         id: savedPicture.id,
         path: newFileName,
       };
+    } else {
+      throw new Error("un soucis au niveau de l'image")
     }
   }
 }
