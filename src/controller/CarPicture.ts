@@ -1,12 +1,12 @@
 import { MutationAddPictureArgs } from "@/graphgen";
-import Car from "../entity/Car";
-import { Repository } from "typeorm";
-import CarPicture from "../entity/CarPicture"; //fix d'importation
-import datasource from "../lib/datasource";
-import { createWriteStream } from "fs";
-import { finished } from "stream/promises";
-import stream from "stream";
 import fs from "fs";
+import { finished } from "stream/promises";
+import { Repository } from "typeorm";
+
+import Car from "../entity/Car";
+import CarPicture from "../entity/CarPicture";
+import datasource from "../lib/datasource";
+
 class CarPictureController {
   db: Repository<CarPicture>;
   dbCar: Repository<Car>;
@@ -38,28 +38,23 @@ class CarPictureController {
     //partie à revoir pour l'assignation de cars
     const savedPicture = await this.db.save({
       path: newFileName,
-      car
+      car,
     });
 
-    //si tout c'est bien passé, on déplace l'image du dossier uploads vers le dossier final public/cars
+    //si tout s'est bien passé, on déplace l'image du dossier uploads vers le dossier final public/cars
     if (savedPicture) {
       const newPath = `public/cars/${newFileName}`;
       fs.copyFile(tempPath, newPath, function (err) {
-        if (err) { throw err; }
-        console.log(
-          `Copie du fichier ${newFileName} vers le dossier public/cars`
-        );
-      });
-      console.log("TEST", {
-        id: savedPicture.id,
-        path: newFileName,
+        if (err) {
+          throw err;
+        }
       });
       return {
         id: savedPicture.id,
         path: newFileName,
       };
     } else {
-      throw new Error("un soucis au niveau de l'image")
+      throw new Error("Erreur lors de l'ajout de l'image");
     }
   }
 }
