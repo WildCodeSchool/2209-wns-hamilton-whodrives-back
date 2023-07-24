@@ -4,7 +4,7 @@ type UserInfo {
   country: String
   address: String
   about: About
-  profilPictureId: ProfilePicture
+  profilPictureId: [ProfilePicture]
 }
 
 type Query {

@@ -25,8 +25,9 @@ export default class UserInfo {
   @Column({ length: 100, nullable : true })
   address: string;
 
-  @OneToOne(() => ProfilPicture)
-  profilPicture: ProfilPicture;
+
+
+
 
   @ManyToOne(() => About, (about) => about.userInfo, {eager: true})
   about: About;

@@ -188,7 +188,7 @@ export type MutationAddPictureArgs = {
 
 export type MutationAddProfilePictureArgs = {
   file: Scalars['Upload'];
-  pictureID: Scalars['ID'];
+  userInfoId: Scalars['ID'];
 };
 
 
@@ -653,7 +653,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPictureId?: Maybe<ProfilePicture>;
+  profilPictureId?: Maybe<Array<Maybe<ProfilePicture>>>;
 };
 
 
@@ -1123,7 +1123,7 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
-  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'pictureID'>>;
+  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'userInfoId'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
@@ -1391,7 +1391,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profilPictureId?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
+  profilPictureId?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProfilePicture']>>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

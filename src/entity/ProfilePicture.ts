@@ -1,5 +1,6 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import UserInfo from "./UserInfo";
+import { on } from "events";
 
 @Entity("profile_picture")
 export default class ProfilPicture {
@@ -8,5 +9,11 @@ export default class ProfilPicture {
 
   @Column()
   path: string;
+
+
+  @OneToOne(() => UserInfo)
+  @JoinColumn()
+  userInfo: UserInfo;
+
 
 }

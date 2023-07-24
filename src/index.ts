@@ -39,6 +39,7 @@ async function startApolloServer() {
     schema,
     context: async ({ req, res }) => {
       let userLogged: any = await getUser(req.headers.authorization as string);
+      console.log(req)
       return {
         req,
         res,
