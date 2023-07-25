@@ -4,6 +4,7 @@ import {
   MutationUpdateRatingArgs,
 } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
+
 import RatingController from "../controller/Rating";
 
 export default {

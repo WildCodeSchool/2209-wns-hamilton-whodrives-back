@@ -188,7 +188,7 @@ export type MutationAddPictureArgs = {
 
 export type MutationAddProfilePictureArgs = {
   file: Scalars['Upload'];
-  pictureID: Scalars['ID'];
+  userInfoId: Scalars['ID'];
 };
 
 
@@ -273,7 +273,7 @@ export type MutationCreateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
-  profilPictureId?: InputMaybe<Scalars['Int']>;
+  profilPicture?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -441,13 +441,14 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPictureId?: InputMaybe<Scalars['Int']>;
+  profilPicture?: InputMaybe<Scalars['Int']>;
 };
 
 export type ProfilePicture = {
   __typename?: 'ProfilePicture';
   id: Scalars['ID'];
   path: Scalars['String'];
+  userInfo?: Maybe<UserInfo>;
 };
 
 export type Query = {
@@ -479,6 +480,7 @@ export type Query = {
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
+  profilePicturePath?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
@@ -653,7 +655,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPictureId?: Maybe<ProfilePicture>;
+  profilPicture?: Maybe<ProfilePicture>;
 };
 
 
@@ -1123,7 +1125,7 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
-  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'pictureID'>>;
+  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'userInfoId'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
   createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
@@ -1217,6 +1219,7 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
 export type ProfilePictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfilePicture'] = ResolversParentTypes['ProfilePicture']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  userInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1248,6 +1251,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
+  profilePicturePath?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
   userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
@@ -1391,7 +1395,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profilPictureId?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
+  profilPicture?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

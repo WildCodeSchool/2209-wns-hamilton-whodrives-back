@@ -1,8 +1,8 @@
-import { ExpressContext } from "apollo-server-express";
 import { MutationAddPictureArgs } from "@/graphgen";
-import CarPictureController from "../controller/CarPicture";
+import { ExpressContext } from "apollo-server-express";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
+
+import CarPictureController from "../controller/CarPicture";
 
 const carPictureController = new CarPictureController();
 
@@ -16,11 +16,10 @@ export default {
       context: ExpressContext
     ) => {
       try {
-        const carPicture = await carPictureController.addCarPicture({
+        return await carPictureController.addCarPicture({
           carId,
           file,
         });
-        return carPicture;
       } catch (error: any) {
         console.log("ERROR", error);
         return {

@@ -12,7 +12,8 @@ import rolesResolver from "./roles.resolver";
 import ratingResolver from "./rating.resolver";
 import TripResolver from "./trip.resolver";
 import receiptsResolver from "./receipts.resolver";
-import carPictureResolver from "./carPicture.resolver"; // ajout du resolver!
+import carPictureResolver from "./carPicture.resolver";
+import addProfilePicture from "./profilePicture.resolver";
 
 const resolvers = [
   userResolver,
@@ -29,6 +30,7 @@ const resolvers = [
   ratingResolver,
   TripResolver,
   receiptsResolver,
+  addProfilePicture,
 ];
 
 export default mergeResolvers(resolvers);

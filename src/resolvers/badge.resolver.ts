@@ -3,8 +3,9 @@ import {
   MutationDeleteBadgeArgs,
   MutationUpdateBadgeArgs,
 } from "@/graphgen";
-import BadgeController from "../controller/Badge";
 import { ExpressContext } from "apollo-server-express/dist/ApolloServer";
+
+import BadgeController from "../controller/Badge";
 
 export default {
   Query: {

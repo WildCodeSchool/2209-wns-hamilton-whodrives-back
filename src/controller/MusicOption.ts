@@ -1,10 +1,11 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import MusicOption from "../entity/MusicOption";
 import {
   MutationCreateMusicOptionArgs,
   MutationUpdateMusicOptionArgs,
 } from "@/graphgen";
+import { Repository } from "typeorm";
+
+import MusicOption from "../entity/MusicOption";
+import datasource from "../lib/datasource";
 
 class MusicOptionController {
   db: Repository<MusicOption>;

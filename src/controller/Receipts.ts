@@ -1,10 +1,11 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import Receipts from "../entity/Receipt";
 import {
   MutationCreateReceiptsArgs,
   MutationUpdateReceiptsArgs,
 } from "@/graphgen";
+import { Repository } from "typeorm";
+
+import Receipts from "../entity/Receipt";
+import datasource from "../lib/datasource";
 
 class ReceiptsController {
   db: Repository<Receipts>;

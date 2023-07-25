@@ -1,7 +1,14 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+
 import UserInfo from "./UserInfo";
 
-@Entity("profile_picture")
+@Entity("profil_picture")
 export default class ProfilPicture {
   @PrimaryGeneratedColumn()
   id: number;
@@ -9,4 +16,7 @@ export default class ProfilPicture {
   @Column()
   path: string;
 
+  @OneToOne(() => UserInfo, { eager: true })
+  @JoinColumn()
+  userInfo: UserInfo;
 }

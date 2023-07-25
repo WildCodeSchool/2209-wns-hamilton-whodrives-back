@@ -1,4 +1,5 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 import Car from "./Car";
 
 @Entity("carPicture")
@@ -9,6 +10,6 @@ export default class CarPicture {
   @Column({ nullable: true })
   path: string;
 
-  @OneToMany(() => Car, (car) => car.carPictures)
+  @ManyToOne(() => Car, (car) => car.carPictures)
   car: Car;
 }

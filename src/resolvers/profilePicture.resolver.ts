@@ -1,34 +1,27 @@
+import { MutationAddProfilePictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
-import {MutationAddProfilePictureArgs} from "@/graphgen";
-import ProfilePictureController from "../controller/ProfilePicture";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
+
+import ProfilePictureController from "../controller/ProfilePicture";
 
 const profilePictureController = new ProfilePictureController();
-
 
 export default {
   Query: {},
   Upload: GraphQLUpload,
   Mutation: {
-    addPicture: async (
+    addProfilePicture: async (
       parent: any,
-      { pictureID, file }: MutationAddProfilePictureArgs,
+      { userInfoId, file }: MutationAddProfilePictureArgs,
       context: ExpressContext
     ) => {
       try {
-        const profilePicture = await profilePictureController.addProfilePicture({
-          pictureID,
+        return await profilePictureController.addProfilePicture({
+          userInfoId,
           file,
         });
-        return profilePicture;
       } catch (error: any) {
         console.log("ERROR", error);
-        return {
-          success: false,
-          message: error.message,
-          profilePicture: null,
-        };
       }
     },
   },
