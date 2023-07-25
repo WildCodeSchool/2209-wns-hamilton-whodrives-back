@@ -207,6 +207,7 @@ class TripController {
           (passenger) => passenger.username !== userLogged.username
         );
         trip.passengers = updatedPassengers;
+        trip.place_available += 1;
         await this.db.save(trip);
         return { message: "Passenger removed from the trip", success: true };
       }
