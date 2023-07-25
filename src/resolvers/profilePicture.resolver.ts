@@ -16,7 +16,6 @@ export default {
       { userInfoId, file }: MutationAddProfilePictureArgs,
       context: ExpressContext
     ) => {
-      console.log("RESOLVER");
       try {
         return await profilePictureController.addProfilePicture({
           userInfoId,

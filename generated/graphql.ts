@@ -448,7 +448,7 @@ export type ProfilePicture = {
   __typename?: 'ProfilePicture';
   id: Scalars['ID'];
   path: Scalars['String'];
-  userInfo: Scalars['ID'];
+  userInfo?: Maybe<UserInfo>;
 };
 
 export type Query = {
@@ -480,7 +480,7 @@ export type Query = {
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
-  profilePicturePath?: Maybe<Scalars['String']>;
+  profilePicturePath?: Maybe<ProfilePicture>;
   user?: Maybe<User>;
   userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
@@ -1219,7 +1219,7 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
 export type ProfilePictureResolvers<ContextType = any, ParentType extends ResolversParentTypes['ProfilePicture'] = ResolversParentTypes['ProfilePicture']> = {
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   path?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  userInfo?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  userInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1251,7 +1251,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
-  profilePicturePath?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  profilePicturePath?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
   userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;

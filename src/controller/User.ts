@@ -50,15 +50,18 @@ class UserController {
   }
   async getProfilePicturePath({ userLogged }: IUserLogged) {
     try {
-      const user = await this.db.findOne({ where: { id: userLogged.id }, relations: ["userInfo"] });
-  
+      let userIdLogged = userLogged.id;
+      const user = await this.db.findOne({ where: { id: userIdLogged } })
       if (user && user.userInfo) {
         const userInfoId = user.userInfo.id;
-        const profilePicture = await this.profilePicture.findOne({ where: { userInfo: userLogged.userInfo.id } });
-        const path = profilePicture?.path;
-        return path;
+        const profilePicture = await this.profilePicture.createQueryBuilder("profil_picture")
+          .leftJoinAndSelect("profil_picture.userInfo", "userInfo")
+          .where("userInfo.id = :userInfoId", { userInfoId })
+          .getOne();
+        const result = profilePicture?.path;
+        return result;
       } else {
-        return null; // L'utilisateur ou la userInfo n'existe pas
+        return null; 
       }
     } catch (error) {
       console.error("Error while fetching profile picture path:", error);
