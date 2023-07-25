@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
+
 import Roles from "../entity/Roles";
+import datasource from "../lib/datasource";
 
 class RolesController {
   db: Repository<Roles>;

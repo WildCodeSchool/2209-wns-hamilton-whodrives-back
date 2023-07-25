@@ -1,12 +1,12 @@
-import { ExpressContext } from "apollo-server-express";
-import CarController from "../controller/Car";
-import { IUserLogged } from "../resolvers/Interface";
 import {
   MutationCreateCarArgs,
   MutationDeleteCarArgs,
   MutationUpdateCarArgs,
 } from "@/graphgen";
-import { user } from "pg/lib/defaults";
+import { ExpressContext } from "apollo-server-express";
+
+import CarController from "../controller/Car";
+import { IUserLogged } from "../resolvers/Interface";
 
 export default {
   Query: {
@@ -19,9 +19,17 @@ export default {
     },
   },
   Mutation: {
-    createCar: async ( _: any, args: MutationCreateCarArgs, { userLogged }: IUserLogged, infos: any) => {
+    createCar: async (
+      _: any,
+      args: MutationCreateCarArgs,
+      { userLogged }: IUserLogged,
+      infos: any
+    ) => {
       const { seat, modelId, optionId } = args;
-      let car = await new CarController().addCar({ seat, modelId, optionId }, { userLogged });
+      let car = await new CarController().addCar(
+        { seat, modelId, optionId },
+        { userLogged }
+      );
       return car;
     },
 

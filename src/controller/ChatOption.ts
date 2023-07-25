@@ -1,10 +1,11 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import ChatOption from "../entity/ChatOption";
 import {
   MutationCreateChatOptionArgs,
   MutationUpdateChatOptionArgs,
 } from "@/graphgen";
+import { Repository } from "typeorm";
+
+import ChatOption from "../entity/ChatOption";
+import datasource from "../lib/datasource";
 
 class ChatOptionController {
   db: Repository<ChatOption>;

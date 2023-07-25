@@ -1,11 +1,7 @@
+import { MutationCreateAboutArgs, MutationUpdateAboutArgs } from "@/graphgen";
+
 import AboutController from "../controller/About";
-import {
-  MutationCreateAboutArgs,
-  MutationUpdateAboutArgs,
-  MutationUpdateMusicAndChatOptionArgs,
-} from "@/graphgen";
 import { IUserLogged } from "./Interface";
-import UserInfoController from "../controller/UserInfo";
 
 export default {
   Query: {
@@ -38,7 +34,6 @@ export default {
         smoke,
         chatOptionId,
         musicOptionId,
-        
       });
       let userInfoAbout = await new AboutController().assignAbout(
         { userLogged },
@@ -52,7 +47,8 @@ export default {
       args: MutationUpdateAboutArgs,
       { res }: any
     ) => {
-      const { id, animal, description, smoke,chatOptionId,musicOptionId } = args;
+      const { id, animal, description, smoke, chatOptionId, musicOptionId } =
+        args;
       let about = await new AboutController().updateAbout({
         id,
         animal,
@@ -62,6 +58,6 @@ export default {
         smoke,
       });
       return about;
-    }
+    },
   },
 };

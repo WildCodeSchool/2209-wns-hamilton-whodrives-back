@@ -7,6 +7,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import CarPicture from "./CarPicture";
 import Model from "./Model";
 import Options from "./Option";
@@ -23,7 +24,7 @@ export default class Car {
   @ManyToOne(() => User, (user) => user.cars)
   user: User;
 
-  @ManyToOne(() => CarPicture, (carPicture) => carPicture.car, { eager: true })
+  @OneToMany(() => CarPicture, (carPicture) => carPicture.car, { eager: true })
   carPictures: CarPicture[];
 
   @OneToOne(() => Options, (options) => options.car)

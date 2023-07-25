@@ -5,6 +5,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import ChatOption from "./ChatOption";
 import MusicOption from "./MusicOption";
 import UserInfo from "./UserInfo";
@@ -24,12 +25,14 @@ export default class About {
   smoke: boolean;
 
   @ManyToOne(() => ChatOption, (chatOption) => chatOption.about, {
-    nullable: true,eager: true
+    nullable: true,
+    eager: true,
   })
   chatOption?: ChatOption;
 
   @ManyToOne(() => MusicOption, (musicOption) => musicOption.about, {
-    nullable: true,eager: true
+    nullable: true,
+    eager: true,
   })
   musicOption?: MusicOption;
 

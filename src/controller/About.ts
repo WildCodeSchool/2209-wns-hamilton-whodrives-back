@@ -1,15 +1,11 @@
+import { MutationCreateAboutArgs, MutationUpdateAboutArgs } from "@/graphgen";
 import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
+
 import About from "../entity/About";
-import MusicOption from "../entity/MusicOption";
 import ChatOption from "../entity/ChatOption";
+import MusicOption from "../entity/MusicOption";
 import UserInfo from "../entity/UserInfo";
-import {
-  MutationCreateAboutArgs,
-  MutationUpdateAboutArgs,
-  MutationUpdateMusicAndChatOptionArgs,
-} from "@/graphgen";
-import { request } from "http";
+import datasource from "../lib/datasource";
 
 class AboutController {
   db: Repository<About>;
@@ -78,8 +74,12 @@ class AboutController {
     chatOptionId,
     musicOptionId,
   }: MutationUpdateAboutArgs) {
-    const chatOption = await this.dbOptionChat.findOne({ where: { id: chatOptionId } });
-    const musicOption = await this.dbOptionMusic.findOne({ where: { id: musicOptionId } });
+    const chatOption = await this.dbOptionChat.findOne({
+      where: { id: chatOptionId },
+    });
+    const musicOption = await this.dbOptionMusic.findOne({
+      where: { id: musicOptionId },
+    });
     const about = await this.db.findOne({ where: { id: +id } });
 
     return await this.db.save({

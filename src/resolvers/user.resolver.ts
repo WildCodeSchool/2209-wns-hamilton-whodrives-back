@@ -23,6 +23,14 @@ export default {
     userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
     },
+    profilePicturePath: async (
+      _: any,
+      {},
+      { userLogged }: IUserLogged,
+      infos: any
+    ) => {
+      return await new UserController().getProfilePicturePath({ userLogged });
+    },
     checkUserLogged: async (
       _: any,
       {},
@@ -38,7 +46,6 @@ export default {
       infos: any
     ) => {
       return await new UserController().getUserTripsLoggedUser({ userLogged });
-      
     },
     UserTrips: async (
       _: any,
@@ -123,7 +130,7 @@ export default {
     ) => {
       const { password, email } = args;
       let user = await new UserController().getUserByEmail(email);
-      let {username} = user;
+      let { username } = user;
       if (!user) {
         return {
           email: "invalid Login",
@@ -151,7 +158,7 @@ export default {
         };
       }
       let token = generateToken(email);
-      return { email,success: true, token,username  };
+      return { email, success: true, token, username };
     },
 
     deleteUser: async (

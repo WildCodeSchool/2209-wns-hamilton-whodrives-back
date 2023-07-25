@@ -5,6 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import User from "./User";
 
 @Entity("trip")
@@ -21,10 +22,10 @@ export default class Trip {
   @Column()
   date_departure: Date;
 
-  @Column({  type: 'time',nullable: true,  })
+  @Column({ type: "time", nullable: true })
   hour_departure: string;
-  
-  @Column({default: 0})
+
+  @Column({ default: 0 })
   place_available: number;
 
   @Column()
@@ -36,11 +37,11 @@ export default class Trip {
   @Column({ nullable: true })
   description: string;
 
-  @ManyToMany(() => User  , user => user.trips, {eager: true})
+  @ManyToMany(() => User, (user) => user.trips, { eager: true })
   @JoinTable()
   users: User[];
 
-  @ManyToMany(() => User, user => user.passengerTrips, {eager: true})
+  @ManyToMany(() => User, (user) => user.passengerTrips, { eager: true })
   @JoinTable()
   passengers: User[];
 }

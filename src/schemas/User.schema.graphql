@@ -43,6 +43,7 @@ type Query {
   checkUserLogged: Res
   UserTrips: [Trip]
   UserTripsLoggedUser: [Trip]
+  profilePicturePath: String
 }
 
 type Mutation {
