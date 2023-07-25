@@ -3,13 +3,11 @@ import {
   MutationDeleteTripArgs,
   MutationUpdateTripArgs,
   MutationUpdateTripPlaceArgs,
-} from "@/graphgen";
-import { ExpressContext } from "apollo-server-express";
-import TripController from "../controller/Trips";
-import { IUserLogged } from "../resolvers/Interface";
-import { getUser } from "src/lib/utilities";
-import { user } from "pg/lib/defaults";
-import User from "src/entity/User";
+} from '@/graphgen';
+import { ExpressContext } from 'apollo-server-express';
+
+import TripController from '../controller/Trips';
+import { IUserLogged } from '../resolvers/Interface';
 
 export default {
   Query: {

@@ -1,9 +1,13 @@
-import { Repository, Between } from "typeorm";
-import datasource from "../lib/datasource";
+import {
+  MutationCreateTripArgs,
+  MutationUpdateTripArgs,
+  MutationUpdateTripPlaceArgs,
+} from "@/graphgen";
+import { Between, Repository } from "typeorm";
+
 import Trip from "../entity/Trip";
-import { MutationCreateTripArgs,MutationUpdateTripPlaceArgs,MutationUpdateTripArgs } from "@/graphgen";
-import { IUserLogged } from "../resolvers/Interface";
 import User from "../entity/User";
+import datasource from "../lib/datasource";
 
 interface IFilter {
   departure_places: string;
@@ -87,10 +91,10 @@ class TripController {
 
     return await this.db.findBy({
       ...filter,
-      hour_departure: maxHour !== "" && minHour !== "" ? Between(minHour, maxHour) : null,
+      hour_departure:
+        maxHour !== "" && minHour !== "" ? Between(minHour, maxHour) : null,
     });
   }
-
 
   async listTrip() {
     return await this.db.find();
@@ -134,10 +138,7 @@ class TripController {
     return await this.db.save(trip);
   }
 
-  async updateTripPlace({
-    id,
-    place_available,
-  }: MutationUpdateTripPlaceArgs) {
+  async updateTripPlace({ id, place_available }: MutationUpdateTripPlaceArgs) {
     const trip = await this.db.findOne({ where: { id: +id } });
     if (!trip) {
       throw new Error("ERROR");
@@ -194,11 +195,13 @@ class TripController {
     const trip = await this.db.findOne({ where: { id: +id } });
 
     if (trip) {
-      const isUserDriver = trip.users.some((user) => user.username === userLogged.username);
+      const isUserDriver = trip.users.some(
+        (user) => user.username === userLogged.username
+      );
       if (isUserDriver) {
         let result = await this.db.delete(id);
         if (result?.affected != 0) {
-          return { message: "Trip deleted", success: true  };
+          return { message: "Trip deleted", success: true };
         } else {
           return { message: msg, success: false };
         }

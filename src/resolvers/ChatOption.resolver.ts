@@ -1,8 +1,9 @@
-import ChatOptionController from "../controller/ChatOption";
 import {
   MutationCreateChatOptionArgs,
   MutationUpdateChatOptionArgs,
 } from "@/graphgen";
+
+import ChatOptionController from "../controller/ChatOption";
 
 export default {
   Query: {

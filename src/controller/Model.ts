@@ -1,6 +1,7 @@
 import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
+
 import Model from "../entity/Model";
+import datasource from "../lib/datasource";
 
 class ModelController {
   db: Repository<Model>;

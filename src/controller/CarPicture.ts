@@ -1,12 +1,12 @@
 import { MutationAddPictureArgs } from "@/graphgen";
-import Car from "../entity/Car";
-import { Repository } from "typeorm";
-import CarPicture from "../entity/CarPicture"; //fix d'importation
-import datasource from "../lib/datasource";
-import { createWriteStream } from "fs";
-import { finished } from "stream/promises";
-import stream from "stream";
 import fs from "fs";
+import { finished } from "stream/promises";
+import { Repository } from "typeorm";
+
+import Car from "../entity/Car";
+import CarPicture from "../entity/CarPicture";
+import datasource from "../lib/datasource";
+
 class CarPictureController {
   db: Repository<CarPicture>;
   dbCar: Repository<Car>;
@@ -22,8 +22,6 @@ class CarPictureController {
       throw new Error("No file uploaded");
     }
 
-    // Invoking the `createReadStream` will return a Readable Stream.
-    // See https://nodejs.org/api/stream.html#stream_readable_streams
     const stream = createReadStream();
     const tempPath = `uploads/${filename}`;
     const newFileName = `${Date.now()}-${filename}`;
@@ -35,31 +33,25 @@ class CarPictureController {
     if (!car) {
       throw new Error("Car not found");
     }
-    //partie à revoir pour l'assignation de cars
+
     const savedPicture = await this.db.save({
       path: newFileName,
-      car
+      car,
     });
 
-    //si tout c'est bien passé, on déplace l'image du dossier uploads vers le dossier final public/cars
     if (savedPicture) {
       const newPath = `public/cars/${newFileName}`;
       fs.copyFile(tempPath, newPath, function (err) {
-        if (err) { throw err; }
-        console.log(
-          `Copie du fichier ${newFileName} vers le dossier public/cars`
-        );
-      });
-      console.log("TEST", {
-        id: savedPicture.id,
-        path: newFileName,
+        if (err) {
+          throw err;
+        }
       });
       return {
         id: savedPicture.id,
         path: newFileName,
       };
     } else {
-      throw new Error("un soucis au niveau de l'image")
+      throw new Error("Un problème est survenu au niveau de l'image.");
     }
   }
 }

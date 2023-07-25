@@ -1,7 +1,8 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import Rating from "../entity/Rating";
 import { MutationCreateRatingArgs, MutationUpdateRatingArgs } from "@/graphgen";
+import { Repository } from "typeorm";
+
+import Rating from "../entity/Rating";
+import datasource from "../lib/datasource";
 
 class RatingController {
   db: Repository<Rating>;

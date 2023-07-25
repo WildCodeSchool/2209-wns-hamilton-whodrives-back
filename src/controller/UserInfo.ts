@@ -1,14 +1,13 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import UserInfo from "../entity/UserInfo";
-import ProfilPicture from "../entity/ProfilePicture";
-import User from "../entity/User";
 import {
   MutationCreateUserInfoArgs,
   MutationUpdateUserInfoArgs,
 } from "@/graphgen";
-import { IUserLogged } from "../resolvers/Interface";
-import About from "../entity/About";
+import { Repository } from "typeorm";
+
+import ProfilPicture from "../entity/ProfilePicture";
+import User from "../entity/User";
+import UserInfo from "../entity/UserInfo";
+import datasource from "../lib/datasource";
 
 class UserInfoController {
   db: Repository<UserInfo>;
@@ -38,7 +37,7 @@ class UserInfoController {
       city,
       country,
       address,
-      profilPicture
+      profilPicture,
     });
     return userInfo;
   }
@@ -48,7 +47,7 @@ class UserInfoController {
     city,
     country,
     address,
-    profilPicture
+    profilPicture,
   }: MutationUpdateUserInfoArgs) {
     const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
@@ -56,11 +55,9 @@ class UserInfoController {
       city,
       country,
       address,
-      profilPicture
+      profilPicture,
     });
   }
-
-
 }
 
 export default UserInfoController;

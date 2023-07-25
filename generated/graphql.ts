@@ -480,7 +480,7 @@ export type Query = {
   getUserInfos?: Maybe<Array<Maybe<UserInfo>>>;
   musicOption?: Maybe<MusicOption>;
   musicOptions?: Maybe<Array<Maybe<MusicOption>>>;
-  profilePicturePath?: Maybe<ProfilePicture>;
+  profilePicturePath?: Maybe<Scalars['String']>;
   user?: Maybe<User>;
   userLogged: User;
   users?: Maybe<Array<Maybe<User>>>;
@@ -1251,7 +1251,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   getUserInfos?: Resolver<Maybe<Array<Maybe<ResolversTypes['UserInfo']>>>, ParentType, ContextType>;
   musicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<QueryMusicOptionArgs, 'id'>>;
   musicOptions?: Resolver<Maybe<Array<Maybe<ResolversTypes['MusicOption']>>>, ParentType, ContextType>;
-  profilePicturePath?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
+  profilePicturePath?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryUserArgs>>;
   userLogged?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;

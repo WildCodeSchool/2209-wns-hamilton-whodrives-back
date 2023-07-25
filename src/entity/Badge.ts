@@ -5,6 +5,7 @@ import {
   ManyToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import UserInfo from "./UserInfo";
 
 @Entity("badge")

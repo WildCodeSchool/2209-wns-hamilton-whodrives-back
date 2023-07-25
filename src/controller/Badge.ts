@@ -1,19 +1,17 @@
-import { Repository } from "typeorm";
-import datasource from "../lib/datasource";
-import Badge from "../entity/Badge";
 import {
   MutationCreateBadgeArgs,
   MutationDeleteBadgeArgs,
   MutationUpdateBadgeArgs,
 } from "@/graphgen";
+import { Repository } from "typeorm";
 
-
+import Badge from "../entity/Badge";
+import datasource from "../lib/datasource";
 
 class BadgeController {
   db: Repository<Badge>;
   constructor() {
     this.db = datasource.getRepository("Badge");
-
   }
 
   async listBadges() {

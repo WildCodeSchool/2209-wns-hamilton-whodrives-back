@@ -2,18 +2,17 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
   ManyToMany,
-  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
+
 import Car from "./Car";
 import ConfirmMail from "./ConfirmMail";
 import Receipt from "./Receipt";
-import UserInfo from "./UserInfo";
 import Trip from "./Trip";
+import UserInfo from "./UserInfo";
 
 @Entity("user")
 export default class User {
@@ -48,21 +47,19 @@ export default class User {
   @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
   confirmMails: ConfirmMail[];
 
-  @OneToMany(() => Car, (car) => car.user, {eager: true})
+  @OneToMany(() => Car, (car) => car.user, { eager: true })
   cars: Car[];
 
-  @OneToOne(() => UserInfo, {eager: true})
+  @OneToOne(() => UserInfo, { eager: true })
   @JoinColumn()
   userInfo: UserInfo;
 
-  @ManyToMany(() => Trip, trip => trip.users)
+  @ManyToMany(() => Trip, (trip) => trip.users)
   trips: Trip[];
 
-  @ManyToMany(() => Trip, trip => trip.users)
+  @ManyToMany(() => Trip, (trip) => trip.users)
   driverTrips: Trip[];
 
-  @ManyToMany(() => Trip, trip => trip.passengers)
+  @ManyToMany(() => Trip, (trip) => trip.passengers)
   passengerTrips: Trip[];
-  
-  
 }

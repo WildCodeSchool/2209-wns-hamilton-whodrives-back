@@ -1,4 +1,5 @@
 import { ExpressContext } from "apollo-server-express";
+
 import ModelController from "../controller/Model";
 
 export default {

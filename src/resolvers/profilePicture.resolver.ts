@@ -1,11 +1,10 @@
+import { MutationAddProfilePictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
-import {MutationAddProfilePictureArgs, ProfilePicture} from "@/graphgen";
-import ProfilePictureController from "../controller/ProfilePicture";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
+
+import ProfilePictureController from "../controller/ProfilePicture";
 
 const profilePictureController = new ProfilePictureController();
-
 
 export default {
   Query: {},
@@ -24,6 +23,6 @@ export default {
       } catch (error: any) {
         console.log("ERROR", error);
       }
+    },
   },
-}
-}
+};

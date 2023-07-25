@@ -1,10 +1,11 @@
 import {
-  Entity,
-  PrimaryGeneratedColumn,
   Column,
+  Entity,
   JoinTable,
   ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
+
 import User from "./User";
 
 @Entity("roles")

@@ -2,11 +2,11 @@ import {
   MutationCreateUserInfoArgs,
   MutationUpdateUserInfoArgs,
 } from "@/graphgen";
-import UserInfoController from "../controller/UserInfo";
 import { ExpressContext } from "apollo-server-express";
-import { IUserLogged } from "./Interface";
-import UserController from "../controller/User";
 
+import UserController from "../controller/User";
+import UserInfoController from "../controller/UserInfo";
+import { IUserLogged } from "./Interface";
 
 export default {
   Query: {
@@ -35,12 +35,12 @@ export default {
         throw new Error(msg);
       }
       let userId = userLogged.id;
-      const { city, country, address,profilPicture } = args;
+      const { city, country, address, profilPicture } = args;
       let userInfo = await new UserInfoController().createUserInfo({
         city,
         country,
         address,
-        profilPicture
+        profilPicture,
       });
       let user = await new UserController().assignUserInfos(
         { userLogged },
@@ -54,13 +54,13 @@ export default {
       args: MutationUpdateUserInfoArgs,
       { res }: ExpressContext
     ) => {
-      const { id, city, country, address ,profilPicture} = args;
+      const { id, city, country, address, profilPicture } = args;
       let userInfo = await new UserInfoController().updateUserInfo({
         id,
         city,
         country,
         address,
-        profilPicture
+        profilPicture,
       });
       return userInfo;
     },
