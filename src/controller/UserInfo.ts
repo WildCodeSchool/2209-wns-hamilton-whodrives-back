@@ -32,13 +32,13 @@ class UserInfoController {
     city,
     country,
     address,
-    profilPictureId,
+    profilPicture,
   }: MutationCreateUserInfoArgs) {
     const userInfo = await this.db.save({
       city,
       country,
       address,
-      profilPictureId
+      profilPicture
     });
     return userInfo;
   }
@@ -48,7 +48,7 @@ class UserInfoController {
     city,
     country,
     address,
-    profilPictureId
+    profilPicture
   }: MutationUpdateUserInfoArgs) {
     const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
@@ -56,7 +56,7 @@ class UserInfoController {
       city,
       country,
       address,
-      profilPictureId
+      profilPicture
     });
   }
 

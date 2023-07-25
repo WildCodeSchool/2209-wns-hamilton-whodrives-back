@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -9,6 +10,7 @@ import {
 import About from "./About";
 // import ProfilPicture from "./ProfilePicture";
 import User from "./User";
+import ProfilPicture from "./ProfilePicture";
 
 @Entity("user_info")
 export default class UserInfo {
@@ -24,9 +26,6 @@ export default class UserInfo {
   // max lenght 10
   @Column({ length: 100, nullable : true })
   address: string;
-
-
-
 
 
   @ManyToOne(() => About, (about) => about.userInfo, {eager: true})

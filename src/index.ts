@@ -27,7 +27,7 @@ async function startApolloServer() {
   app.use(cookieParser());
   app.use(graphqlUploadExpress());
   app.use("/cars-images", express.static("./public/cars"));
-  app.use("/profiles-images", express.static("./public/profile"));
+  app.use("/profiles-images", express.static("./public/profiles"));
 
   const httpServer = http.createServer(app);
 

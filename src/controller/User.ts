@@ -10,13 +10,18 @@ import { IUserLogged } from "../resolvers/Interface";
 import UserInfo from "../entity/UserInfo";
 import { FindOneOptions } from "typeorm";
 import Trip from "src/entity/Trip";
+import ProfilPicture from "../entity/ProfilePicture";
 
 class UserController {
   db: Repository<User>;
   trip: Repository<Trip>;
+  userInfo: Repository<UserInfo>;
+  profilePicture: Repository<ProfilPicture>;
   constructor() {
     this.db = datasource.getRepository("User");
     this.trip = datasource.getRepository("Trip");
+    this.userInfo = datasource.getRepository("UserInfo");
+    this.profilePicture = datasource.getRepository("profil_picture");
   }
 
   async listUsers() {
@@ -41,6 +46,23 @@ class UserController {
       return { msg: true, user: result };
     } else {
       return { msg };
+    }
+  }
+  async getProfilePicturePath({ userLogged }: IUserLogged) {
+    try {
+      const user = await this.db.findOne({ where: { id: userLogged.id }, relations: ["userInfo"] });
+  
+      if (user && user.userInfo) {
+        const userInfoId = user.userInfo.id;
+        const profilePicture = await this.profilePicture.findOne({ where: { userInfo: userLogged.userInfo.id } });
+        const path = profilePicture?.path;
+        return path;
+      } else {
+        return null; // L'utilisateur ou la userInfo n'existe pas
+      }
+    } catch (error) {
+      console.error("Error while fetching profile picture path:", error);
+      return null;
     }
   }
 

@@ -12,7 +12,7 @@ export default class ProfilPicture {
   path: string;
 
 
-  @OneToOne(() => UserInfo)
+  @OneToOne(() => UserInfo, { eager: true })
   @JoinColumn()
   userInfo: UserInfo;
 

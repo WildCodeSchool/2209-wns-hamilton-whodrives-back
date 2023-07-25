@@ -23,6 +23,9 @@ export default {
     userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
     },
+    profilePicturePath: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+      return await new UserController().getProfilePicturePath({ userLogged });
+    },
     checkUserLogged: async (
       _: any,
       {},
