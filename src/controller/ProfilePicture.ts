@@ -13,10 +13,11 @@ class ProfilePictureController {
   dbProfile: Repository<UserInfo>;
 
 constructor() {
-  this.db = datasource.getRepository("ProfilePicture");
+  this.db = datasource.getRepository("ProfilPicture");
   this.dbProfile = datasource.getRepository("UserInfo");
 }
 async addProfilePicture({ userInfoId, file }: MutationAddProfilePictureArgs) {
+  console.log("file", file);
   const { createReadStream, filename } = await file;
   if (!createReadStream || !filename) {
     throw new Error("No file uploaded");
@@ -27,22 +28,28 @@ async addProfilePicture({ userInfoId, file }: MutationAddProfilePictureArgs) {
   const out = require("fs").createWriteStream(tempPath);
   stream.pipe(out);
   await finished(out);
+
   const profile = await this.dbProfile.findOneBy({ id: +userInfoId });
+
   if (!profile) {
     throw new Error("Profile not found");
   
   }else{
     const userInfoId = profile.id;
+
+    const existantProfile = await this.db.findOneBy({userInfo: {id : userInfoId}})
+    let data = existantProfile ?? {userInfo: { id: userInfoId }}
     const savedPicture = await this.db.save({
+      ...data,
       path: newFileName,
-      userInfoId
-    });
+      
+    })
     if (savedPicture) {
-      const newPath = `public/profile/${newFileName}`;
+      const newPath = `public/profiles/${newFileName}`;
       fs.copyFile(tempPath, newPath, function (err) {
         if (err) { throw err; }
         console.log(
-          `Copie du fichier ${newFileName} vers le dossier public/profile`
+          `Copie du fichier ${newFileName} vers le dossier public/profiles`
         );
       });
      

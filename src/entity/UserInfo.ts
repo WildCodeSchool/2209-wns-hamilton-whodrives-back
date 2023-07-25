@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
 } from "typeorm";
 import About from "./About";
-import ProfilPicture from "./ProfilePicture";
+// import ProfilPicture from "./ProfilePicture";
 import User from "./User";
 
 @Entity("user_info")

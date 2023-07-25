@@ -11,11 +11,12 @@ export default {
   Query: {},
   Upload: GraphQLUpload,
   Mutation: {
-    addPicture: async (
+    addProfilePicture: async (
       parent: any,
       { userInfoId, file }: MutationAddProfilePictureArgs,
       context: ExpressContext
     ) => {
+      console.log("RESOLVER");
       try {
         return await profilePictureController.addProfilePicture({
           userInfoId,

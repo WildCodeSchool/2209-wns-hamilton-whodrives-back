@@ -38,8 +38,8 @@ async function startApolloServer() {
   const server = new ApolloServer({
     schema,
     context: async ({ req, res }) => {
+      // console.log(req);
       let userLogged: any = await getUser(req.headers.authorization as string);
-      console.log(req)
       return {
         req,
         res,

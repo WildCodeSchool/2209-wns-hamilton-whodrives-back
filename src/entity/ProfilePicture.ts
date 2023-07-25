@@ -2,7 +2,8 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGene
 import UserInfo from "./UserInfo";
 import { on } from "events";
 
-@Entity("profile_picture")
+
+@Entity("profil_picture")
 export default class ProfilPicture {
   @PrimaryGeneratedColumn()
   id: number;
