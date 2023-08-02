@@ -9,8 +9,6 @@ import {
 } from "typeorm";
 
 import Car from "./Car";
-import ConfirmMail from "./ConfirmMail";
-import Receipt from "./Receipt";
 import Trip from "./Trip";
 import UserInfo from "./UserInfo";
 
@@ -40,12 +38,6 @@ export default class User {
 
   @Column({ unique: true })
   phone: string;
-
-  @OneToMany(() => Receipt, (receipt) => receipt.user)
-  receipts: Receipt[];
-
-  @OneToMany(() => ConfirmMail, (confirmMail) => confirmMail.user)
-  confirmMails: ConfirmMail[];
 
   @OneToMany(() => Car, (car) => car.user, { eager: true })
   cars: Car[];

@@ -91,13 +91,6 @@ export type About = {
   smoke?: Maybe<Scalars['Boolean']>;
 };
 
-export type Badge = {
-  __typename?: 'Badge';
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
-};
-
 export type Car = {
   __typename?: 'Car';
   carPictures?: Maybe<Array<Maybe<CarPicture>>>;
@@ -142,36 +135,27 @@ export type Mutation = {
   addPicture: CarPicture;
   addProfilePicture: ProfilePicture;
   createAbout?: Maybe<About>;
-  createBadge?: Maybe<Badge>;
   createCar?: Maybe<Car>;
   createChatOption?: Maybe<ChatOption>;
   createModel?: Maybe<Model>;
   createMusicOption?: Maybe<MusicOption>;
-  createRating?: Maybe<Rating>;
-  createReceipts?: Maybe<Receipts>;
   createRole?: Maybe<Roles>;
   createTrip?: Maybe<Trip>;
   createUser?: Maybe<UserCreated>;
   createUserInfo?: Maybe<UserInfo>;
-  deleteBadge?: Maybe<Badge>;
   deleteCar?: Maybe<Car>;
   deleteModel?: Maybe<Model>;
-  deleteRating?: Maybe<Rating>;
-  deleteReceipts?: Maybe<Receipts>;
   deleteRole?: Maybe<Roles>;
   deleteTrip: DeleteTripResponse;
   deleteUser?: Maybe<Res>;
   loginUser?: Maybe<RegisterUser>;
   selectTrip?: Maybe<Trip>;
   updateAbout?: Maybe<About>;
-  updateBadge?: Maybe<Badge>;
   updateCar?: Maybe<Car>;
   updateChatOption?: Maybe<ChatOption>;
   updateModel?: Maybe<Model>;
   updateMusicAndChatOption?: Maybe<About>;
   updateMusicOption?: Maybe<MusicOption>;
-  updateRating?: Maybe<Rating>;
-  updateReceipts?: Maybe<Receipts>;
   updateRole?: Maybe<Roles>;
   updateTrip?: Maybe<Trip>;
   updateTripPlace?: Maybe<Trip>;
@@ -201,12 +185,6 @@ export type MutationCreateAboutArgs = {
 };
 
 
-export type MutationCreateBadgeArgs = {
-  description: Scalars['String'];
-  name: Scalars['String'];
-};
-
-
 export type MutationCreateCarArgs = {
   modelId?: InputMaybe<Scalars['Int']>;
   optionId?: InputMaybe<Scalars['Int']>;
@@ -227,17 +205,6 @@ export type MutationCreateModelArgs = {
 
 export type MutationCreateMusicOptionArgs = {
   content: Scalars['String'];
-};
-
-
-export type MutationCreateRatingArgs = {
-  content?: InputMaybe<Scalars['String']>;
-  note?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type MutationCreateReceiptsArgs = {
-  file_name?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -277,27 +244,12 @@ export type MutationCreateUserInfoArgs = {
 };
 
 
-export type MutationDeleteBadgeArgs = {
-  id: Scalars['ID'];
-};
-
-
 export type MutationDeleteCarArgs = {
   id: Scalars['ID'];
 };
 
 
 export type MutationDeleteModelArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationDeleteRatingArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type MutationDeleteReceiptsArgs = {
   id: Scalars['ID'];
 };
 
@@ -338,13 +290,6 @@ export type MutationUpdateAboutArgs = {
 };
 
 
-export type MutationUpdateBadgeArgs = {
-  description?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
-  name?: InputMaybe<Scalars['String']>;
-};
-
-
 export type MutationUpdateCarArgs = {
   id: Scalars['ID'];
   modelId?: InputMaybe<Scalars['Int']>;
@@ -374,19 +319,6 @@ export type MutationUpdateMusicAndChatOptionArgs = {
 
 export type MutationUpdateMusicOptionArgs = {
   content: Scalars['String'];
-  id: Scalars['ID'];
-};
-
-
-export type MutationUpdateRatingArgs = {
-  content?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
-  note?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type MutationUpdateReceiptsArgs = {
-  file_name?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
 };
 
@@ -453,14 +385,8 @@ export type ProfilePicture = {
 
 export type Query = {
   __typename?: 'Query';
-  Badge?: Maybe<Badge>;
-  Badges?: Maybe<Array<Maybe<Badge>>>;
   Model?: Maybe<Model>;
   Models?: Maybe<Array<Maybe<Model>>>;
-  Rating?: Maybe<Rating>;
-  Ratings?: Maybe<Array<Maybe<Rating>>>;
-  Receipt?: Maybe<Receipts>;
-  Receipts?: Maybe<Array<Maybe<Receipts>>>;
   Role?: Maybe<Roles>;
   Roles?: Maybe<Array<Maybe<Roles>>>;
   UserTrips?: Maybe<Array<Maybe<Trip>>>;
@@ -487,22 +413,7 @@ export type Query = {
 };
 
 
-export type QueryBadgeArgs = {
-  id: Scalars['ID'];
-};
-
-
 export type QueryModelArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryRatingArgs = {
-  id: Scalars['ID'];
-};
-
-
-export type QueryReceiptArgs = {
   id: Scalars['ID'];
 };
 
@@ -570,19 +481,6 @@ export type QueryMusicOptionArgs = {
 
 export type QueryUserArgs = {
   id?: InputMaybe<Scalars['ID']>;
-};
-
-export type Rating = {
-  __typename?: 'Rating';
-  content?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  note?: Maybe<Scalars['Int']>;
-};
-
-export type Receipts = {
-  __typename?: 'Receipts';
-  file_name?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
 };
 
 export type RegisterUser = {
@@ -729,7 +627,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   About: ResolverTypeWrapper<About>;
   AccountNumber: ResolverTypeWrapper<Scalars['AccountNumber']>;
-  Badge: ResolverTypeWrapper<Badge>;
   BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Byte: ResolverTypeWrapper<Scalars['Byte']>;
@@ -794,8 +691,6 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
-  Rating: ResolverTypeWrapper<Rating>;
-  Receipts: ResolverTypeWrapper<Receipts>;
   RegisterUser: ResolverTypeWrapper<RegisterUser>;
   Res: ResolverTypeWrapper<Res>;
   Roles: ResolverTypeWrapper<Roles>;
@@ -824,7 +719,6 @@ export type ResolversTypes = {
 export type ResolversParentTypes = {
   About: About;
   AccountNumber: Scalars['AccountNumber'];
-  Badge: Badge;
   BigInt: Scalars['BigInt'];
   Boolean: Scalars['Boolean'];
   Byte: Scalars['Byte'];
@@ -889,8 +783,6 @@ export type ResolversParentTypes = {
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
-  Rating: Rating;
-  Receipts: Receipts;
   RegisterUser: RegisterUser;
   Res: Res;
   Roles: Roles;
@@ -928,13 +820,6 @@ export type AboutResolvers<ContextType = any, ParentType extends ResolversParent
 export interface AccountNumberScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['AccountNumber'], any> {
   name: 'AccountNumber';
 }
-
-export type BadgeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Badge'] = ResolversParentTypes['Badge']> = {
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
 
 export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
   name: 'BigInt';
@@ -1127,36 +1012,27 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
   addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'userInfoId'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'description' | 'musicOptionId' | 'smoke'>>;
-  createBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationCreateBadgeArgs, 'description' | 'name'>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
   createChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationCreateChatOptionArgs, 'content'>>;
   createModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, Partial<MutationCreateModelArgs>>;
   createMusicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<MutationCreateMusicOptionArgs, 'content'>>;
-  createRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, Partial<MutationCreateRatingArgs>>;
-  createReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, Partial<MutationCreateReceiptsArgs>>;
   createRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, Partial<MutationCreateRoleArgs>>;
   createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
   createUser?: Resolver<Maybe<ResolversTypes['UserCreated']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
-  deleteBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationDeleteBadgeArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
   deleteModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationDeleteModelArgs, 'id'>>;
-  deleteRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<MutationDeleteRatingArgs, 'id'>>;
-  deleteReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationDeleteReceiptsArgs, 'id'>>;
   deleteRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationDeleteRoleArgs, 'id'>>;
   deleteTrip?: Resolver<ResolversTypes['DeleteTripResponse'], ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
   selectTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationSelectTripArgs, 'tripId'>>;
   updateAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateAboutArgs, 'id'>>;
-  updateBadge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<MutationUpdateBadgeArgs, 'id'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;
   updateChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationUpdateChatOptionArgs, 'content' | 'id'>>;
   updateModel?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<MutationUpdateModelArgs, 'id'>>;
   updateMusicAndChatOption?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateMusicAndChatOptionArgs, 'chatOptionId' | 'id' | 'musicOptionId'>>;
   updateMusicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<MutationUpdateMusicOptionArgs, 'content' | 'id'>>;
-  updateRating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<MutationUpdateRatingArgs, 'id'>>;
-  updateReceipts?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<MutationUpdateReceiptsArgs, 'id'>>;
   updateRole?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<MutationUpdateRoleArgs, 'id'>>;
   updateTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripArgs, 'id'>>;
   updateTripPlace?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationUpdateTripPlaceArgs, 'id'>>;
@@ -1224,14 +1100,8 @@ export type ProfilePictureResolvers<ContextType = any, ParentType extends Resolv
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  Badge?: Resolver<Maybe<ResolversTypes['Badge']>, ParentType, ContextType, RequireFields<QueryBadgeArgs, 'id'>>;
-  Badges?: Resolver<Maybe<Array<Maybe<ResolversTypes['Badge']>>>, ParentType, ContextType>;
   Model?: Resolver<Maybe<ResolversTypes['Model']>, ParentType, ContextType, RequireFields<QueryModelArgs, 'id'>>;
   Models?: Resolver<Maybe<Array<Maybe<ResolversTypes['Model']>>>, ParentType, ContextType>;
-  Rating?: Resolver<Maybe<ResolversTypes['Rating']>, ParentType, ContextType, RequireFields<QueryRatingArgs, 'id'>>;
-  Ratings?: Resolver<Maybe<Array<Maybe<ResolversTypes['Rating']>>>, ParentType, ContextType>;
-  Receipt?: Resolver<Maybe<ResolversTypes['Receipts']>, ParentType, ContextType, RequireFields<QueryReceiptArgs, 'id'>>;
-  Receipts?: Resolver<Maybe<Array<Maybe<ResolversTypes['Receipts']>>>, ParentType, ContextType>;
   Role?: Resolver<Maybe<ResolversTypes['Roles']>, ParentType, ContextType, RequireFields<QueryRoleArgs, 'id'>>;
   Roles?: Resolver<Maybe<Array<Maybe<ResolversTypes['Roles']>>>, ParentType, ContextType>;
   UserTrips?: Resolver<Maybe<Array<Maybe<ResolversTypes['Trip']>>>, ParentType, ContextType>;
@@ -1264,19 +1134,6 @@ export interface RgbScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['RGBA'], any> {
   name: 'RGBA';
 }
-
-export type RatingResolvers<ContextType = any, ParentType extends ResolversParentTypes['Rating'] = ResolversParentTypes['Rating']> = {
-  content?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  note?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
-
-export type ReceiptsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Receipts'] = ResolversParentTypes['Receipts']> = {
-  file_name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-};
 
 export type RegisterUserResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegisterUser'] = ResolversParentTypes['RegisterUser']> = {
   email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1410,7 +1267,6 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type Resolvers<ContextType = any> = {
   About?: AboutResolvers<ContextType>;
   AccountNumber?: GraphQLScalarType;
-  Badge?: BadgeResolvers<ContextType>;
   BigInt?: GraphQLScalarType;
   Byte?: GraphQLScalarType;
   Car?: CarResolvers<ContextType>;
@@ -1472,8 +1328,6 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
-  Rating?: RatingResolvers<ContextType>;
-  Receipts?: ReceiptsResolvers<ContextType>;
   RegisterUser?: RegisterUserResolvers<ContextType>;
   Res?: ResResolvers<ContextType>;
   Roles?: RolesResolvers<ContextType>;

@@ -1,22 +1,18 @@
-import { DataSource } from "typeorm";
-import User from "../entity/User";
 import * as dotenv from "dotenv";
+import { DataSource } from "typeorm";
 
-import Car from "../entity/Car";
-import Model from "../entity/Model";
-import CarPicture from "../entity/CarPicture";
-import Options from "../entity/Option";
-import UserInfo from "../entity/UserInfo";
-import ProfilPicture from "../entity/ProfilePicture";
-import Badge from "../entity/Badge";
 import About from "../entity/About";
+import Car from "../entity/Car";
+import CarPicture from "../entity/CarPicture";
 import ChatOption from "../entity/ChatOption";
+import Model from "../entity/Model";
 import MusicOption from "../entity/MusicOption";
+import ProfilPicture from "../entity/ProfilePicture";
 import Roles from "../entity/Roles";
-import Rating from "../entity/Rating";
-import Receipt from "../entity/Receipt";
-import ConfirmMail from "../entity/ConfirmMail";
 import Trip from "../entity/Trip";
+import User from "../entity/User";
+import UserInfo from "../entity/UserInfo";
+
 dotenv.config();
 
 export default new DataSource({
@@ -30,18 +26,13 @@ export default new DataSource({
     User,
     UserInfo,
     ProfilPicture,
-    Badge,
     About,
     ChatOption,
     MusicOption,
     Trip,
     Roles,
-    Rating,
-    Receipt,
-    ConfirmMail,
     Car,
     Model,
-    Options,
     CarPicture,
   ],
   synchronize: true,
