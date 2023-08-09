@@ -8,7 +8,6 @@ import ChatOption from "../entity/ChatOption";
 import Model from "../entity/Model";
 import MusicOption from "../entity/MusicOption";
 import ProfilPicture from "../entity/ProfilePicture";
-import Roles from "../entity/Roles";
 import Trip from "../entity/Trip";
 import User from "../entity/User";
 import UserInfo from "../entity/UserInfo";
@@ -30,7 +29,6 @@ export default new DataSource({
     ChatOption,
     MusicOption,
     Trip,
-    Roles,
     Car,
     Model,
     CarPicture,

@@ -8,7 +8,6 @@ import ChatOptionResolver from "./ChatOption.resolver";
 import modelResolver from "./model.resolver";
 import MusicOptionResolver from "./MusicOption.resolver";
 import addProfilePicture from "./profilePicture.resolver";
-import rolesResolver from "./roles.resolver";
 import TripResolver from "./trip.resolver";
 import userResolver from "./user.resolver";
 import userInfoResolver from "./userInfo.resolver";
@@ -23,7 +22,6 @@ const resolvers = [
   ChatOptionResolver,
   MusicOptionResolver,
   AboutResolver,
-  rolesResolver,
   TripResolver,
   addProfilePicture,
 ];
