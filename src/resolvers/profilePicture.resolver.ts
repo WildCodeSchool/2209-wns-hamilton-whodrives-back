@@ -1,4 +1,4 @@
-import { MutationAddProfilePictureArgs } from "@/graphgen";
+import { MutationCreateProfilePictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 
@@ -10,13 +10,13 @@ export default {
   Query: {},
   Upload: GraphQLUpload,
   Mutation: {
-    addProfilePicture: async (
+    createProfilePicture: async (
       parent: any,
-      { userInfoId, file }: MutationAddProfilePictureArgs,
+      { userInfoId, file }: MutationCreateProfilePictureArgs,
       context: ExpressContext
     ) => {
       try {
-        return await profilePictureController.addProfilePicture({
+        return await profilePictureController.createProfilePicture({
           userInfoId,
           file,
         });

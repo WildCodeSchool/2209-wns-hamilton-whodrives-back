@@ -5,7 +5,7 @@ import AboutResolver from "./About.resolver";
 import carResolver from "./car.resolver";
 import carPictureResolver from "./carPicture.resolver";
 import ChatOptionResolver from "./ChatOption.resolver";
-import modelResolver from "./model.resolver";
+import brandResolver from "./brand.resolver";
 import MusicOptionResolver from "./MusicOption.resolver";
 import addProfilePicture from "./profilePicture.resolver";
 import TripResolver from "./trip.resolver";
@@ -18,7 +18,7 @@ const resolvers = [
   carPictureResolver,
   scalarResolvers,
   userInfoResolver,
-  modelResolver,
+  brandResolver,
   ChatOptionResolver,
   MusicOptionResolver,
   AboutResolver,

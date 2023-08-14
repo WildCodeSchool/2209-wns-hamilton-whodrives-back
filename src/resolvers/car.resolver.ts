@@ -10,12 +10,12 @@ import { IUserLogged } from "../resolvers/Interface";
 
 export default {
   Query: {
-    cars: async (_: any, {}, context: any, infos: any) => {
+    getCars: async (_: any, {}, context: any, infos: any) => {
       return await new CarController().listCars();
     },
 
-    car: async (_: any, { id }: { id: number }, context: any, infos: any) => {
-      return await new CarController().getCar(id);
+    getCarById: async (_: any, { id }: { id: number }, context: any, infos: any) => {
+      return await new CarController().getCarById(id);
     },
   },
   Mutation: {
@@ -25,9 +25,9 @@ export default {
       { userLogged }: IUserLogged,
       infos: any
     ) => {
-      const { seat, modelId, optionId } = args;
+      const { seat, brandId } = args;
       let car = await new CarController().addCar(
-        { seat, modelId, optionId },
+        { seat, brandId },
         { userLogged }
       );
       return car;
@@ -38,8 +38,8 @@ export default {
       args: MutationUpdateCarArgs,
       { res }: ExpressContext
     ) => {
-      const { id, seat, modelId } = args;
-      let car = await new CarController().updateCar({ id, seat, modelId });
+      const { id, seat, brandId } = args;
+      let car = await new CarController().updateCar({ id, seat, brandId });
       return car;
     },
 

@@ -112,7 +112,7 @@ class UserController {
       throw error;
     }
   }
-  async selectTrip({ userLogged, tripId }: IUserLogged & { tripId: number }) {
+  async joinTrip({ userLogged, tripId }: IUserLogged & { tripId: number }) {
     try {
       const tripRepository = this.trip;
       const userRepository = this.db;
@@ -145,7 +145,7 @@ class UserController {
     }
   }
 
-  async getUser(id: number) {
+  async getUserById(id: number) {
     return await this.db.findOneBy({ id });
   }
 

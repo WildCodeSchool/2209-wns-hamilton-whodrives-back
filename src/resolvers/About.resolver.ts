@@ -5,14 +5,14 @@ import { IUserLogged } from "./Interface";
 
 export default {
   Query: {
-    about: async (
+    getAboutById: async (
       _: any,
       { id }: { id: number },
       { userLogged }: any,
       context: any,
       infos: any
     ) => {
-      return await new AboutController().getAbout(id);
+      return await new AboutController().getAboutById(id);
     },
   },
 
@@ -27,11 +27,11 @@ export default {
         throw new Error(msg);
       }
       let userId = userLogged.id;
-      const { animal, description, smoke, chatOptionId, musicOptionId } = args;
+      const { animal, description, cigarette, chatOptionId, musicOptionId } = args;
       let about = await new AboutController().createAbout({
         animal,
         description,
-        smoke,
+        cigarette,
         chatOptionId,
         musicOptionId,
       });
@@ -47,7 +47,7 @@ export default {
       args: MutationUpdateAboutArgs,
       { res }: any
     ) => {
-      const { id, animal, description, smoke, chatOptionId, musicOptionId } =
+      const { id, animal, description, cigarette, chatOptionId, musicOptionId } =
         args;
       let about = await new AboutController().updateAbout({
         id,
@@ -55,7 +55,7 @@ export default {
         description,
         chatOptionId,
         musicOptionId,
-        smoke,
+        cigarette,
       });
       return about;
     },

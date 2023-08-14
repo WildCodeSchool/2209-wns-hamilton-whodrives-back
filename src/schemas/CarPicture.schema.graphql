@@ -5,5 +5,5 @@
   }
 
   type Mutation {
-    addPicture(carId: ID!, file: Upload!): CarPicture!
+    createCarPicture(carId: ID!, file: Upload!): CarPicture!
   }

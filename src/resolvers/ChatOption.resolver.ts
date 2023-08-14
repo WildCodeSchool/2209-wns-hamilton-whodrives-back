@@ -7,17 +7,17 @@ import ChatOptionController from "../controller/ChatOption";
 
 export default {
   Query: {
-    chatOptions: async (_: any, {}, context: any, infos: any) => {
+    getChatOptions: async (_: any, {}, context: any, infos: any) => {
       return await new ChatOptionController().listChatOptions();
     },
 
-    chatOption: async (
+    getChatOptionsById: async (
       _: any,
       { id }: { id: number },
       context: any,
       infos: any
     ) => {
-      return await new ChatOptionController().getChatOption(id);
+      return await new ChatOptionController().getChatOptionsById(id);
     },
   },
 

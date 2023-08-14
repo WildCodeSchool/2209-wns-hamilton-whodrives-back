@@ -10,13 +10,13 @@ import User from "../entity/User";
 import datasource from "../lib/datasource";
 
 interface IFilter {
-  departure_places: string;
+  departure_place: string;
   destination: string;
   date_departure: Date;
   arrival_date: Date;
   price: number;
   description: string;
-  place_available: number;
+  available_seat: number;
   hour_departure?: string;
 }
 class TripController {
@@ -27,66 +27,66 @@ class TripController {
     this.user = datasource.getRepository("User");
   }
   async getTripSearch({
-    departure_places,
+    departure_place,
     destination,
     date_departure,
     arrival_date,
     price,
     description,
     hour_departure,
-    place_available,
+    available_seat,
   }: {
-    departure_places: string;
+    departure_place: string;
     destination: string;
     date_departure: Date;
     arrival_date: Date;
     price: number;
     description: string;
     hour_departure: string;
-    place_available: number;
+    available_seat: number;
   }) {
     return await this.db.findBy({
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
       hour_departure,
-      place_available,
+      available_seat,
     });
   }
   async getTripSearchByHourRange({
-    departure_places,
+    departure_place,
     destination,
     date_departure,
     arrival_date,
     price,
     description,
     hour_departure,
-    place_available,
+    available_seat,
     minHour,
     maxHour,
   }: {
-    departure_places: string;
+    departure_place: string;
     destination: string;
     date_departure: Date;
     arrival_date: Date;
     price: number;
     description: string;
     hour_departure: string;
-    place_available: number;
+    available_seat: number;
     minHour: string;
     maxHour: string;
   }) {
     let filter: IFilter = {
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
-      place_available,
+      available_seat,
     };
 
     return await this.db.findBy({
@@ -100,19 +100,19 @@ class TripController {
     return await this.db.find();
   }
 
-  async getTrip(id: number) {
+  async getTripById(id: number) {
     return await this.db.findOneBy({ id });
   }
   async addTrip(
     {
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
       hour_departure,
-      place_available,
+      available_seat,
     }: MutationCreateTripArgs,
     userLogged: User
   ) {
@@ -124,38 +124,38 @@ class TripController {
     }
 
     const trip = new Trip();
-    trip.departure_places = departure_places;
+    trip.departure_place = departure_place;
     trip.destination = destination;
     trip.date_departure = new Date(date_departure);
     trip.arrival_date = new Date(arrival_date);
     trip.price = price;
     trip.description = description;
     trip.hour_departure = hour_departure;
-    trip.place_available = place_available;
+    trip.available_seat = available_seat;
 
     trip.users = [user];
 
     return await this.db.save(trip);
   }
 
-  async updateTripPlace({ id, place_available }: MutationUpdateTripPlaceArgs) {
+  async updateTripPlace({ id, available_seat }: MutationUpdateTripPlaceArgs) {
     const trip = await this.db.findOne({ where: { id: +id } });
     if (!trip) {
       throw new Error("ERROR");
     }
     const {
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
     } = trip;
-    trip.place_available = place_available;
+    trip.available_seat = available_seat;
     await this.db.save(trip);
     return {
       ...trip,
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
@@ -166,26 +166,26 @@ class TripController {
 
   async updateTrip({
     id,
-    departure_places,
+    departure_place,
     destination,
     date_departure,
     arrival_date,
     price,
     description,
     hour_departure,
-    place_available,
+    available_seat,
   }: MutationUpdateTripArgs) {
     const TripId = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
       ...TripId,
-      departure_places,
+      departure_place,
       destination,
       date_departure,
       arrival_date,
       price,
       description,
       hour_departure,
-      place_available,
+      available_seat,
     });
   }
 
@@ -210,7 +210,7 @@ class TripController {
           (passenger) => passenger.username !== userLogged.username
         );
         trip.passengers = updatedPassengers;
-        trip.place_available += 1;
+        trip.available_seat += 1;
         await this.db.save(trip);
         return { message: "Passenger removed from the trip", success: true };
       }

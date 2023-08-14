@@ -22,7 +22,7 @@ export default class About {
   description: string;
 
   @Column()
-  smoke: boolean;
+  cigarette: boolean;
 
   @ManyToOne(() => ChatOption, (chatOption) => chatOption.about, {
     nullable: true,

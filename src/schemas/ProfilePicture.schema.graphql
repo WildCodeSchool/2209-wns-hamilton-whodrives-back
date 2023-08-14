@@ -7,5 +7,5 @@ type ProfilePicture {
 
 
 type Mutation {
-  addProfilePicture(userInfoId: ID!, file: Upload!): ProfilePicture!
+  createProfilePicture(userInfoId: ID!, file: Upload!): ProfilePicture!
 }

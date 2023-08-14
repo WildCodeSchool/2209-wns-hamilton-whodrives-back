@@ -4,8 +4,8 @@ type ChatOption {
 }
 
 type Query {
-  chatOptions: [ChatOption]
-  chatOption(id: ID!): ChatOption
+  getChatOptions: [ChatOption]
+  getChatOptionsById(id: ID!): ChatOption
 }
 type Mutation {
   createChatOption(content: String!): ChatOption
