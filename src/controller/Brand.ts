@@ -17,7 +17,7 @@ class BrandController {
     return await this.db.findOneBy({ id });
   }
 
-  async addBrand({ name }: { name: string }) {
+  async createBrand({ name }: { name: string }) {
     const Brand = await this.db.save({ name });
     return Brand;
   }

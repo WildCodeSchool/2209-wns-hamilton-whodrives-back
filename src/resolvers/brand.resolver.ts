@@ -20,7 +20,7 @@ export default {
       { res }: ExpressContext
     ) => {
       const { name } = args;
-      let Brand = await new BrandController().addBrand({ name });
+      let Brand = await new BrandController().createBrand({ name });
       return Brand;
     },
 

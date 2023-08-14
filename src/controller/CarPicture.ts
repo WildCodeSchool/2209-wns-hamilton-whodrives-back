@@ -1,4 +1,4 @@
-import { MutationCreatePictureArgs } from "@/graphgen";
+import { MutationCreateCarPictureArgs } from "@/graphgen";
 import fs from "fs";
 import { finished } from "stream/promises";
 import { Repository } from "typeorm";
@@ -16,7 +16,7 @@ class CarPictureController {
     this.dbCar = datasource.getRepository("Car");
   }
 
-  async createCarPicture({ carId, file }: MutationCreatePictureArgs) {
+  async createCarPicture({ carId, file }: MutationCreateCarPictureArgs) {
     const { createReadStream, filename } = await file;
     if (!createReadStream || !filename) {
       throw new Error("No file uploaded");
