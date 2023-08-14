@@ -170,13 +170,13 @@ export default {
       return await new UserController().deleteUser({ id });
     },
     // trip user mutation
-    selectTrip: async (
+    joinTrip: async (
       _: any,
       { tripId }: { tripId: number },
       { userLogged }: IUserLogged,
       infos: any
     ) => {
-      return await new UserController().selectTrip({ userLogged, tripId });
+      return await new UserController().joinTrip({ userLogged, tripId });
     },
   },
 };

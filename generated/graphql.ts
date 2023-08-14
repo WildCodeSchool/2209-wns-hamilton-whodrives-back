@@ -132,13 +132,13 @@ export type MusicOption = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  addPicture: CarPicture;
-  addProfilePicture: ProfilePicture;
   createAbout?: Maybe<About>;
   createBrand?: Maybe<Brand>;
   createCar?: Maybe<Car>;
+  createCarPicture: CarPicture;
   createChatOption?: Maybe<ChatOption>;
   createMusicOption?: Maybe<MusicOption>;
+  createProfilePicture: ProfilePicture;
   createTrip?: Maybe<Trip>;
   createUser?: Maybe<UserCreated>;
   createUserInfo?: Maybe<UserInfo>;
@@ -146,8 +146,8 @@ export type Mutation = {
   deleteCar?: Maybe<Car>;
   deleteTrip: DeleteTripResponse;
   deleteUser?: Maybe<Res>;
+  joinTrip?: Maybe<Trip>;
   loginUser?: Maybe<RegisterUser>;
-  selectTrip?: Maybe<Trip>;
   updateAbout?: Maybe<About>;
   updateBrand?: Maybe<Brand>;
   updateCar?: Maybe<Car>;
@@ -158,18 +158,6 @@ export type Mutation = {
   updateTripPlace?: Maybe<Trip>;
   updateUser?: Maybe<User>;
   updateUserInfo?: Maybe<UserInfo>;
-};
-
-
-export type MutationAddPictureArgs = {
-  carId: Scalars['ID'];
-  file: Scalars['Upload'];
-};
-
-
-export type MutationAddProfilePictureArgs = {
-  file: Scalars['Upload'];
-  userInfoId: Scalars['ID'];
 };
 
 
@@ -194,6 +182,12 @@ export type MutationCreateCarArgs = {
 };
 
 
+export type MutationCreateCarPictureArgs = {
+  carId: Scalars['ID'];
+  file: Scalars['Upload'];
+};
+
+
 export type MutationCreateChatOptionArgs = {
   content: Scalars['String'];
 };
@@ -201,6 +195,12 @@ export type MutationCreateChatOptionArgs = {
 
 export type MutationCreateMusicOptionArgs = {
   content: Scalars['String'];
+};
+
+
+export type MutationCreateProfilePictureArgs = {
+  file: Scalars['Upload'];
+  userInfoId: Scalars['ID'];
 };
 
 
@@ -255,14 +255,14 @@ export type MutationDeleteUserArgs = {
 };
 
 
-export type MutationLoginUserArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
+export type MutationJoinTripArgs = {
+  tripId: Scalars['ID'];
 };
 
 
-export type MutationSelectTripArgs = {
-  tripId: Scalars['ID'];
+export type MutationLoginUserArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 
@@ -973,13 +973,13 @@ export type MusicOptionResolvers<ContextType = any, ParentType extends Resolvers
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
-  addPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationAddPictureArgs, 'carId' | 'file'>>;
-  addProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationAddProfilePictureArgs, 'file' | 'userInfoId'>>;
   createAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationCreateAboutArgs, 'animal' | 'chatOptionId' | 'cigarette' | 'description' | 'musicOptionId'>>;
   createBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, Partial<MutationCreateBrandArgs>>;
   createCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationCreateCarArgs, 'seat'>>;
+  createCarPicture?: Resolver<ResolversTypes['CarPicture'], ParentType, ContextType, RequireFields<MutationCreateCarPictureArgs, 'carId' | 'file'>>;
   createChatOption?: Resolver<Maybe<ResolversTypes['ChatOption']>, ParentType, ContextType, RequireFields<MutationCreateChatOptionArgs, 'content'>>;
   createMusicOption?: Resolver<Maybe<ResolversTypes['MusicOption']>, ParentType, ContextType, RequireFields<MutationCreateMusicOptionArgs, 'content'>>;
+  createProfilePicture?: Resolver<ResolversTypes['ProfilePicture'], ParentType, ContextType, RequireFields<MutationCreateProfilePictureArgs, 'file' | 'userInfoId'>>;
   createTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, Partial<MutationCreateTripArgs>>;
   createUser?: Resolver<Maybe<ResolversTypes['UserCreated']>, ParentType, ContextType, RequireFields<MutationCreateUserArgs, 'date_of_birth' | 'email' | 'password' | 'phone' | 'username'>>;
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
@@ -987,8 +987,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
   deleteTrip?: Resolver<ResolversTypes['DeleteTripResponse'], ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
+  joinTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationJoinTripArgs, 'tripId'>>;
   loginUser?: Resolver<Maybe<ResolversTypes['RegisterUser']>, ParentType, ContextType, RequireFields<MutationLoginUserArgs, 'email' | 'password'>>;
-  selectTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationSelectTripArgs, 'tripId'>>;
   updateAbout?: Resolver<Maybe<ResolversTypes['About']>, ParentType, ContextType, RequireFields<MutationUpdateAboutArgs, 'id'>>;
   updateBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<MutationUpdateBrandArgs, 'id'>>;
   updateCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationUpdateCarArgs, 'id'>>;

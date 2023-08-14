@@ -1,4 +1,4 @@
-import { MutationAddProfilePictureArgs } from "@/graphgen";
+import { MutationCreateProfilePictureArgs } from "@/graphgen";
 import fs from "fs";
 import UserInfo from "src/entity/UserInfo";
 import { finished } from "stream/promises";
@@ -15,7 +15,7 @@ class ProfilePictureController {
     this.db = datasource.getRepository("ProfilPicture");
     this.dbProfile = datasource.getRepository("UserInfo");
   }
-  async addProfilePicture({ userInfoId, file }: MutationAddProfilePictureArgs) {
+  async createProfilePicture({ userInfoId, file }: MutationCreateProfilePictureArgs) {
     console.log("file", file);
     const { createReadStream, filename } = await file;
     if (!createReadStream || !filename) {

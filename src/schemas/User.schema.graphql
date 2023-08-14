@@ -73,5 +73,5 @@ type Mutation {
 
   loginUser(email: String!, password: String!): RegisterUser
 
-  selectTrip(tripId: ID!): Trip
+  joinTrip(tripId: ID!): Trip
 }

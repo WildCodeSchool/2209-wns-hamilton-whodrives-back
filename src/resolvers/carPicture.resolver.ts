@@ -1,4 +1,4 @@
-import { MutationAddPictureArgs } from "@/graphgen";
+import { MutationCreateCarPictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
 
@@ -10,13 +10,13 @@ export default {
   Query: {},
   Upload: GraphQLUpload,
   Mutation: {
-    addPicture: async (
+    createCarPicture: async (
       parent: any,
-      { carId, file }: MutationAddPictureArgs,
+      { carId, file }: MutationCreateCarPictureArgs,
       context: ExpressContext
     ) => {
       try {
-        return await carPictureController.addCarPicture({
+        return await carPictureController.createCarPicture({
           carId,
           file,
         });
