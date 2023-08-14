@@ -13,17 +13,17 @@ import { IUserLogged } from "../resolvers/Interface";
 
 export default {
   Query: {
-    users: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+    getUsers: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().listUsers();
     },
 
-    user: async (_: any, { id }: { id: number }, context: any, infos: any) => {
-      return await new UserController().getUser(id);
+    getUserById: async (_: any, { id }: { id: number }, context: any, infos: any) => {
+      return await new UserController().getUserById(id);
     },
-    userLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
+    getUserLogged: async (_: any, {}, { userLogged }: IUserLogged, infos: any) => {
       return await new UserController().getUserLogged({ userLogged });
     },
-    profilePicturePath: async (
+    getProfilePicturePath: async (
       _: any,
       {},
       { userLogged }: IUserLogged,
@@ -39,7 +39,7 @@ export default {
     ) => {
       return await new UserController().checkUserLogged({ userLogged });
     },
-    UserTripsLoggedUser: async (
+    getUserTripsLoggedUser: async (
       _: any,
       {},
       { userLogged }: IUserLogged,
@@ -47,7 +47,7 @@ export default {
     ) => {
       return await new UserController().getUserTripsLoggedUser({ userLogged });
     },
-    UserTrips: async (
+    getUserTrips: async (
       _: any,
       {}: any,
       { userLogged }: IUserLogged,

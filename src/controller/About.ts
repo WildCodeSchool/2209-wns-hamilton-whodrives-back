@@ -20,7 +20,7 @@ class AboutController {
     this.dbUserInfo = datasource.getRepository("UserInfo");
   }
 
-  async getAbout(id: number) {
+  async getAboutById(id: number) {
     return await this.db.findOneBy({ id });
   }
 
@@ -35,7 +35,7 @@ class AboutController {
   async createAbout({
     animal,
     description,
-    smoke,
+    cigarette,
     chatOptionId,
     musicOptionId,
   }: MutationCreateAboutArgs) {
@@ -48,7 +48,7 @@ class AboutController {
     if (musicOption && chatOption) {
       const about = await this.db.save({
         animal,
-        smoke,
+        cigarette,
         description,
         musicOption,
         chatOption,
@@ -70,7 +70,7 @@ class AboutController {
     id,
     animal,
     description,
-    smoke,
+    cigarette,
     chatOptionId,
     musicOptionId,
   }: MutationUpdateAboutArgs) {
@@ -88,7 +88,7 @@ class AboutController {
       chatOption,
       description,
       musicOption,
-      smoke,
+      cigarette,
     });
   }
 }

@@ -37,13 +37,13 @@ type UserCreated {
 }
 
 type Query {
-  users: [User]
-  user(id: ID): User
-  userLogged: User!
+  getUsers: [User]
+  getUserById(id: ID): User
+  getUserLogged: User!
   checkUserLogged: Res
-  UserTrips: [Trip]
-  UserTripsLoggedUser: [Trip]
-  profilePicturePath: String
+  getUserTrips: [Trip]
+  getUserTripsLoggedUser: [Trip]
+  getProfilePicturePath: String
 }
 
 type Mutation {

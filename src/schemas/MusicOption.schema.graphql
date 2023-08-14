@@ -4,8 +4,8 @@ type MusicOption {
 }
 
 type Query {
-  musicOptions: [MusicOption]
-  musicOption(id: ID!): MusicOption
+  getMusicOptions: [MusicOption]
+  getMusicOptionsById(id: ID!): MusicOption
 }
 
 type Mutation {

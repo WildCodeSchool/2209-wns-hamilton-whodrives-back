@@ -1,0 +1,15 @@
+type Brand {
+  id: ID!
+  name: String
+}
+
+type Query {
+  getBrands: [Brand]
+  getBrandById(id: ID!): Brand
+}
+
+type Mutation {
+  createBrand(name: String): Brand
+  updateBrand(id: ID!, name: String): Brand
+  deleteBrand(id: ID!): Brand
+}

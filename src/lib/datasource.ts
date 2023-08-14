@@ -5,7 +5,7 @@ import About from "../entity/About";
 import Car from "../entity/Car";
 import CarPicture from "../entity/CarPicture";
 import ChatOption from "../entity/ChatOption";
-import Model from "../entity/Model";
+import Brand from "../entity/Brand";
 import MusicOption from "../entity/MusicOption";
 import ProfilPicture from "../entity/ProfilePicture";
 import Trip from "../entity/Trip";
@@ -30,7 +30,7 @@ export default new DataSource({
     MusicOption,
     Trip,
     Car,
-    Model,
+    Brand,
     CarPicture,
   ],
   synchronize: true,

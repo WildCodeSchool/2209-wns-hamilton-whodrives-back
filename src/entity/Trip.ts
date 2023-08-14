@@ -14,7 +14,7 @@ export default class Trip {
   id: number;
 
   @Column()
-  departure_places: string;
+  departure_place: string;
 
   @Column()
   destination: string;
@@ -26,7 +26,7 @@ export default class Trip {
   hour_departure: string;
 
   @Column({ default: 0 })
-  place_available: number;
+  available_seat: number;
 
   @Column()
   arrival_date: Date;

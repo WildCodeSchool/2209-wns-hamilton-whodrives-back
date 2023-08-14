@@ -1,74 +1,74 @@
 type Trip {
   id: ID!
-  departure_places: String
+  departure_place: String
   destination: String
   date_departure: Date
   arrival_date: Date
   price: Int
   description: String
   hour_departure: String
-  place_available: Int
+  available_seat: Int
   users: [User]
   passengers: [User!]!
 }
 type Query {
   getTripSearch(
-    departure_places: String
+    departure_place: String
     destination: String
     date_departure: Date
     arrival_date: Date
     price: Int
     description: String
     hour_departure: String
-    place_available: Int
+    available_seat: Int
   ): [Trip]
   getTripSearchByHourRange(
-    departure_places: String
+    departure_place: String
     destination: String
     date_departure: Date
     arrival_date: Date
     price: Int
     description: String
     hour_departure: String
-    place_available: Int
+    available_seat: Int
     minHour: String,
     maxHour: String,
   ): [Trip]
-  getTrip(id: ID!): Trip
+  getTripById(id: ID!): Trip
   getTrips: [Trip]
 }
 type Mutation {
   createTrip(
-    departure_places: String
+    departure_place: String
     destination: String
     date_departure: Date
     arrival_date: Date
     price: Int
     description: String
     hour_departure: String
-    place_available: Int
+    available_seat: Int
   ): Trip
   updateTripPlace(
     id: ID!
-    departure_places: String
+    departure_place: String
     destination: String
     date_departure: Date
     arrival_date: Date
     price: Int
     description: String
     hour_departure: String
-    place_available: Int
+    available_seat: Int
   ): Trip
   updateTrip(
     id: ID!
-    departure_places: String
+    departure_place: String
     destination: String
     date_departure: Date
     arrival_date: Date
     price: Int
     description: String
     hour_departure: String
-    place_available: Int
+    available_seat: Int
   ): Trip
     deleteTrip(id: ID!): DeleteTripResponse!
 }

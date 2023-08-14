@@ -7,7 +7,7 @@ import {
 } from "typeorm";
 
 import CarPicture from "./CarPicture";
-import Model from "./Model";
+import Brand from "./Brand";
 import User from "./User";
 
 @Entity("car")
@@ -24,6 +24,6 @@ export default class Car {
   @OneToMany(() => CarPicture, (carPicture) => carPicture.car, { eager: true })
   carPictures: CarPicture[];
 
-  @ManyToOne(() => Model, (model) => model.cars, { eager: true })
-  model: Model;
+  @ManyToOne(() => Brand, (brand) => brand.cars, { eager: true })
+  brand: Brand;
 }

@@ -17,60 +17,60 @@ export default {
     getTripSearch: async (
       _: any,
       {
-        departure_places,
+        departure_place,
         destination,
         date_departure,
         arrival_date,
         price,
         description,
         hour_departure,
-        place_available,
+        available_seat,
       }: {
-        departure_places: string;
+        departure_place: string;
         destination: string;
         date_departure: Date;
         arrival_date: Date;
         price: number;
         description: string;
         hour_departure: string;
-        place_available: number;
+        available_seat: number;
       },
       context: any,
       infos: any
     ) => {
       return await new TripController().getTripSearch({
-        departure_places,
+        departure_place,
         destination,
         date_departure,
         arrival_date,
         price,
         description,
         hour_departure,
-        place_available,
+        available_seat,
       });
     },
     getTripSearchByHourRange: async (
       _: any,
       {
-        departure_places,
+        departure_place,
         destination,
         date_departure,
         arrival_date,
         price,
         description,
         hour_departure,
-        place_available,
+        available_seat,
         minHour,
         maxHour,
       }: {
-        departure_places: string;
+        departure_place: string;
         destination: string;
         date_departure: Date;
         arrival_date: Date;
         price: number;
         description: string;
         hour_departure: string;
-        place_available: number;
+        available_seat: number;
         minHour: string;
         maxHour: string;
       },
@@ -78,26 +78,26 @@ export default {
       infos: any
     ) => {
       return await new TripController().getTripSearchByHourRange({
-        departure_places,
+        departure_place,
         destination,
         date_departure,
         arrival_date,
         price,
         description,
         hour_departure,
-        place_available,
+        available_seat,
         minHour,
         maxHour,
       });
     },
 
-    getTrip: async (
+    getTripById: async (
       _: any,
       { id }: { id: number },
       context: any,
       infos: any
     ) => {
-      return await new TripController().getTrip(id);
+      return await new TripController().getTripById(id);
     },
   },
 
@@ -109,14 +109,14 @@ export default {
 
     ) => {
       const {
-        departure_places,
+        departure_place,
         destination,
         date_departure,
         arrival_date,
         price,
         description,
         hour_departure,
-        place_available,
+        available_seat,
       } = args;
 
       if (!userLogged) {
@@ -124,14 +124,14 @@ export default {
       }
       const trip = await new TripController().addTrip(
         {
-          departure_places,
+          departure_place,
           destination,
           date_departure,
           arrival_date,
           price,
           description,
           hour_departure,
-          place_available,
+          available_seat,
         },
         userLogged
       );
@@ -146,23 +146,23 @@ export default {
       ) => {
         const {
           id,
-          departure_places,
+          departure_place,
           destination,
           date_departure,
           arrival_date,
           price,
           description,
-          place_available,
+          available_seat,
         } = args;
         let Trip = await new TripController().updateTripPlace({
           id,
-          departure_places,
+          departure_place,
           destination,
           date_departure,
           arrival_date,
           price,
           description,
-          place_available, 
+          available_seat, 
         });
         return Trip;
       },
@@ -174,23 +174,23 @@ export default {
       ) => {
         const {
           id,
-          departure_places,
+          departure_place,
           destination,
           date_departure,
           arrival_date,
           price,
           description,
-          place_available,
+          available_seat,
         } = args;
         let Trip = await new TripController().updateTrip({
           id,
-          departure_places,
+          departure_place,
           destination,
           date_departure,
           arrival_date,
           price,
           description,
-          place_available,
+          available_seat,
         });
         return Trip;
       },

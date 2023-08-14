@@ -17,7 +17,7 @@ class MusicOptionController {
     return await this.db.find();
   }
 
-  async getMusicOption(id: number) {
+  async getMusicOptionsById(id: number) {
     return await this.db.findOneBy({ id });
   }
 

@@ -7,17 +7,17 @@ import MusicOptionController from "../controller/MusicOption";
 
 export default {
   Query: {
-    musicOptions: async (_: any, {}, context: any, infos: any) => {
+    getMusicOptions: async (_: any, {}, context: any, infos: any) => {
       return await new MusicOptionController().listMusicOptions();
     },
 
-    musicOption: async (
+    getMusicOptionsById: async (
       _: any,
       { id }: { id: number },
       context: any,
       infos: any
     ) => {
-      return await new MusicOptionController().getMusicOption(id);
+      return await new MusicOptionController().getMusicOptionsById(id);
     },
   },
   Mutation: {

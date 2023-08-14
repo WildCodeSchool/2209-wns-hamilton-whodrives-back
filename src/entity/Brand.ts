@@ -2,14 +2,14 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import Car from "./Car";
 
-@Entity("model")
-export default class Model {
+@Entity("brand")
+export default class Brand {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   name: string;
 
-  @OneToMany(() => Car, (car) => car.model)
+  @OneToMany(() => Car, (car) => car.brand)
   cars: Car[];
 }

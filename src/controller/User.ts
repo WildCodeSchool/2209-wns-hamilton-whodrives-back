@@ -145,7 +145,7 @@ class UserController {
     }
   }
 
-  async getUser(id: number) {
+  async getUserById(id: number) {
     return await this.db.findOneBy({ id });
   }
 

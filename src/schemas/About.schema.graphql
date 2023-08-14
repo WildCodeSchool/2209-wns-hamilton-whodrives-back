@@ -2,21 +2,21 @@ type About {
   id: ID!
   animal: Boolean
   description: String
-  smoke: Boolean
+  cigarette: Boolean
   chatOption: ChatOption
   musicOption: MusicOption
 }
 
 type Query {
-  abouts: [About]
-  about(id: ID!): About
+  getAbouts: [About]
+  getAboutById(id: ID!): About
 }
 
 type Mutation {
   createAbout(
     animal: Boolean!
     description: String!
-    smoke: Boolean!
+    cigarette: Boolean!
     chatOptionId: ID!
     musicOptionId: ID!
   ): About
@@ -26,7 +26,7 @@ type Mutation {
     description: String
     chatOptionId: Int
     musicOptionId: Int
-    smoke: Boolean
+    cigarette: Boolean
   ): About
   updateMusicAndChatOption(
     id: ID!

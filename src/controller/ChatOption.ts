@@ -17,7 +17,7 @@ class ChatOptionController {
     return await this.db.find();
   }
 
-  async getChatOption(id: number) {
+  async getChatOptionsById(id: number) {
     return await this.db.findOneBy({ id });
   }
 
