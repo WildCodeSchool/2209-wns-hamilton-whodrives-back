@@ -6,4 +6,8 @@
 
   type Mutation {
     createCarPicture(carId: ID!, file: Upload!): CarPicture!
+    deleteCarPicture(id: ID!): msg
   }
+type msg{
+  msg: String
+}
