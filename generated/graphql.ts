@@ -144,6 +144,8 @@ export type Mutation = {
   createUserInfo?: Maybe<UserInfo>;
   deleteBrand?: Maybe<Brand>;
   deleteCar?: Maybe<Car>;
+  deleteCarPicture?: Maybe<Msg>;
+  deleteProfilePicture?: Maybe<Msg>;
   deleteTrip: DeleteTripResponse;
   deleteUser?: Maybe<Res>;
   joinTrip?: Maybe<Trip>;
@@ -241,6 +243,16 @@ export type MutationDeleteBrandArgs = {
 
 
 export type MutationDeleteCarArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteCarPictureArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationDeleteProfilePictureArgs = {
   id: Scalars['ID'];
 };
 
@@ -522,6 +534,11 @@ export type UserInfo = {
   profilPicture?: Maybe<ProfilePicture>;
 };
 
+export type Msg = {
+  __typename?: 'msg';
+  msg?: Maybe<Scalars['String']>;
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -678,6 +695,7 @@ export type ResolversTypes = {
   UserInfo: ResolverTypeWrapper<UserInfo>;
   UtcOffset: ResolverTypeWrapper<Scalars['UtcOffset']>;
   Void: ResolverTypeWrapper<Scalars['Void']>;
+  msg: ResolverTypeWrapper<Msg>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -769,6 +787,7 @@ export type ResolversParentTypes = {
   UserInfo: UserInfo;
   UtcOffset: Scalars['UtcOffset'];
   Void: Scalars['Void'];
+  msg: Msg;
 };
 
 export type AboutResolvers<ContextType = any, ParentType extends ResolversParentTypes['About'] = ResolversParentTypes['About']> = {
@@ -985,6 +1004,8 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   createUserInfo?: Resolver<Maybe<ResolversTypes['UserInfo']>, ParentType, ContextType, Partial<MutationCreateUserInfoArgs>>;
   deleteBrand?: Resolver<Maybe<ResolversTypes['Brand']>, ParentType, ContextType, RequireFields<MutationDeleteBrandArgs, 'id'>>;
   deleteCar?: Resolver<Maybe<ResolversTypes['Car']>, ParentType, ContextType, RequireFields<MutationDeleteCarArgs, 'id'>>;
+  deleteCarPicture?: Resolver<Maybe<ResolversTypes['msg']>, ParentType, ContextType, RequireFields<MutationDeleteCarPictureArgs, 'id'>>;
+  deleteProfilePicture?: Resolver<Maybe<ResolversTypes['msg']>, ParentType, ContextType, RequireFields<MutationDeleteProfilePictureArgs, 'id'>>;
   deleteTrip?: Resolver<ResolversTypes['DeleteTripResponse'], ParentType, ContextType, RequireFields<MutationDeleteTripArgs, 'id'>>;
   deleteUser?: Resolver<Maybe<ResolversTypes['Res']>, ParentType, ContextType, RequireFields<MutationDeleteUserArgs, 'id'>>;
   joinTrip?: Resolver<Maybe<ResolversTypes['Trip']>, ParentType, ContextType, RequireFields<MutationJoinTripArgs, 'tripId'>>;
@@ -1217,6 +1238,11 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Void';
 }
 
+export type MsgResolvers<ContextType = any, ParentType extends ResolversParentTypes['msg'] = ResolversParentTypes['msg']> = {
+  msg?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   About?: AboutResolvers<ContextType>;
   AccountNumber?: GraphQLScalarType;
@@ -1301,5 +1327,6 @@ export type Resolvers<ContextType = any> = {
   UserInfo?: UserInfoResolvers<ContextType>;
   UtcOffset?: GraphQLScalarType;
   Void?: GraphQLScalarType;
+  msg?: MsgResolvers<ContextType>;
 };
 

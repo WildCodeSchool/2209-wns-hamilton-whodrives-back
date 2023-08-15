@@ -1,7 +1,6 @@
-import { MutationCreateCarPictureArgs } from "@/graphgen";
+import { MutationCreateCarPictureArgs, MutationDeleteCarPictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
-
 import CarPictureController from "../controller/CarPicture";
 
 const carPictureController = new CarPictureController();
@@ -28,6 +27,14 @@ export default {
           carPicture: null,
         };
       }
+    },
+    deleteCarPicture: async (
+      _: any,
+      args: MutationDeleteCarPictureArgs,
+      { res }: ExpressContext
+    ) => {
+      const { id } = args;
+      return await carPictureController.deleteCarPicture(+id);
     },
   },
 };

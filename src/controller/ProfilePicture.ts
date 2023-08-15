@@ -55,5 +55,21 @@ class ProfilePictureController {
       }
     }
   }
-}
+ async deleteProfilePicture(id: number) {
+    let msg = "Picture not found";
+    let msg2 = "Error request";
+    const Profile = await this.db.findOne({ where: { id: +id } });
+    if (Profile) {
+      let result = await this.db.delete(id);
+      if (result?.affected != 0) {
+        return { msg: "Picture deleted" };
+      } else {
+        return {msg : msg2};
+      }
+    } else {
+      return { msg };
+    }
+  }
+     
+  }
 export default ProfilePictureController;

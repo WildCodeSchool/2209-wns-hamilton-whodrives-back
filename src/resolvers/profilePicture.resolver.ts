@@ -1,7 +1,6 @@
-import { MutationCreateProfilePictureArgs } from "@/graphgen";
+import { MutationCreateProfilePictureArgs, MutationDeleteProfilePictureArgs } from "@/graphgen";
 import { ExpressContext } from "apollo-server-express";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.js";
-
 import ProfilePictureController from "../controller/ProfilePicture";
 
 const profilePictureController = new ProfilePictureController();
@@ -23,6 +22,13 @@ export default {
       } catch (error: any) {
         console.log("ERROR", error);
       }
+    },
+    deleteProfilePicture: async (
+      parent: any,
+      args: MutationDeleteProfilePictureArgs,
+    ) => {
+      const { id } = args;
+      return await profilePictureController.deleteProfilePicture(+id);
     },
   },
 };

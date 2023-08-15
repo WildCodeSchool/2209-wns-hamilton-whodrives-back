@@ -54,5 +54,20 @@ class CarPictureController {
       throw new Error("Un problème est survenu au niveau de l'image.");
     }
   }
+async deleteCarPicture(id: number) {
+      let msg = "Car Picture not found";
+      let msg2 = "Error request";
+      const carPicture = await this.db.findOne({ where: { id: +id } });
+      if (carPicture) {
+        let result = await this.db.delete(id);
+        if (result?.affected != 0) {
+          return { msg: "Car Picture deleted" };
+        } else {
+          return {msg : msg2};
+        }
+      } else {
+        return { msg };
+      }
+    }
 }
 export default CarPictureController;
