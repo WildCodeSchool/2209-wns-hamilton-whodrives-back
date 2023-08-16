@@ -12,12 +12,12 @@ import datasource from "../lib/datasource";
 interface IFilter {
   departure_place: string;
   destination: string;
-  date_departure: Date;
+  departure_date: Date;
   arrival_date: Date;
   price: number;
   description: string;
   available_seat: number;
-  hour_departure?: string;
+  departure_hour?: string;
 }
 class TripController {
   db: Repository<Trip>;
@@ -29,52 +29,52 @@ class TripController {
   async getTripSearch({
     departure_place,
     destination,
-    date_departure,
+    departure_date,
     arrival_date,
     price,
     description,
-    hour_departure,
+    departure_hour,
     available_seat,
   }: {
     departure_place: string;
     destination: string;
-    date_departure: Date;
+    departure_date: Date;
     arrival_date: Date;
     price: number;
     description: string;
-    hour_departure: string;
+    departure_hour: string;
     available_seat: number;
   }) {
     return await this.db.findBy({
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
-      hour_departure,
+      departure_hour,
       available_seat,
     });
   }
   async getTripSearchByHourRange({
     departure_place,
     destination,
-    date_departure,
+    departure_date,
     arrival_date,
     price,
     description,
-    hour_departure,
+    departure_hour,
     available_seat,
     minHour,
     maxHour,
   }: {
     departure_place: string;
     destination: string;
-    date_departure: Date;
+    departure_date: Date;
     arrival_date: Date;
     price: number;
     description: string;
-    hour_departure: string;
+    departure_hour: string;
     available_seat: number;
     minHour: string;
     maxHour: string;
@@ -82,7 +82,7 @@ class TripController {
     let filter: IFilter = {
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
@@ -91,7 +91,7 @@ class TripController {
 
     return await this.db.findBy({
       ...filter,
-      hour_departure:
+      departure_hour:
         maxHour !== "" && minHour !== "" ? Between(minHour, maxHour) : null,
     });
   }
@@ -107,11 +107,11 @@ class TripController {
     {
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
-      hour_departure,
+      departure_hour,
       available_seat,
     }: MutationCreateTripArgs,
     userLogged: User
@@ -126,11 +126,11 @@ class TripController {
     const trip = new Trip();
     trip.departure_place = departure_place;
     trip.destination = destination;
-    trip.date_departure = new Date(date_departure);
+    trip.departure_date = new Date(departure_date);
     trip.arrival_date = new Date(arrival_date);
     trip.price = price;
     trip.description = description;
-    trip.hour_departure = hour_departure;
+    trip.departure_hour = departure_hour;
     trip.available_seat = available_seat;
 
     trip.users = [user];
@@ -146,7 +146,7 @@ class TripController {
     const {
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
@@ -157,7 +157,7 @@ class TripController {
       ...trip,
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
@@ -168,11 +168,11 @@ class TripController {
     id,
     departure_place,
     destination,
-    date_departure,
+    departure_date,
     arrival_date,
     price,
     description,
-    hour_departure,
+    departure_hour,
     available_seat,
   }: MutationUpdateTripArgs) {
     const TripId = await this.db.findOne({ where: { id: +id } });
@@ -180,11 +180,11 @@ class TripController {
       ...TripId,
       departure_place,
       destination,
-      date_departure,
+      departure_date,
       arrival_date,
       price,
       description,
-      hour_departure,
+      departure_hour,
       available_seat,
     });
   }
