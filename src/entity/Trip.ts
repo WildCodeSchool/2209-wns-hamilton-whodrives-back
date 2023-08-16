@@ -20,10 +20,10 @@ export default class Trip {
   destination: string;
 
   @Column()
-  date_departure: Date;
+  departure_date: Date;
 
   @Column({ type: "time", nullable: true })
-  hour_departure: string;
+  departure_hour: string;
 
   @Column({ default: 0 })
   available_seat: number;

@@ -209,11 +209,11 @@ export type MutationCreateProfilePictureArgs = {
 export type MutationCreateTripArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   available_seat?: InputMaybe<Scalars['Int']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_date?: InputMaybe<Scalars['Date']>;
+  departure_hour?: InputMaybe<Scalars['String']>;
   departure_place?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -323,11 +323,11 @@ export type MutationUpdateMusicOptionArgs = {
 export type MutationUpdateTripArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   available_seat?: InputMaybe<Scalars['Int']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_date?: InputMaybe<Scalars['Date']>;
+  departure_hour?: InputMaybe<Scalars['String']>;
   departure_place?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   price?: InputMaybe<Scalars['Int']>;
 };
@@ -336,11 +336,11 @@ export type MutationUpdateTripArgs = {
 export type MutationUpdateTripPlaceArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   available_seat?: InputMaybe<Scalars['Int']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_date?: InputMaybe<Scalars['Date']>;
+  departure_hour?: InputMaybe<Scalars['String']>;
   departure_place?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
   price?: InputMaybe<Scalars['Int']>;
 };
@@ -435,11 +435,11 @@ export type QueryGetTripByIdArgs = {
 export type QueryGetTripSearchArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   available_seat?: InputMaybe<Scalars['Int']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_date?: InputMaybe<Scalars['Date']>;
+  departure_hour?: InputMaybe<Scalars['String']>;
   departure_place?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
 };
 
@@ -447,11 +447,11 @@ export type QueryGetTripSearchArgs = {
 export type QueryGetTripSearchByHourRangeArgs = {
   arrival_date?: InputMaybe<Scalars['Date']>;
   available_seat?: InputMaybe<Scalars['Int']>;
-  date_departure?: InputMaybe<Scalars['Date']>;
+  departure_date?: InputMaybe<Scalars['Date']>;
+  departure_hour?: InputMaybe<Scalars['String']>;
   departure_place?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   destination?: InputMaybe<Scalars['String']>;
-  hour_departure?: InputMaybe<Scalars['String']>;
   maxHour?: InputMaybe<Scalars['String']>;
   minHour?: InputMaybe<Scalars['String']>;
   price?: InputMaybe<Scalars['Int']>;
@@ -484,11 +484,11 @@ export type Trip = {
   __typename?: 'Trip';
   arrival_date?: Maybe<Scalars['Date']>;
   available_seat?: Maybe<Scalars['Int']>;
-  date_departure?: Maybe<Scalars['Date']>;
+  departure_date?: Maybe<Scalars['Date']>;
+  departure_hour?: Maybe<Scalars['String']>;
   departure_place?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   destination?: Maybe<Scalars['String']>;
-  hour_departure?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   passengers: Array<User>;
   price?: Maybe<Scalars['Int']>;
@@ -1155,11 +1155,11 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
 export type TripResolvers<ContextType = any, ParentType extends ResolversParentTypes['Trip'] = ResolversParentTypes['Trip']> = {
   arrival_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   available_seat?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  date_departure?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  departure_date?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  departure_hour?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   departure_place?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   destination?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  hour_departure?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   passengers?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
   price?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
