@@ -7,7 +7,7 @@ import CarPicture from "../entity/CarPicture";
 import ChatOption from "../entity/ChatOption";
 import Brand from "../entity/Brand";
 import MusicOption from "../entity/MusicOption";
-import ProfilPicture from "../entity/ProfilePicture";
+import ProfilePicture from "../entity/ProfilePicture";
 import Trip from "../entity/Trip";
 import User from "../entity/User";
 import UserInfo from "../entity/UserInfo";
@@ -24,7 +24,7 @@ export default new DataSource({
   entities: [
     User,
     UserInfo,
-    ProfilPicture,
+    ProfilePicture,
     About,
     ChatOption,
     MusicOption,

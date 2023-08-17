@@ -9,7 +9,7 @@ import {
 import UserInfo from "./UserInfo";
 
 @Entity("profil_picture")
-export default class ProfilPicture {
+export default class ProfilePicture {
   @PrimaryGeneratedColumn()
   id: number;
 

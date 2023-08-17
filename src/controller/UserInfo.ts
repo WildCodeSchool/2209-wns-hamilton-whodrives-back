@@ -4,7 +4,7 @@ import {
 } from "@/graphgen";
 import { Repository } from "typeorm";
 
-import ProfilPicture from "../entity/ProfilePicture";
+import ProfilePicture from "../entity/ProfilePicture";
 import User from "../entity/User";
 import UserInfo from "../entity/UserInfo";
 import datasource from "../lib/datasource";
@@ -12,11 +12,11 @@ import datasource from "../lib/datasource";
 class UserInfoController {
   db: Repository<UserInfo>;
   dbUsere: Repository<User>;
-  dbPicture: Repository<ProfilPicture>;
+  dbPicture: Repository<ProfilePicture>;
 
   constructor() {
     this.db = datasource.getRepository("UserInfo");
-    this.dbPicture = datasource.getRepository("ProfilPicture");
+    this.dbPicture = datasource.getRepository("ProfilePicture");
   }
 
   async listUsersInfo() {
@@ -31,13 +31,13 @@ class UserInfoController {
     city,
     country,
     address,
-    profilPicture,
+    profilePicture,
   }: MutationCreateUserInfoArgs) {
     const userInfo = await this.db.save({
       city,
       country,
       address,
-      profilPicture,
+      profilePicture,
     });
     return userInfo;
   }
@@ -47,7 +47,7 @@ class UserInfoController {
     city,
     country,
     address,
-    profilPicture,
+    profilePicture,
   }: MutationUpdateUserInfoArgs) {
     const userInfo = await this.db.findOne({ where: { id: +id } });
     return await this.db.save({
@@ -55,7 +55,7 @@ class UserInfoController {
       city,
       country,
       address,
-      profilPicture,
+      profilePicture,
     });
   }
 }
