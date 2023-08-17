@@ -21,7 +21,7 @@ class UserController {
     this.db = datasource.getRepository("User");
     this.trip = datasource.getRepository("Trip");
     this.userInfo = datasource.getRepository("UserInfo");
-    this.profilePicture = datasource.getRepository("profil_picture");
+    this.profilePicture = datasource.getRepository("profile_picture");
   }
 
   async listUsers() {
@@ -55,8 +55,8 @@ class UserController {
       if (user && user.userInfo) {
         const userInfoId = user.userInfo.id;
         const profilePicture = await this.profilePicture
-          .createQueryBuilder("profil_picture")
-          .leftJoinAndSelect("profil_picture.userInfo", "userInfo")
+          .createQueryBuilder("profile_picture")
+          .leftJoinAndSelect("profile_picture.userInfo", "userInfo")
           .where("userInfo.id = :userInfoId", { userInfoId })
           .getOne();
         const result = profilePicture?.path;
