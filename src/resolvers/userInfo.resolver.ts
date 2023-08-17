@@ -11,7 +11,7 @@ import { IUserLogged } from "./Interface";
 export default {
   Query: {
     getUserInfos: async (_: any, {}, { userLogged }: any, infos: any) => {
-      return await new UserInfoController().listUsersInfo();
+      return await new UserInfoController().listUserInfos();
     },
 
     getUserInfo: async (

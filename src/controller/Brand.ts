@@ -9,7 +9,7 @@ class BrandController {
     this.db = datasource.getRepository("Brand");
   }
 
-  async listBrand() {
+  async listBrands() {
     return await this.db.find();
   }
 

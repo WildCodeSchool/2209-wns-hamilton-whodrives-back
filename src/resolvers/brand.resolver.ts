@@ -5,10 +5,15 @@ import BrandController from "../controller/Brand";
 export default {
   Query: {
     getBrands: async (_: any, {}, context: any, infos: any) => {
-      return await new BrandController().listBrand();
+      return await new BrandController().listBrands();
     },
 
-    getBrandById: async (_: any, { id }: { id: number }, context: any, infos: any) => {
+    getBrandById: async (
+      _: any,
+      { id }: { id: number },
+      context: any,
+      infos: any
+    ) => {
       return await new BrandController().getBrand(id);
     },
   },
