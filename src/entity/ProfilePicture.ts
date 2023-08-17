@@ -8,7 +8,7 @@ import {
 
 import UserInfo from "./UserInfo";
 
-@Entity("profil_picture")
+@Entity("profile_picture")
 export default class ProfilePicture {
   @PrimaryGeneratedColumn()
   id: number;
