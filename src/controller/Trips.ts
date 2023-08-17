@@ -96,7 +96,7 @@ class TripController {
     });
   }
 
-  async listTrip() {
+  async listTrips() {
     return await this.db.find();
   }
 

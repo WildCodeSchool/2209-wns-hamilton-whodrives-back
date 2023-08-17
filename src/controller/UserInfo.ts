@@ -19,7 +19,7 @@ class UserInfoController {
     this.dbPicture = datasource.getRepository("ProfilePicture");
   }
 
-  async listUsersInfo() {
+  async listUserInfos() {
     return await this.db.find();
   }
 

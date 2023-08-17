@@ -12,7 +12,7 @@ import { IUserLogged } from "../resolvers/Interface";
 export default {
   Query: {
     getTrips: async (_: any, {}, context: any, infos: any) => {
-      return await new TripController().listTrip();
+      return await new TripController().listTrips();
     },
     getTripSearch: async (
       _: any,

@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import Car from "./Car";
 
-@Entity("carPicture")
+@Entity("car_picture")
 export default class CarPicture {
   @PrimaryGeneratedColumn()
   id: number;
