@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 import About from "./About";
 
-// import ProfilPicture from "./ProfilePicture";
+// import ProfilePicture from "./ProfilePicture";
 @Entity("user_info")
 export default class UserInfo {
   @PrimaryGeneratedColumn()

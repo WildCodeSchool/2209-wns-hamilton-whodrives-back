@@ -233,7 +233,7 @@ export type MutationCreateUserInfoArgs = {
   address?: InputMaybe<Scalars['String']>;
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
-  profilPicture?: InputMaybe<Scalars['Int']>;
+  profilePicture?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -364,7 +364,7 @@ export type MutationUpdateUserInfoArgs = {
   city?: InputMaybe<Scalars['String']>;
   country?: InputMaybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPicture?: InputMaybe<Scalars['Int']>;
+  profilePicture?: InputMaybe<Scalars['Int']>;
 };
 
 export type ProfilePicture = {
@@ -531,7 +531,7 @@ export type UserInfo = {
   city?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  profilPicture?: Maybe<ProfilePicture>;
+  profilePicture?: Maybe<ProfilePicture>;
 };
 
 export type Msg = {
@@ -1226,7 +1226,7 @@ export type UserInfoResolvers<ContextType = any, ParentType extends ResolversPar
   city?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  profilPicture?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
+  profilePicture?: Resolver<Maybe<ResolversTypes['ProfilePicture']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

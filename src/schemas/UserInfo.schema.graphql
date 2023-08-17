@@ -4,7 +4,7 @@ type UserInfo {
   country: String
   address: String
   about: About
-  profilPicture: ProfilePicture
+  profilePicture: ProfilePicture
 }
 
 type Query {
@@ -18,12 +18,12 @@ type Mutation {
     city: String
     country: String
     address: String
-    profilPicture : Int
+    profilePicture: Int
   ): UserInfo
   createUserInfo(
     city: String
     country: String
     address: String
-    profilPicture: Int
+    profilePicture: Int
   ): UserInfo
 }

@@ -4,18 +4,21 @@ import UserInfo from "src/entity/UserInfo";
 import { finished } from "stream/promises";
 import { Repository } from "typeorm";
 
-import ProfilPicture from "../entity/ProfilePicture";
+import ProfilePicture from "../entity/ProfilePicture";
 import datasource from "../lib/datasource";
 
 class ProfilePictureController {
-  db: Repository<ProfilPicture>;
+  db: Repository<ProfilePicture>;
   dbProfile: Repository<UserInfo>;
 
   constructor() {
-    this.db = datasource.getRepository("ProfilPicture");
+    this.db = datasource.getRepository("ProfilePicture");
     this.dbProfile = datasource.getRepository("UserInfo");
   }
-  async createProfilePicture({ userInfoId, file }: MutationCreateProfilePictureArgs) {
+  async createProfilePicture({
+    userInfoId,
+    file,
+  }: MutationCreateProfilePictureArgs) {
     console.log("file", file);
     const { createReadStream, filename } = await file;
     if (!createReadStream || !filename) {
@@ -55,7 +58,7 @@ class ProfilePictureController {
       }
     }
   }
- async deleteProfilePicture(id: number) {
+  async deleteProfilePicture(id: number) {
     let msg = "Picture not found";
     let msg2 = "Error request";
     const Profile = await this.db.findOne({ where: { id: +id } });
@@ -64,12 +67,11 @@ class ProfilePictureController {
       if (result?.affected != 0) {
         return { msg: "Picture deleted" };
       } else {
-        return {msg : msg2};
+        return { msg: msg2 };
       }
     } else {
       return { msg };
     }
   }
-     
-  }
+}
 export default ProfilePictureController;

@@ -6,7 +6,7 @@ import {
 import Trip from "src/entity/Trip";
 import { Repository } from "typeorm";
 
-import ProfilPicture from "../entity/ProfilePicture";
+import ProfilePicture from "../entity/ProfilePicture";
 import User from "../entity/User";
 import UserInfo from "../entity/UserInfo";
 import datasource from "../lib/datasource";
@@ -16,7 +16,7 @@ class UserController {
   db: Repository<User>;
   trip: Repository<Trip>;
   userInfo: Repository<UserInfo>;
-  profilePicture: Repository<ProfilPicture>;
+  profilePicture: Repository<ProfilePicture>;
   constructor() {
     this.db = datasource.getRepository("User");
     this.trip = datasource.getRepository("Trip");
