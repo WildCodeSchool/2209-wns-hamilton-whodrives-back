@@ -1,0 +1,36 @@
+type About {
+  id: ID!
+  animal: Boolean
+  description: String
+  cigarette: Boolean
+  chatOption: ChatOption
+  musicOption: MusicOption
+}
+
+type Query {
+  getAbouts: [About]
+  getAboutById(id: ID!): About
+}
+
+type Mutation {
+  createAbout(
+    animal: Boolean!
+    description: String!
+    cigarette: Boolean!
+    chatOptionId: ID!
+    musicOptionId: ID!
+  ): About
+  updateAbout(
+    id: ID!
+    animal: Boolean
+    description: String
+    chatOptionId: Int
+    musicOptionId: Int
+    cigarette: Boolean
+  ): About
+  updateMusicAndChatOption(
+    id: ID!
+    chatOptionId: ID!
+    musicOptionId: ID!
+  ): About
+}

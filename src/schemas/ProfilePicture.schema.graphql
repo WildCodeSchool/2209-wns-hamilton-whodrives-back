@@ -1,0 +1,14 @@
+type ProfilePicture {
+  id: ID!
+  path: String!
+  userInfo: UserInfo
+}
+
+type msg{
+  msg: String
+}
+
+type Mutation {
+  createProfilePicture(userInfoId: ID!, file: Upload!): ProfilePicture!
+  deleteProfilePicture(id: ID!):msg
+}

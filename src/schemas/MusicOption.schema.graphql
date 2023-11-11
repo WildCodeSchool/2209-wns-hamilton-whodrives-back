@@ -1,0 +1,14 @@
+type MusicOption {
+  id: ID!
+  content: String!
+}
+
+type Query {
+  getMusicOptions: [MusicOption]
+  getMusicOptionsById(id: ID!): MusicOption
+}
+
+type Mutation {
+  createMusicOption(content: String!): MusicOption
+  updateMusicOption(id: ID!, content: String!): MusicOption
+}

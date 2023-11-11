@@ -1,0 +1,79 @@
+type Trip {
+  id: ID!
+  departure_place: String
+  destination: String
+  departure_date: Date
+  arrival_date: Date
+  price: Int
+  description: String
+  departure_hour: String
+  available_seat: Int
+  users: [User]
+  passengers: [User!]!
+}
+type Query {
+  getTripSearch(
+    departure_place: String
+    destination: String
+    departure_date: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    departure_hour: String
+    available_seat: Int
+  ): [Trip]
+  getTripSearchByHourRange(
+    departure_place: String
+    destination: String
+    departure_date: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    departure_hour: String
+    available_seat: Int
+    minHour: String
+    maxHour: String
+  ): [Trip]
+  getTripById(id: ID!): Trip
+  getTrips: [Trip]
+}
+type Mutation {
+  createTrip(
+    departure_place: String
+    destination: String
+    departure_date: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    departure_hour: String
+    available_seat: Int
+  ): Trip
+  updateTripPlace(
+    id: ID!
+    departure_place: String
+    destination: String
+    departure_date: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    departure_hour: String
+    available_seat: Int
+  ): Trip
+  updateTrip(
+    id: ID!
+    departure_place: String
+    destination: String
+    departure_date: Date
+    arrival_date: Date
+    price: Int
+    description: String
+    departure_hour: String
+    available_seat: Int
+  ): Trip
+  deleteTrip(id: ID!): DeleteTripResponse!
+}
+
+type DeleteTripResponse {
+  success: Boolean!
+  message: String!
+}

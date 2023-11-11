@@ -1,0 +1,77 @@
+type User {
+  id: ID!
+  username: String!
+  firstname: String
+  lastname: String
+  date_of_birth: String
+  password: String!
+  email: String!
+  phone: String!
+  cars: [Car]
+  userInfo: UserInfo
+  trips: [Trip]
+}
+
+type RegisterUser {
+  email: String
+  username: String
+  success: Boolean
+  token: String
+}
+
+type Res {
+  msg: Boolean
+}
+
+type UserCreated {
+  id: ID!
+  username: String!
+  firstname: String
+  lastname: String
+  date_of_birth: String
+  email: String!
+  phone: String!
+  cars: [Car]
+  userInfo: UserInfo
+  trips: [Trip]
+}
+
+type Query {
+  getUsers: [User]
+  getUserById(id: ID): User
+  getUserLogged: User!
+  checkUserLogged: Res
+  getUserTrips: [Trip]
+  getUserTripsLoggedUser: [Trip]
+  getProfilePicturePath: String
+}
+
+type Mutation {
+  createUser(
+    username: String!
+    password: String!
+    firstname: String
+    lastname: String
+    date_of_birth: Date!
+    email: String!
+    phone: String!
+  ): UserCreated
+
+  updateUser(
+    id: ID!
+    username: String!
+    password: String!
+    firstname: String!
+    lastname: String!
+    date_of_birth: Date!
+    email: String!
+    phone: String!
+    userInfoId: ID
+  ): User
+
+  deleteUser(id: ID!): Res
+
+  loginUser(email: String!, password: String!): RegisterUser
+
+  joinTrip(tripId: ID!): Trip
+}
